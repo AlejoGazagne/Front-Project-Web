@@ -6,7 +6,12 @@ header{
     color: aliceblue;
 }
 .navbar{
-    background-color: #f0f8ff75;
+    background-color: #f0f8ffa8;
+    font-weight: bold;
+    padding: 0.4rem 10%;
+}
+.navbar-nav{
+    width: 30%;
 }
 
 #img-logo{
@@ -27,4 +32,48 @@ header{
 }
 .icono-nosotros{
     height: 200px;
+}
+/* --------------------------------------------------- */
+.card{
+    width: 25rem;
+    margin: 2rem 0.5rem;
+    background-color: #f0f0f0;
+}
+.contenedor{
+    margin: 3rem 10% 5rem 10%;
+}
+.contenedor-anuncios{
+    row-gap: 2rem;
+}
+.card-body a{
+    background-color: #ffab3d;
+    padding: .5rem 2rem;
+    color: #fff;
+    border-radius: .3rem;
+}
+.ver-anuncios{
+    background-color: #74b12d;
+    padding: .5rem 2rem;
+    color: #fff;
+    border-radius: .3rem;
+}
+.publi{
+    background-image: url('../img/publi.jpg');
+    height: 20rem;
+    background-size: cover;
+    background-position: center center;
+    color: #f0f0f0;
+}
+footer{
+    height: 10rem;
+    align-items: center;
+    background-color: #333333;
+    padding: 0 10%;
+    color: #f0f0f0;
+}
+.navegacion{
+    width: 18rem;
+}
+footer a{
+    color: #f0f0f0;
 }
