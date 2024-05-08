@@ -2,43 +2,29 @@ header{
     background-image: url('../img/imagenInicio.jpg');
     background-size: cover;
     background-position: center center;
-    /* filter: brightness(0.4); */
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     color: aliceblue;
-    font-weight: bold;
-    padding: 2rem 8rem;
+}
+.navbar{
+    background-color: #f0f8ff75;
 }
 
-.container{
-    margin: 0rem 8rem;
-}
-.barra{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#img-logo{
+    width: 8rem;
 }
 
-.nav-header{
-    display: flex;
-    justify-content: space-around;
-    width: 20rem;
+@media screen and (max-width: 1024px){
+    #img-logo{
+        display: none;
+    }
 }
-.nav-header a{
-    font-size: 1.1rem;
-    color: aliceblue;
-    font-weight: bold;
-}
-
 /* --------------------------------------------------- */
 .mas-nosotros{
-    margin: 2rem 0rem;
+    padding: 4rem 0rem;
 }
-.items-nosotros{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 2rem;
+.items-nosotros .row div{
+    height: 250px;
+}
+.icono-nosotros{
+    height: 200px;
 }

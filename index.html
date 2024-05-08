@@ -4,69 +4,99 @@
     <title>Document</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <header>
-        <div class="barra">
-            <a href="/">
-                <img src="img/logo.svg" alt="Logotipo de Bienes Raices" />
+    <header class="d-flex flex-column justify-content-between">
+      <nav class="navbar navbar-expand-lg centrar">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse align-items-center justify-content-between" id="navbar-toggler">
+            <a class="navbar-brand" href="#">
+              <img src="./img/logoEmpresa.png" alt="Logo empresa" id="img-logo">
             </a>
-    
-            <nav class="nav-header">
-                <a href="anuncios.html">Anuncios</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="publicar.html">Publicar</a>
-           </nav>
+            <ul class="navbar-nav d-flex justify-content-center align-items-center">
+              <li class="nav-item">
+                <a class="nav-link"href="#">Anuncios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Publicar</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
     
-        <h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>
+      <h1 class="centrar">Venta de Casas y Departamentos Exclusivos de Lujo</h1>
     </header>
     
-    <div class="container">
-        <section class="mas-nosotros">
-            <h2 class="center-text">Mas sobre nosotros</h2>
+    <!-- mas sobre nosotros -->
+    <section class="mas-nosotros container text-center">
+      <h2>Mas sobre nosotros</h2>
       
-            <div class="items-nosotros">
-                <div class="">
-                    <img src="img/icono1.svg" alt="Icono Seguridad" />
-                    <h3>Seguridad</h3>
-                    <p>
-                        dolor sit amet consectetur, adipisicing elit. Facere non possimus
-                        saepe esse, tempora iure blanditiis impedit porro, ex corporis
-                        minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
-                    </p>
-                </div>
-      
-                <div class="">
-                    <img src="img/icono2.svg" alt="Icono Mejor Precio" />
-      
-                    <h3>El Mejor Precio</h3>
-                    <p>
-                        dolor sit amet consectetur, adipisicing elit. Facere non possimus
-                        saepe esse, tempora iure blanditiis impedit porro, ex corporis
-                        minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
-                    </p>
-                </div>
-      
-                <div class="">
-                    <img src="img/icono3.svg" alt="Icono A tiempo" />
-      
-                    <h3>A tiempo</h3>
-                    <p>
-                        dolor sit amet consectetur, adipisicing elit. Facere non possimus
-                        saepe esse, tempora iure blanditiis impedit porro, ex corporis
-                        minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
-                    </p>
-                </div>
-            </div>
-          </section>
-    </div>
+      <div class="items-nosotros row">
+        <div class="col-12 col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shield-lock icono-nosotros" viewBox="0 0 16 16">
+            <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+            <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415"/>
+          </svg>
+
+          <h3>Seguridad</h3>
+          <p>
+            olor sit amet consectetur, adipisicing elit. Facere non possimus
+            saepe esse, tempora iure blanditiis impedit porro, ex corporis
+            minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
+          </p>
+        </div>
+                
+        <div class="col-12 col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cash icono-nosotros" viewBox="0 0 16 16">
+            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z"/>
+          </svg>
+          <h3>El Mejor Precio</h3>
+          <p>
+            dolor sit amet consectetur, adipisicing elit. Facere non possimus
+            saepe esse, tempora iure blanditiis impedit porro, ex corporis
+            minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
+          </p>
+        </div>
+                
+        <div class="col-12 col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-clock-history icono-nosotros" viewBox="0 0 16 16">
+            <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
+            <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
+            <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
+          </svg>
+          <h3>A tiempo</h3>
+          <p>
+            dolor sit amet consectetur, adipisicing elit. Facere non possimus
+            saepe esse, tempora iure blanditiis impedit porro, ex corporis
+            minima, omnis ipsum rem praesentium nulla et ducimus ea ut!
+          </p>
+        </div>
+      </div>
+    </section>
+
 
     <footer>
-
+      <div class="contenedor contenedor-footer">
+        <nav class="navegacion">
+          <a href="nosotros.html">Nosotros</a>
+          <a href="anuncios.html">Anuncios</a>
+          <a href="blog.html">Blog</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+        <p class="copyright">Todos los Derechos Reservados 2024 &copy;</p>
+      </div>
     </footer>
 </body>
 </html>
