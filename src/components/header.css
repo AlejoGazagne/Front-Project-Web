@@ -1,0 +1,18 @@
+.navbar{
+    background-color: #f0f8ffa8;
+    font-weight: bold;
+    padding: 0.4rem 10%;
+}
+.navbar-nav{
+    width: 30%;
+}
+
+#img-logo{
+    width: 8rem;
+}
+
+@media screen and (max-width: 1024px){
+    #img-logo{
+        display: none;
+    }
+}
