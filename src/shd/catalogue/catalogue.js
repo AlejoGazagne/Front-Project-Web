@@ -77,21 +77,24 @@ btnIGarage.addEventListener("click", () => {
   garageCount.value = parseInt(garageCount.value) + 1;
 });
 
-pool.addEventListener("click", () => {
-  console.log(pool.checked);
-  if (pool.checked) {
-    pool.checked = false;
-  } else {
-    pool.checked = true;
+let wasChecked = {};
+
+pool.addEventListener("click", function () {
+  if (wasChecked[this.id]) {
+    this.checked = false;
   }
+  wasChecked[this.id] = this.checked;
 });
 
-pets.addEventListener("click", () => {
-  if (pets.checked) {
-    pets.checked = false;
-  } else {
-    pets.checked = true;
+pets.addEventListener("click", function () {
+  if (wasChecked[this.id]) {
+    this.checked = false;
   }
+  wasChecked[this.id] = this.checked;
 });
+
+/////////////////////////////////////
+//DESARROLLAR LA LOGICA CON EL BACK//
+/////////////////////////////////////
 
 search.addEventListener("click", () => {});

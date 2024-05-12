@@ -26,71 +26,78 @@ const contraseniaPublicador = document.getElementById("pubContrasenia");
 
 const error = document.getElementById("error");
 
-btnSesion.addEventListener('click', () => {
-    if(mail.value != null && password.value != null){
-        console.log('click');
-        console.log(mail.value);
-        console.log(password.value)
-        // fetch('http://localhost:3000/login',{
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email: mail.value,
-        //         password: password.value
-        //     })
-        // }).then(async response  => {
-        //     const rsp = await response.json();
-        //     localStorage.setItem('token', rsp.token);
-        //     localStorage.setItem('user', rsp.user);
-        //     modalRegistro.classList.remove('mostrar');
-        // })
-    }
+btnSesion.addEventListener("click", () => {
+  if (mail.value != "" && password.value != "") {
+    console.log("click");
+    console.log(mail.value);
+    console.log(password.value);
+    // fetch('http://localhost:3000/login',{
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         email: mail.value,
+    //         password: password.value
+    //     })
+    // }).then(async response  => {
+    //     const rsp = await response.json();
+    //     localStorage.setItem('token', rsp.token);
+    //     localStorage.setItem('user', rsp.user);
+    //     modalRegistro.classList.remove('mostrar');
+    // })
+  }
 });
 
-btnIrOlvContrasenia.addEventListener('click', () => {
-    recuperarContrasenia.style.display = 'flex';
-    iniciarSesion.style.display = 'none';
-    registrarse.style.display = 'none'; 
+btnIrOlvContrasenia.addEventListener("click", () => {
+  recuperarContrasenia.style.display = "flex";
+  iniciarSesion.style.display = "none";
+  registrarse.style.display = "none";
 });
 
-continuarRecuperacion.addEventListener('click', () => {
-    recuperarContrasenia.style.display = 'none';
-    iniciarSesion.style.display = 'flex';
+continuarRecuperacion.addEventListener("click", () => {
+  recuperarContrasenia.style.display = "none";
+  iniciarSesion.style.display = "flex";
 });
 
-btnIrRegistrarse.addEventListener('click', () => {
-    registrarse.style.display = 'flex';
-    iniciarSesion.style.display = 'none';
-    recuperarContrasenia.style.display = 'none';
+btnIrRegistrarse.addEventListener("click", () => {
+  registrarse.style.display = "flex";
+  iniciarSesion.style.display = "none";
+  recuperarContrasenia.style.display = "none";
 });
 
-seleccionCuenta.addEventListener('click', () => {
-    if (seleccionCuenta.value == 1){
-        formVisitante.style.display = 'flex';
-        formPublicador.style.display = 'none';
-        
-    }
-    if (seleccionCuenta.value == 2){
-        formVisitante.style.display = 'none';
-        formPublicador.style.display = 'flex';
-    }
+seleccionCuenta.addEventListener("click", () => {
+  if (seleccionCuenta.value == 1) {
+    formVisitante.style.display = "flex";
+    formPublicador.style.display = "none";
+  }
+  if (seleccionCuenta.value == 2) {
+    formVisitante.style.display = "none";
+    formPublicador.style.display = "flex";
+  }
 });
 
-btnRegistrar.addEventListener('click', () => {
-    event.preventDefault();
-    if ((emailUsuario.value == '' || contraseniaUsuario.value == '') && seleccionCuenta.value == 1){
-        error.classList.add('mostrar');
-        console.log('error');
-    }
-    if ((nombrePublicador.value == '' || numeroPublicador.value == '' || emailPublicador.value == '' || contraseniaPublicador.value == '') && seleccionCuenta.value == 2){
-        error.classList.add('mostrar');
-        console.log('error');
-    }
-    if (seleccionCuenta.value != 1 && seleccionCuenta.value != 2){
-        error.classList.add('mostrar');
-        console.log('error');
-    }
-
+btnRegistrar.addEventListener("click", () => {
+  event.preventDefault();
+  if (
+    (emailUsuario.value == "" || contraseniaUsuario.value == "") &&
+    seleccionCuenta.value == 1
+  ) {
+    error.classList.add("mostrar");
+    console.log("error");
+  }
+  if (
+    (nombrePublicador.value == "" ||
+      numeroPublicador.value == "" ||
+      emailPublicador.value == "" ||
+      contraseniaPublicador.value == "") &&
+    seleccionCuenta.value == 2
+  ) {
+    error.classList.add("mostrar");
+    console.log("error");
+  }
+  if (seleccionCuenta.value != 1 && seleccionCuenta.value != 2) {
+    error.classList.add("mostrar");
+    console.log("error");
+  }
 });
