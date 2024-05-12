@@ -1,0 +1,15 @@
+.container {
+  max-width: 95%;
+}
+
+#map {
+  height: 24rem;
+  width: 100%;
+}
+
+#consulta {
+  padding: 1rem;
+  border: 1px solid #999999;
+  border-radius: 1.5rem;
+  background-color: #cccccc4a;
+}

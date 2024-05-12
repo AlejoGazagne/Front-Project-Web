@@ -1,0 +1,125 @@
+#navbar{
+  width: 100%;
+  height: 110px;
+  background-color: #000000ab;
+}
+header{
+  margin-bottom: 2rem;
+}
+
+/* ------------------------------- */
+.container {
+  max-width: 95%;
+}
+
+.filtersColumn {
+  max-height: 40rem;
+  border: 1px solid #727272cf;
+  border-radius: 2rem;
+  background-color: #e7e7e7a8;
+}
+
+.filters {
+  max-width: 90%;
+  margin: auto;
+  text-align: center;
+}
+.form-group {
+  margin-top: 1rem;
+}
+.form-group p{
+  margin-bottom: .3rem;
+}
+.form-control {
+  text-align: center;
+}
+
+.btn {
+  width: 3rem;
+  color: black;
+  font-style: bold;
+  background-color: #ffab3d;
+  border-color: rgba(114, 114, 114, 0.812);
+}
+
+#btnSearch {
+  width: 7rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #333333;
+  padding: .6rem .2rem;
+  border-radius: 8px;
+  border: 4px solid #333333;
+}
+#btnSearch:hover{
+  border: 4px solid #ffab3d;
+}
+
+/* Ocultar los botones de incremento y decremento en los inputs de tipo número */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ------------------------------- */
+
+.card {
+  text-align: center;
+  border: none;
+  padding: 0;
+  border: 1px solid rgba(114, 114, 114, 0.812);
+  border-radius: 1rem;
+}
+
+.headerCard {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  position: absolute;
+  left: 43.5%;
+}
+
+.carousel-inner {
+  max-height: 20rem;
+}
+
+.carousel-item {
+  position: sticky;
+}
+
+.card-image {
+  max-width: 100%;
+  border-radius: 1rem;
+}
+
+.iconos-caracteristicas {
+  max-width: 100%;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.iconos-caracteristicas li {
+  display: flex;
+  align-items: center;
+}
+
+.iconos-caracteristicas li p {
+  margin: 0;
+  font-size: x-large;
+  font-style: bold;
+}
+
+.btnOpen {
+  width: 75%;
+}

@@ -16,22 +16,22 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
 
-    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../../css/normalize.css" />
+    <link rel="stylesheet" href="../../css/util.css" />
     <link rel="stylesheet" href="./catalogue.css" />
   </head>
   <body>
     <header>
       <iframe
-        src="../components/header.html"
-        width="100%"
-        height="18%"
+        src="../../components/header/header.html"
+        id="navbar"
         frameborder="0"
       ></iframe>
     </header>
 
     <div class="container">
       <div class="row">
-        <div class="col-3 d-flex filtersColumn">
+        <div class="col-2 d-flex filtersColumn">
           <form class="filters">
             <div class="form-group">
               <p>Tipo de propiedad</p>
@@ -133,12 +133,20 @@
               <input type="radio" id="poolCheck" />
             </div>
 
-            <button type="submit" class="btnSearch btn btn-primary mt-4 mb-2">
+            <div class="form-group d-flex justify-content-between">
+              <label for="poolCheck">Admite mascotas</label>
+              <input type="radio" id="petsCheck" />
+            </div>
+
+            <button type="submit" id="btnSearch" class="btn-primary mt-4 mb-1">
               Buscar
             </button>
           </form>
         </div>
-        <div class="col-9">
+
+        <!----------------------------------------------------------------------->
+
+        <div class="col-9 ms-5">
           <div class="row">
             <div class="card">
               <div id="carouselExampleIndicators" class="carousel slide">
@@ -167,21 +175,21 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img
-                      src="../img/anuncioCasa1.jpg"
+                      src="../../img/anuncioCasa1.jpg"
                       class="card-image d-block"
                       alt="..."
                     />
                   </div>
                   <div class="carousel-item">
                     <img
-                      src="../img/anuncioCasa2.jpg"
+                      src="../../img/anuncioCasa2.jpg"
                       class="card-image d-block w-100"
                       alt="..."
                     />
                   </div>
                   <div class="carousel-item">
                     <img
-                      src="../img/anuncioCasa3.jpg"
+                      src="../../img/anuncioCasa3.jpg"
                       class="card-image d-block w-100"
                       alt="..."
                     />
@@ -213,11 +221,152 @@
                 </button>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Casa en venta</h5>
+                <div class="headerCard">
+                  <h3 class="card-title">Casa en venta</h3>
+                  <h5 class="card-text">$500.000</h5>
+                </div>
+                <ul class="iconos-caracteristicas">
+                  <li>
+                    <img
+                      src="../../img/icono_dormitorio.svg"
+                      class="me-3"
+                      alt=""
+                    />
+                    <p>3</p>
+                  </li>
+                  <li>
+                    <img src="../../img/icono_wc.svg" class="me-3" alt="" />
+                    <p>3</p>
+                  </li>
+                  <li>
+                    <img
+                      src="../../img/icono_estacionamiento.svg"
+                      class="me-3"
+                      alt=""
+                    />
+                    <p>4</p>
+                  </li>
+                </ul>
                 <p class="card-text">
-                  Casa de 3 habitaciones, 2 baños, 1 garage
+                  Casa ubicada en villa allende Lorem ipsum, dolor sit amet
+                  consectetur adipisicing elit. Voluptatibus dignissimos fugiat
+                  illum asperiores ratione non enim deleniti error, neque
+                  adipisci consequuntur natus vel soluta, nostrum dolor nam
+                  deserunt dolores necessitatibus.
                 </p>
-                <a href="#" class="btn btn-primary">Ver más</a>
+                <a href="#" class="btnOpen btn btn-primary">Ver más</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card mt-4">
+              <div id="carousel2" class="carousel slide">
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#carousel2"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carousel2"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carousel2"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      src="../../img/anuncioCasa1.jpg"
+                      class="card-image d-block"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="../../img/anuncioCasa2.jpg"
+                      class="card-image d-block w-100"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="../../img/anuncioCasa3.jpg"
+                      class="card-image d-block w-100"
+                      alt="..."
+                    />
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carousel2"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carousel2"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="headerCard">
+                  <h3 class="card-title">Casa en venta</h3>
+                  <h5 class="card-text">$1.500.000</h5>
+                </div>
+                <ul class="iconos-caracteristicas">
+                  <li>
+                    <img
+                      src="../../img/icono_dormitorio.svg"
+                      class="me-3"
+                      alt=""
+                    />
+                    <p>3</p>
+                  </li>
+                  <li>
+                    <img src="../../img/icono_wc.svg" class="me-3" alt="" />
+                    <p>3</p>
+                  </li>
+                  <li>
+                    <img
+                      src="../../img/icono_estacionamiento.svg"
+                      class="me-3"
+                      alt=""
+                    />
+                    <p>4</p>
+                  </li>
+                </ul>
+                <p class="card-text">
+                  Casa ubicada en valle hermoso Lorem ipsum, dolor sit amet
+                  consectetur adipisicing elit. Voluptatibus dignissimos fugiat
+                  illum asperiores ratione non enim deleniti error, neque
+                  adipisci consequuntur natus vel soluta, nostrum dolor nam
+                  deserunt dolores necessitatibus.
+                </p>
+                <a href="#" class="btnOpen btn btn-primary">Ver más</a>
               </div>
             </div>
           </div>
@@ -225,10 +374,25 @@
       </div>
     </div>
 
+    <!----------------------------------------------------------------------->
+
+    <div id="marco-flotante">
+      <button class="boton-atras" id="atras">
+        <i class="bi bi-arrow-left float-start"> Atras</i>
+      </button>
+
+      <iframe
+        src="../../components/log-reg/log-reg.html"
+        frameborder="0"
+        id="log-reg"
+      ></iframe>
+    </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="./catalogue.js"></script>
   </body>
 </html>

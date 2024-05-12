@@ -1,6 +1,9 @@
 html{
     background-color: #ffffff00;
 }
+body{
+    background-color: #00000063;
+}
 .barra{
     font-weight: bold;
     padding: 0.4rem 10%;
@@ -8,9 +11,13 @@ html{
 }
 .navbar{
     background-color: #ffffff00;
+    height: 110px;
 }
 .navbar-nav{
     width: 40%;
+}
+.nav-item a {
+    color: aliceblue;
 }
 
 #img-logo{
@@ -21,15 +28,18 @@ html{
     border: none;
     background-color: #f0f8ff00;
     font-weight: bold;
-    color: #636363;
+    color: aliceblue;
     transition-duration: 0.3s;
 }
 .nav-item button:hover{
-    color: #000;
+    color: #fda54c;
 }
 
-@media screen and (max-width: 1024px){
+/* @media screen and (max-width: 1024px){
     #img-logo{
         display: none;
     }
+} */
+.nav-link:hover{
+    color: #a2a6aa;
 }
