@@ -55,6 +55,18 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 1rem;
 }
 
+.headerCard {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  position: absolute;
+  left: 43.5%;
+}
+
 .carousel-inner {
   max-height: 20rem;
 }
@@ -69,7 +81,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .iconos-caracteristicas {
-  max-width: 50rem;
+  max-width: 100%;
   list-style: none;
   padding: 0;
   display: flex;

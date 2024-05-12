@@ -1,0 +1,4 @@
+Que tan optimo es que cuando hagamos el buscado por filtro guardemos
+el array de publicaciones que traemos de la base de datos en la cache del navegador
+(esto pa que? pa que cuando entremos al post, podamos recuperar los datos usando
+el id de la publicacion para mostrar toda la info completa)
