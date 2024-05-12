@@ -1,0 +1,35 @@
+html{
+    background-color: #ffffff00;
+}
+.barra{
+    font-weight: bold;
+    padding: 0.4rem 10%;
+    background-color: #ffffff00;
+}
+.navbar{
+    background-color: #ffffff00;
+}
+.navbar-nav{
+    width: 40%;
+}
+
+#img-logo{
+    width: 8rem;
+}
+.nav-item button{
+    width: max-content;
+    border: none;
+    background-color: #f0f8ff00;
+    font-weight: bold;
+    color: #636363;
+    transition-duration: 0.3s;
+}
+.nav-item button:hover{
+    color: #000;
+}
+
+@media screen and (max-width: 1024px){
+    #img-logo{
+        display: none;
+    }
+}

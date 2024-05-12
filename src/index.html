@@ -13,24 +13,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
 
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/index.css" />
   </head>
-
   <body>
     <header class="d-flex flex-column justify-content-between">
       <iframe
-        id="navbar"
-        src="./components/header.html"
-        width="100%"
-        height="18%"
+        src="./src/components/header/header.html"
         frameborder="0"
+        id="navbar"
       ></iframe>
 
       <h1 class="centrar">Venta de Casas y Departamentos Exclusivos de Lujo</h1>
@@ -191,29 +183,23 @@
       <p class="copyright">Todos los Derechos Reservados 2024 &copy;</p>
     </footer>
 
-    <div id="modal-registro" class="modal">
-      <div class="modal-contenido">
-        <i class="bi bi-arrow-left float-start"> Atras</i> <br />
+    <div id="marco-flotante">
+      <button class="boton-atras" id="atras">
+        <i class="bi bi-arrow-left float-start"> Atras</i>
+      </button>
 
-        <div class="log-p">
-          <div class="log">
-            <h2>Inicia sesion</h2>
-            <p>¡Encuentra tu hogar ideal hoy mismo!</p>
-            <form>
-              <label for="gmail">Gmail</label><br />
-              <input type="mail" id="gmail" /><br />
-
-              <label for="contrasenia">Contraseña</label><br />
-              <input type="password" id="contrasenia" /><br />
-
-              <button class="" id="continuar">Continuar</button><br />
-              <a href="">Olvide mi contraseña</a>
-            </form>
-          </div>
-        </div>
-      </div>
+      <iframe
+        src="./src/components/log-reg/log-reg.html"
+        frameborder="0"
+        id="log-reg"
+      ></iframe>
     </div>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
     <script src="./js/index.js"></script>
   </body>
 </html>
