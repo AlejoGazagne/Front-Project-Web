@@ -1,0 +1,44 @@
+#log-reg {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  width: 50%;
+  height: 70%;
+  left: 25%;
+  top: 15%;
+  border-radius: 1rem;
+  /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#log-reg.mostrar {
+  display: block;
+}
+#atras {
+  display: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ffffff00;
+}
+#atras.mostrar {
+  position: fixed;
+  z-index: 2;
+  left: 26%;
+  top: 17%;
+  display: block;
+}
+#marco-flotante {
+  display: none;
+  z-index: 1;
+  background-color: #00000069;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#marco-flotante.mostrar {
+  display: block;
+}
