@@ -17,6 +17,7 @@
     />
 
     <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../../css/util.css" />
     <link rel="stylesheet" href="./catalogue.css" />
   </head>
   <body>
@@ -136,10 +137,14 @@
 
             <div class="form-group d-flex justify-content-between">
               <label for="poolCheck">Admite mascotas</label>
-              <input type="radio" id="poolCheck" />
+              <input type="radio" id="petsCheck" />
             </div>
 
-            <button type="submit" class="btnSearch btn btn-primary mt-4 mb-1">
+            <button
+              type="submit"
+              id="btnSearch"
+              class="btnSearch btn btn-primary mt-4 mb-1"
+            >
               Buscar
             </button>
           </form>
@@ -367,6 +372,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!----------------------------------------------------------------------->
+
+    <div id="marco-flotante">
+      <button class="boton-atras" id="atras">
+        <i class="bi bi-arrow-left float-start"> Atras</i>
+      </button>
+
+      <iframe
+        src="../../components/log-reg/log-reg.html"
+        frameborder="0"
+        id="log-reg"
+      ></iframe>
     </div>
 
     <script
