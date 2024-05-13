@@ -1,9 +1,9 @@
-#navbar{
+#navbar {
   width: 100%;
   height: 110px;
   background-color: #000000ab;
 }
-header{
+header {
   margin-bottom: 2rem;
 }
 
@@ -19,19 +19,38 @@ header{
   background-color: #e7e7e7a8;
 }
 
+.filtersColumn.collapsed {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  max-width: 5%;
+  transition: max-width 1s ease-out;
+}
+
 .filters {
   max-width: 90%;
   margin: auto;
   text-align: center;
 }
+
+.filters.collapsed {
+  display: none;
+}
+
 .form-group {
   margin-top: 1rem;
 }
-.form-group p{
-  margin-bottom: .3rem;
+.form-group p {
+  margin-bottom: 0.3rem;
 }
 .form-control {
   text-align: center;
+}
+
+#filtersColumn,
+#posts {
+  transition: width 1s;
 }
 
 .btn {
@@ -47,11 +66,11 @@ header{
   font-weight: bold;
   color: #ffffff;
   background-color: #333333;
-  padding: .6rem .2rem;
+  padding: 0.6rem 0.2rem;
   border-radius: 8px;
   border: 4px solid #333333;
 }
-#btnSearch:hover{
+#btnSearch:hover {
   border: 4px solid #ffab3d;
 }
 
