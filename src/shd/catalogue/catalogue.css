@@ -13,29 +13,23 @@ header {
 }
 
 .filtersColumn {
-  max-height: 40rem;
+  width: 18%;
+  height: 70%;
   border: 1px solid #727272cf;
   border-radius: 2rem;
   background-color: #e7e7e7a8;
-}
-
-.filtersColumn.collapsed {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  max-width: 5%;
-  transition: max-width 1s ease-out;
 }
 
 .filters {
   max-width: 90%;
   margin: auto;
   text-align: center;
+  overflow: auto;
+  scrollbar-width: none; /* Ocultar barra de scroll Para Firefox */
 }
 
-.filters.collapsed {
-  display: none;
+.filters::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari y Opera */
 }
 
 .form-group {
@@ -46,11 +40,6 @@ header {
 }
 .form-control {
   text-align: center;
-}
-
-#filtersColumn,
-#posts {
-  transition: width 1s;
 }
 
 .btn {
