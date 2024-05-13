@@ -24,16 +24,17 @@
         <!-- Iniciar secion -->
         <div class="log-p" id="init-sesion">
           <div class="log">
-            <h2>Inicia sesion</h2>
+            <h2>Bienvenido de vuelta &#128079;</h2>
             <p>¡Encuentra tu hogar ideal hoy mismo!</p>
             <form>
               <label for="gmail">Gmail</label><br />
-              <input type="mail" id="gmail" /><br />
+              <input type="email" id="gmail" /><br />
 
-              <label for="contrasenia">Contraseña</label><br />
-              <input type="password" id="contrasenia" /><br />
+              <label for="password">Password</label>
+              <input id="contrasenia" type="password" name="password"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
 
-              <button class="" id="iniciar-sesion">Iniciar sesion</button><br />
+              <button class="botn" id="iniciar-sesion">Iniciar sesion</button><br />
             </form>
             <button id="olvide-contrasenia">Olvide mi contraseña</button><br />
             <button id="registrarme">Registrarme</button>
@@ -45,7 +46,7 @@
           <div class="log">
             <h2>Recuperar contraseña</h2>
             <p>Te enviamos un mail con los pasos a seguir</p>
-            <button id="continuar-rec">Continuar</button>
+            <button class="botn" id="continuar-rec">Continuar</button>
           </div>
         </div>
 
@@ -53,7 +54,7 @@
         <div class="log-p" id="regist">
           <div class="log">
             <h2>Registrate</h2>
-            <p>Completa con todos tus datos para crearte una cuenta</p>
+            <p>Completa con todos tus datos para crearte una cuenta con nosotros</p>
 
             <form>
               <select
@@ -69,31 +70,34 @@
               <div id="formVisitante">
                 <div style="width: 100%">
                   <label for="regGmail">Gmail</label><br />
-                  <input type="mail" id="regGmail" /><br />
+                  <input type="email" id="regGmail" /><br />
 
                   <label for="regContrasenia">Contraseña</label><br />
-                  <input type="password" id="regContrasenia" /><br />
+                  <input id="regContrasenia" type="password" name="password"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
                 </div>
               </div>
 
               <div id="formPublicador">
                 <div style="width: 100%">
-                  <label for="pubNombre">Nombre</label><br />
-                  <input type="text" id="pubNombre" /><br />
+                  <label for="pubNombre">Nombre</label>
+                  <input type="text" id="pubNombre" />
 
-                  <label for="pubNumero">Numero de telefono</label><br />
-                  <input type="number" id="pubNumero" /><br />
+                  <label for="pubNumero">Numero de telefono</label>
+                  <input type="number" id="pubNumero" />
 
-                  <label for="pubGmail">Gmail</label><br />
-                  <input type="mail" id="pubGmail" /><br />
+                  <label for="pubGmail">Gmail</label>
+                  <input type="email" id="pubGmail" />
 
-                  <label for="pubContrasenia">Contraseña</label><br />
-                  <input type="password" id="pubContrasenia" /><br />
+                  <label for="pubContrasenia">Contraseña</label>
+                  <input id="pubContrasenia" type="password" name="password"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
+                  <p class="mensage">Al menos 6 caraceres alfanumericos</p>
                 </div>
               </div>
 
-              <p id="error">Faltan de seleccionar valores</p>
-              <button id="probando">Registrarme</button>
+              <p id="error">Faltan campos por completar</p>
+              <button class="botn" id="probando">Registrarme</button>
             </form>
           </div>
         </div>
