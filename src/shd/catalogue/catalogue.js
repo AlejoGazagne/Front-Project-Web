@@ -46,6 +46,7 @@ let pool = document.getElementById("poolCheck");
 let pets = document.getElementById("petsCheck");
 
 let search = document.getElementById("btnSearch");
+let collapse = document.getElementById("btnCollapse");
 
 btnDRoom.addEventListener("click", () => {
   if (roomCount.value > 0) {
@@ -98,3 +99,30 @@ pets.addEventListener("click", function () {
 /////////////////////////////////////
 
 search.addEventListener("click", () => {});
+
+// ------------------------------------- //
+
+let filtersColumn = document.getElementById("filtersColumn");
+let filters = document.getElementById("filters");
+let posts = document.getElementById("posts");
+let widthOriginal = posts.style.width;
+
+collapse.addEventListener("click", () => {
+  if (collapse.src.endsWith("left-collapse.svg")) {
+    collapse.src = "../../img/right-collapse.svg";
+  } else {
+    collapse.src = "../../img/left-collapse.svg";
+  }
+
+  if (filtersColumn.classList.contains("collapsed")) {
+    filtersColumn.classList.remove("collapsed");
+    filters.classList.remove("collapsed");
+    posts.style.width = widthOriginal;
+    posts.classList.add("col-9");
+  } else {
+    filtersColumn.classList.toggle("collapsed");
+    filters.classList.toggle("collapsed");
+    posts.style.width = "87%";
+    posts.classList.remove("col-9");
+  }
+});
