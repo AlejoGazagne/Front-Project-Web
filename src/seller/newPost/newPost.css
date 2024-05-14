@@ -1,0 +1,47 @@
+#navbar {
+  width: 100%;
+  height: 110px;
+  background-color: #000000ab;
+}
+/* ------------------------------- */
+
+input[type="number"] {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-select {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-check-input {
+  margin-top: 0.3em;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  padding: 0.5em 1em;
+  width: 85%;
+}
+
+#note {
+  color: rgb(90, 90, 90);
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+#preview {
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+#preview img {
+  margin: 0.7rem;
+  max-width: 15rem;
+  max-height: 15rem;
+}
