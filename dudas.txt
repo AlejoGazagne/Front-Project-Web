@@ -2,3 +2,8 @@ Que tan optimo es que cuando hagamos el buscado por filtro guardemos
 el array de publicaciones que traemos de la base de datos en la cache del navegador
 (esto pa que? pa que cuando entremos al post, podamos recuperar los datos usando
 el id de la publicacion para mostrar toda la info completa)
+
+realmente vale la pena comprimir si en la bd guardamos el link de imgur?
+
+como encriptar la password en el front? podemos instalar modulos en el front? o es
+exclusivamente del back instalar modulos?

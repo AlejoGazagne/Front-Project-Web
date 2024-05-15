@@ -97,6 +97,32 @@ pets.addEventListener("click", function () {
 //DESARROLLAR LA LOGICA CON EL BACK//
 /////////////////////////////////////
 
-search.addEventListener("click", () => {});
+async function getPostCardTemplate() {
+  const response = await fetch(
+    "../../components/catalogPostCard/cpostCard.html"
+  );
+
+  const text = await response.text();
+  return text;
+}
+
+let postSection = document.getElementById("posts");
+
+search.addEventListener("click", async () => {
+  event.preventDefault();
+
+  const postCardTemplate = await getPostCardTemplate();
+
+  console.log(postCardTemplate);
+  let post = postCardTemplate
+    .replace("Title", "Casa en venta")
+    .replace("Price", "Precio: $1000000")
+    .replace("Description", "Casa en venta en la zona de la playa")
+    .replace("Rooms", "3")
+    .replace("WC", "2")
+    .replace("Garage", "1");
+  console.log(post);
+  postSection.insertAdjacentHTML("beforeend", post);
+});
 
 // ------------------------------------- //
