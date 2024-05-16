@@ -95,14 +95,10 @@ seleccionCuenta.addEventListener("click", () => {
 
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
-  if (
-    (emailUsuario.value == "" || contraseniaUsuario.value == "") &&
-    seleccionCuenta.value == 1
-  ) {
+  if ((emailUsuario.value == "" || contraseniaUsuario.value == "") && seleccionCuenta.value == 1) {
     error.classList.add("mostrar");
     console.log("error");
-  }
-  if (
+  } else if (
     (nombrePublicador.value == "" ||
       numeroPublicador.value == "" ||
       emailPublicador.value == "" ||
@@ -111,9 +107,14 @@ btnRegistrar.addEventListener("click", () => {
   ) {
     error.classList.add("mostrar");
     console.log("error");
-  }
-  if (seleccionCuenta.value != 1 && seleccionCuenta.value != 2) {
+  } else if (seleccionCuenta.value != 1 && seleccionCuenta.value != 2) {
     error.classList.add("mostrar");
     console.log("error");
+  } else {
+    error.classList.remove("mostrar");
+    recuperarContrasenia.style.display = "none";
+    iniciarSesion.style.display = "flex";
+    registrarse.style.display = "none";
+    console.log("click");
   }
 });
