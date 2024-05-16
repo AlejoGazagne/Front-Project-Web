@@ -76,6 +76,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* ------------------------------- */
 
+#posts {
+  margin-left: 24%;
+  width: 75%;
+}
+
 .card {
   text-align: center;
   border: none;
@@ -85,32 +90,19 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .headerCard {
-  display: flex;
-  justify-content: right;
-  align-items: center;
   margin-bottom: 2rem;
 }
 
-.card-title {
-  position: absolute;
-  left: 43.5%;
-}
-
-.carousel-inner {
-  max-height: 20rem;
-}
-
-.carousel-item {
-  position: sticky;
-}
-
 .card-image {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  height: 30rem;
   max-width: 100%;
-  border-radius: 1rem;
+  object-fit: cover;
 }
 
 .iconos-caracteristicas {
-  max-width: 100%;
+  max-width: 50rem;
   list-style: none;
   padding: 0;
   display: flex;
@@ -122,8 +114,18 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
+.iconos-caracteristicas li i {
+  font-size: 2rem;
+}
+
 .iconos-caracteristicas li p {
-  margin: 0;
+  margin: 0 1.3rem;
+  font-size: x-large;
+  font-style: bold;
+}
+
+.iconos-caracteristicas li p:last-of-type {
+  margin: 0 0 0 1.3rem;
   font-size: x-large;
   font-style: bold;
 }
