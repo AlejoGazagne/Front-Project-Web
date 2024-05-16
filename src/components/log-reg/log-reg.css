@@ -1,117 +1,117 @@
-html{
-    background-color: #ffffff;
-    border-radius: 1rem;
+html {
+  background-color: #ffffff;
+  border-radius: 1rem;
 }
-#modal-registro{
-    /* display: block; */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background-color: #ffffff00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
+#modal-registro {
+  /* display: block; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: #ffffff00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
 
 .modal-contenido {
-    background-color: #fefefe;
-    width: 350px;
-    height: 510px;
-    padding: 1rem;
-    border-radius: 1rem;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #fefefe;
+  width: 350px;
+  height: 510px;
+  padding: 1rem;
+  border-radius: 1rem;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #btn-registro:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.log-p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
+.log-p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
 }
-#gmail{
-    margin-bottom: 1rem;
+#gmail {
+  margin-bottom: 1rem;
 }
 
-#contrasenia{
-    margin-bottom: 1rem;
+#contrasenia {
+  margin-bottom: 1rem;
 }
-.log button{
-    padding: .5rem 4rem;
-    border: none;
-    border-radius: .3rem;
-    background-color: #ffab3d;
-    color: aliceblue;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: .7rem;
+.log button {
+  padding: 0.5rem 4rem;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #ffab3d;
+  color: aliceblue;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
 }
-.boton-atras{
-    border: none;
-    background-color: #fefefe;
+.boton-atras {
+  border: none;
+  background-color: #fefefe;
 }
-.log input{
-    width: 100%;
-    padding: .3rem 0.3rem;
-    border-radius: .3rem;
-    border: 1px solid #333333;
+.log input {
+  width: 100%;
+  padding: 0.3rem 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid #333333;
 }
-.log a{
-    color: #ffab3d;
-    font-weight: bold;
+.log a {
+  color: #ffab3d;
+  font-weight: bold;
 }
-#olvide-contrasenia{
-    color: #ffab3d;
-    background-color: #fefefe;
-    padding: 0;
+#olvide-contrasenia {
+  color: #ffab3d;
+  background-color: #fefefe;
+  padding: 0;
 }
-#registrarme{
-    color: #ffab3d;
-    background-color: #fefefe;
-    padding: 0;
+#registrarme {
+  color: #ffab3d;
+  background-color: #fefefe;
+  padding: 0;
 }
-#recuperar-contrasenia{
-    display: none;
+#recuperar-contrasenia {
+  display: none;
 }
-#regist{
-    display: none;
+#regist {
+  display: none;
 }
 /* ---------------------------------------------- */
-.seleccionCuenta{
-    width: 100%; 
-    padding: .2rem;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+.seleccionCuenta {
+  width: 100%;
+  padding: 0.2rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
-#formVisitante input{
-    width: 100%;
-    margin-bottom: .6rem;
+#formVisitante input {
+  width: 100%;
+  margin-bottom: 0.6rem;
 }
 
-#formPublicador input{
-    margin-bottom: .6rem;
+#formPublicador input {
+  margin-bottom: 0.6rem;
 }
-#formVisitante{
-    display: none;
+#formVisitante {
+  display: none;
 }
-#formPublicador{
-    display: none;
+#formPublicador {
+  display: none;
 }
-#error{
-    color: red;
-    opacity: 0;
+#error {
+  color: red;
+  opacity: 0;
 }
-#error.mostrar{
-    opacity: 1;
+#error.mostrar {
+  opacity: 1;
 }
-#registrar{
-    margin-top: 1rem;
+#registrar {
+  margin-top: 1rem;
 }

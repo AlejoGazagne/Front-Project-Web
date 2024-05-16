@@ -1,11 +1,11 @@
-const btnSesion = document.getElementById("iniciar-sesion");
+const btnIniciarSesion = document.getElementById("iniciar-sesion");
 const btnIrOlvContrasenia = document.getElementById("olvide-contrasenia");
 const btnIrRegistrarse = document.getElementById("registrarme");
 
+const iniciarSesion = document.getElementById("init-sesion");
+
 const mail = document.getElementById("gmail");
 const password = document.getElementById("contrasenia");
-
-const iniciarSesion = document.getElementById("init-sesion");
 
 const recuperarContrasenia = document.getElementById("recuperar-contrasenia");
 const continuarRecuperacion = document.getElementById("continuar-rec");
@@ -26,26 +26,42 @@ const contraseniaPublicador = document.getElementById("pubContrasenia");
 
 const error = document.getElementById("error");
 
-btnSesion.addEventListener("click", () => {
+btnIniciarSesion.addEventListener("click", () => {
+  event.preventDefault();
+
   if (mail.value != "" && password.value != "") {
     console.log("click");
     console.log(mail.value);
     console.log(password.value);
-    // fetch('http://localhost:3000/login',{
-    //     method: "POST",
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         email: mail.value,
-    //         password: password.value
-    //     })
-    // }).then(async response  => {
-    //     const rsp = await response.json();
-    //     localStorage.setItem('token', rsp.token);
-    //     localStorage.setItem('user', rsp.user);
-    //     modalRegistro.classList.remove('mostrar');
-    // })
+
+    let bodyContent = JSON.stringify({
+      email: mail.value,
+      password: password.value,
+    });
+
+    fetch("http://localhost:3010/account/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: bodyContent,
+    })
+      .then(async (response) => {
+        const rsp = await response.json();
+        localStorage.setItem("token", rsp.token);
+
+        const index = window.parent.document;
+        const log_reg = index.getElementById("log-reg");
+        const marcoFlotante = index.getElementById("marco-flotante");
+        const atras = index.getElementById("atras");
+
+        log_reg.classList.remove("mostrar");
+        atras.classList.remove("mostrar");
+        marcoFlotante.classList.remove("mostrar");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 });
 
