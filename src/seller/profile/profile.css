@@ -4,11 +4,31 @@
   background-color: #000000ab;
 }
 /* ------------------------------- */
-.card {
-  padding: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 1rem;
-  background-color: rgb(251, 251, 251);
+.datos {
+  padding: 1rem;
+  border: 1px solid #8c8c8c;
+  border-radius: 0.5rem;
+  background-color: #d7d7d745;
+}
+
+.ocultar {
+  display: none;
+}
+
+.datos p {
+  margin: 0;
+}
+
+.editDatos {
+  padding: 1rem;
+  border: 1px solid #8c8c8c;
+  border-radius: 0.5rem;
+  background-color: #d7d7d745;
+}
+
+.editDatos input {
+  border-radius: 0.5rem;
+  background-color: #d7d7d745;
 }
 
 i {
