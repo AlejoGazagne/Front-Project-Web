@@ -35,19 +35,30 @@
       <div class="row">
         <div class="col-lg-4">
           <h2>Perfil del vendedor</h2>
-          <div class="card">
+          <div class="datos" id="datos">
             <div class="d-flex justify-content-between">
               <h3 id="seller-name">Inmobiliaria del Sol</h3>
-              <i class="fa-solid fa-pen-to-square"></i>
+              <a id="btn-edit" href="">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
             </div>
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">
+            <div>
+              <p>
                 <strong>Email:</strong> <span id="seller-email"></span><br />
                 <strong>Número de contacto:</strong>
                 <span id="seller-phone"></span>
               </p>
             </div>
+          </div>
+          <div class="editDatos ocultar" id="editDatos">
+            <h5>Edita la informacion del perfil</h5>
+            <label for="name">Nombre</label> <br />
+            <input type="text" class="mb-3" id="name" /> <br />
+            <label for="mail">Correo</label> <br />
+            <input type="mail" class="mb-3" id="mail" /> <br />
+            <label for="phoneNumber">Número de contacto</label> <br />
+            <input type="text" class="mb-3" id="phoneNumber" /> <br />
+            <button class="btn btn-primary" id="btn-save">Guardar</button>
           </div>
         </div>
         <div class="col-lg-8">

@@ -7,7 +7,6 @@ async function getLatLng(address) {
     const data = await response.json();
     if (data.length > 0) {
       ubication = [data[0].lat, data[0].lon];
-      console.log(ubication);
     } else {
       console.log("No se encontró la dirección");
     }
@@ -37,31 +36,31 @@ async function uploadImage(image) {
   return data.data.link;
 }
 
-// async function compressAndUploadImage(file) {
-//   const image = await createImageBitmap(file);
-//   const canvas = document.createElement("canvas");
-//   const ctx = canvas.getContext("2d");
+async function compressAndUploadImage(file) {
+  const image = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
-//   // Mantén la relación de aspecto de la imagen original
-//   const MAX_WIDTH = 800;
-//   const scaleFactor = MAX_WIDTH / image.width;
-//   const width = MAX_WIDTH;
-//   const height = image.height * scaleFactor;
+  // Mantén la relación de aspecto de la imagen original
+  const MAX_WIDTH = 800;
+  const scaleFactor = MAX_WIDTH / image.width;
+  const width = MAX_WIDTH;
+  const height = image.height * scaleFactor;
 
-//   canvas.width = width;
-//   canvas.height = height;
+  canvas.width = width;
+  canvas.height = height;
 
-//   ctx.drawImage(image, 0, 0, width, height);
+  ctx.drawImage(image, 0, 0, width, height);
 
-//   // Convierte el canvas a blob
-//   const blob = await new Promise((resolve) =>
-//     canvas.toBlob(resolve, "image/jpeg", 0.8)
-//   );
+  // Convierte el canvas a blob
+  const blob = await new Promise((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", 0.8)
+  );
 
-//   // Sube la imagen comprimida
-//   const url = await uploadImage(blob);
-//   return url;
-// }
+  // Sube la imagen comprimida
+  const url = await uploadImage(blob);
+  return url;
+}
 
 async function buildPost() {
   let images = document.getElementById("images").files;
@@ -116,7 +115,14 @@ async function buildPost() {
     urlImages.push(url);
   }
 
-  let property = {
+  let post = {
+    title: title,
+    content: description,
+    price: price,
+    onSale: operation === "Alquiler" ? false : true,
+    ubication: ubication,
+    frontImage: urlImages[0],
+    images: urlImages,
     type: type,
     rooms: rooms,
     bathrooms: bathrooms,
@@ -124,19 +130,9 @@ async function buildPost() {
     area: area,
     pool: pool,
     pets: pets,
-    ubication: ubication,
-    images: urlImages,
   };
 
-  let post = {
-    title: title,
-    content: description,
-    property: JSON.stringify(property),
-    price: price,
-    onSale: operation === "Alquiler" ? false : true,
-  };
-
-  return { post, property };
+  return post;
 }
 
 //////////////////////////////////////////////////////
@@ -175,27 +171,26 @@ images.addEventListener("change", (e) => {
 btnPost.addEventListener("click", async () => {
   event.preventDefault();
 
-  let { post, property } = await buildPost();
+  let post = await buildPost();
   post.published = true;
 
+  post = JSON.stringify(post);
+
   console.log(post);
-  console.log(property);
 
   //Fetch al backend, esto lo tiro el copilot, pero hay que hacerla xd
-  // fetch("/api/products", {
-  //   method: "POST",
-  //   body: formData,
-  // })
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     if (data.error) {
-  //       alert(data.error);
-  //       return;
-  //     }
+  fetch("http://localhost:3010/createPost", {
+    method: "POST",
+    body: post,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      }
 
-  //     alert("Producto creado con éxito");
-  //     window.location.href = "/seller/products";
-  //   });
+      console.log("Producto creado con éxito");
+    });
 });
 
 btnSave.addEventListener("click", async () => {

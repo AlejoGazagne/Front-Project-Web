@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/util.css" />
     <link rel="stylesheet" href="./css/index.css" />
+
+    <script src="./js/index.js" defer></script>
   </head>
   <body>
     <header class="d-flex flex-column justify-content-between">
@@ -105,62 +107,12 @@
     </section>
 
     <main class="contenedor">
-      <h2 class="venta-alquiler text-center m-3">
-        Casas y Deptos en venta o alquiler
-      </h2>
+      <h2 class="venta-alquiler text-center m-3">Publicaciones Destacadas</h2>
 
-      <div class="contenedro-anuncios d-flex justify-content-center flex-wrap">
-        <div class="card">
-          <img
-            src="./img/anuncioCasa1.jpg"
-            class="card-img-top"
-            alt="Imagen Anuncio"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <p>Price: usd$400.000</p>
-            <a href="#" class="fw-bold">Go somewhere</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./img/anuncioCasa2.jpg"
-            class="card-img-top"
-            alt="Imagen Anuncio"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <p>Price: usd$400.000</p>
-            <a href="#" class="fw-bold">Go somewhere</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./img/anuncioCasa3.jpg"
-            class="card-img-top"
-            alt="Imagen Anuncio"
-          />
-          <div class="card-body m-1">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <p>Price: usd$400.000</p>
-            <a href="#" class="fw-bold">Go somewhere</a>
-          </div>
-        </div>
-      </div>
+      <div
+        id="anuncios-destacados"
+        class="contenedro-anuncios d-flex justify-content-center flex-wrap"
+      ></div>
     </main>
 
     <section class="publi align-content-center">
@@ -201,6 +153,5 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./js/index.js"></script>
   </body>
 </html>
