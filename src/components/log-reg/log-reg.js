@@ -48,6 +48,7 @@ btnIniciarSesion.addEventListener("click", () => {
     })
       .then(async (response) => {
         const rsp = await response.json();
+        localStorage.removeItem('token');
         localStorage.setItem("token", rsp.token);
 
         const index = window.parent.document;

@@ -118,16 +118,16 @@ async function buildPost() {
   let post = {
     title: title,
     content: description,
-    price: price,
+    price: parseFloat(price),
     onSale: operation === "Alquiler" ? false : true,
     ubication: ubication,
     frontImage: urlImages[0],
     images: urlImages,
     type: type,
-    rooms: rooms,
-    bathrooms: bathrooms,
-    garages: garages,
-    area: area,
+    rooms: parseInt(rooms),
+    bathrooms: parseInt(bathrooms),
+    garage: parseInt(garages),
+    area: parseFloat(area),
     pool: pool,
     pets: pets,
   };
@@ -177,19 +177,40 @@ btnPost.addEventListener("click", async () => {
   post = JSON.stringify(post);
 
   console.log(post);
+  console.log(localStorage.getItem("token"))
 
   //Fetch al backend, esto lo tiro el copilot, pero hay que hacerla xd
-  fetch("http://localhost:3010/createPost", {
+  // fetch("http://localhost:3010/seller/post/createPost", {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "Authorization": localStorage.getItem("token"),
+  //   },
+  //   method: "POST",
+  //   body: post,
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     if (data.error) {
+  //       console.log(data.error);
+  //       return;
+  //     }
+
+  //     console.log("Producto creado con éxito");
+  //   });
+  fetch("http://localhost:3010/seller/post/createPost", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": localStorage.getItem("token"),
+    },
     body: post,
   })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.error) {
-        console.log(data.error);
-      }
-
-      console.log("Producto creado con éxito");
+    .then(async (response) => {
+      const rsp = await response.json();
+      console.log(rsp);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 });
 

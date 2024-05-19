@@ -5,9 +5,7 @@ const marcoFlotante = document.getElementById("marco-flotante");
 const atras = document.getElementById("atras");
 
 async function getPostCardTemplate() {
-  const response = await fetch(
-    "../../components/catalogPostCard/cpostCard.html"
-  );
+  const response = await fetch("../src/components/postCard/postCard.html");
 
   const text = await response.text();
   return text;
