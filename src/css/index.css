@@ -64,3 +64,50 @@ footer a {
   color: aliceblue;
 }
 /* --------------------------------------------------- */
+
+.card {
+  text-align: center;
+  border: none;
+  padding: 0;
+  border: 1px solid rgba(114, 114, 114, 0.812);
+  border-radius: 1rem;
+}
+
+.headerCard {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  position: relative;
+  left: 25%;
+}
+
+.card-image {
+  max-width: 100%;
+}
+
+.iconos-caracteristicas {
+  max-width: 50rem;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.iconos-caracteristicas li {
+  display: flex;
+  align-items: center;
+}
+
+.iconos-caracteristicas li p {
+  margin: 0;
+  font-size: x-large;
+  font-style: bold;
+}
+
+.btnOpen {
+  width: 75%;
+}
