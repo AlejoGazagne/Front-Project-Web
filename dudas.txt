@@ -7,3 +7,12 @@ realmente vale la pena comprimir si en la bd guardamos el link de imgur?
 
 como encriptar la password en el front? podemos instalar modulos en el front? o es
 exclusivamente del back instalar modulos?
+
+
+
+
+
+/////////////
+
+Agregar los campos de barrio ciudad provincia al post en la base de datos
+en el fetch, mandarselo al back

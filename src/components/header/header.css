@@ -43,3 +43,20 @@ body{
 .nav-link:hover{
     color: #a2a6aa;
 }
+
+#btn-profile{
+    display: none;
+}
+
+#btn-sesion{
+    display: none;
+}
+
+
+#btn-profile.mostrar{
+    display: block;
+}
+
+#btn-sesion.mostrar{
+    display: block;
+}

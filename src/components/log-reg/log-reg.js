@@ -1,3 +1,8 @@
+let parent = window.parent.document;
+let navbar = parent.getElementById("navbar");
+let btnSesion = navbar.contentDocument.getElementById("btn-sesion");
+let btnProfile = navbar.contentDocument.getElementById("btn-profile");
+
 const btnIniciarSesion = document.getElementById("iniciar-sesion");
 const btnIrOlvContrasenia = document.getElementById("olvide-contrasenia");
 const btnIrRegistrarse = document.getElementById("registrarme");
@@ -58,6 +63,9 @@ btnIniciarSesion.addEventListener("click", () => {
         log_reg.classList.remove("mostrar");
         atras.classList.remove("mostrar");
         marcoFlotante.classList.remove("mostrar");
+
+        btnSesion.classList.remove("mostrar");
+        btnProfile.classList.add("mostrar");
       })
       .catch((error) => {
         console.log(error);
@@ -95,26 +103,80 @@ seleccionCuenta.addEventListener("click", () => {
 
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
-  if ((emailUsuario.value == "" || contraseniaUsuario.value == "") && seleccionCuenta.value == 1) {
-    error.classList.add("mostrar");
-    console.log("error");
-  } else if (
-    (nombrePublicador.value == "" ||
-      numeroPublicador.value == "" ||
-      emailPublicador.value == "" ||
-      contraseniaPublicador.value == "") &&
-    seleccionCuenta.value == 2
-  ) {
-    error.classList.add("mostrar");
-    console.log("error");
-  } else if (seleccionCuenta.value != 1 && seleccionCuenta.value != 2) {
-    error.classList.add("mostrar");
-    console.log("error");
-  } else {
-    error.classList.remove("mostrar");
-    recuperarContrasenia.style.display = "none";
-    iniciarSesion.style.display = "flex";
-    registrarse.style.display = "none";
-    console.log("click");
+
+  if(seleccionCuenta.value == 1 && emailUsuario.value != "" && contraseniaUsuario.value != ""){
+    let bodyContent = JSON.stringify({
+      email: emailUsuario.value,
+      password: contraseniaUsuario.value,
+      type: seleccionCuenta.value,
+    });
+
+    console.log(bodyContent)
+
+    fetch("http://localhost:3010/account/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: bodyContent,
+    })
+      .then(async (response) => {
+        const rsp = await response.json();
+        localStorage.setItem("token", rsp.token);
+
+        const index = window.parent.document;
+        const log_reg = index.getElementById("log-reg");
+        const marcoFlotante = index.getElementById("marco-flotante");
+        const atras = index.getElementById("atras");
+
+        log_reg.classList.remove("mostrar");
+        atras.classList.remove("mostrar");
+        marcoFlotante.classList.remove("mostrar");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
+  else if(seleccionCuenta.value == 2 && 
+    nombrePublicador.value != "" && 
+    numeroPublicador.value != "" && 
+    emailPublicador.value != "" && 
+    contraseniaPublicador.value != ""){
+    
+    let bodyContent = JSON.stringify({
+      name: nombrePublicador.value,
+      phoneNumber: numeroPublicador.value,
+      email: emailPublicador.value,
+      password: contraseniaPublicador.value,
+      type: parseInt(seleccionCuenta.value),
+    });
+
+    console.log(bodyContent)
+
+    fetch("http://localhost:3010/account/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: bodyContent,
+    })
+      .then(async (response) => {
+        const rsp = await response.json();
+        localStorage.setItem("token", rsp.token);
+
+        error.classList.remove("mostrar");
+        recuperarContrasenia.style.display = "none";
+        iniciarSesion.style.display = "flex";
+        registrarse.style.display = "none";
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  else{
+    error.classList.add("mostrar");
+    console.log("error");
+  }
+  
 });
