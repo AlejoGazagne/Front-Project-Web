@@ -35,6 +35,21 @@
       <h4 class="mt-3 mb-3">Detalles Generales de la Publicacion</h4>
       <form>
         <div class="mb-3">
+          <label for="images" class="form-label">Imágenes</label>
+          <input
+            type="file"
+            class="form-control"
+            id="images"
+            multiple
+            required
+          />
+          <p id="note">
+            Imagenes de mayor tamaño pueden conllevar mayor tiempo de carga
+          </p>
+          <div id="preview" class="d-flex grid"></div>
+        </div>
+        
+        <div class="mb-3">
           <label for="title" class="form-label">Título de la publicación</label>
           <input type="text" class="form-control" id="title" required />
         </div>
@@ -73,20 +88,7 @@
             required
           ></textarea>
         </div>
-        <div class="mb-3">
-          <label for="images" class="form-label">Imágenes</label>
-          <input
-            type="file"
-            class="form-control"
-            id="images"
-            multiple
-            required
-          />
-          <p id="note">
-            Imagenes de mayor tamaño pueden conllevar mayor tiempo de carga
-          </p>
-          <div id="preview" class="d-flex grid"></div>
-        </div>
+        
         <h4 class="mt-3 mb-3">Detalles Especificos de la Propiedad</h4>
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -130,14 +132,20 @@
           >
         </div>
         <h4 class="mt-3 mb-3">Ubicacion</h4>
-        <div class="mb-3">
-          <label for="province" class="form-label">Provincia</label>
-          <input type="text" class="form-control" id="province" required />
+        <div class="row mb-3">
+          <div class="col-6">
+            <label for="province" class="form-label">Provincia</label>
+            <input type="text" class="form-control" id="province" required />
+          </div>
+          <div class="col-6">
+            <label for="city" class="form-label">Localidad</label>
+            <input type="text" class="form-control" id="city" required />
+          </div>
         </div>
         <div class="row">
           <div class="col-md-8 mb-3">
-            <label for="city" class="form-label">Localidad</label>
-            <input type="text" class="form-control" id="city" required />
+            <label for="neighborhood" class="form-label">Barrio</label>
+            <input type="text" class="form-control" id="neighborhood" required />
           </div>
           <div class="col-md-4 mb-3">
             <label for="postalCode" class="form-label">Código Postal</label>

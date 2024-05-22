@@ -1,21 +1,3 @@
-async function getLatLng(address) {
-  let ubication;
-  try {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${address}`
-    );
-    const data = await response.json();
-    if (data.length > 0) {
-      ubication = [data[0].lat, data[0].lon];
-    } else {
-      console.log("No se encontró la dirección");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-  return ubication;
-}
-
 async function uploadImage(image) {
   const formData = new FormData();
   formData.append("image", image);
@@ -23,7 +5,7 @@ async function uploadImage(image) {
   const response = await fetch("https://api.imgur.com/3/image", {
     method: "POST",
     headers: {
-      Authorization: "Client-ID 0b0e7fad6ff11fc",
+      Authorization: "Client-ID 53fe1a7ee9c3b07",
     },
     body: formData,
   });
@@ -64,7 +46,6 @@ async function compressAndUploadImage(file) {
 
 async function buildPost() {
   let images = document.getElementById("images").files;
-  let urlImages = [];
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
   let type = document.getElementById("propertyType").value;
@@ -87,9 +68,9 @@ async function buildPost() {
     ", " +
     document.getElementById("province").value +
     ", Argentina";
-
-  // Obtiene latitud y longitud de la address gracias a Nominatin
-  let ubication = await getLatLng(address);
+  
+  let city = document.getElementById("city").value;
+  let neighborhood = document.getElementById("neighborhood").value;
 
   if (images.length === 0) {
     alert("Debe seleccionar al menos una imagen");
@@ -105,14 +86,11 @@ async function buildPost() {
     !area ||
     !price ||
     !operation ||
-    !ubication
+    !address ||
+    !city ||
+    !neighborhood
   ) {
     alert("Faltan completar campos");
-  }
-
-  for (let image of images) {
-    let url = await uploadImage(image);
-    urlImages.push(url);
   }
 
   let post = {
@@ -120,7 +98,9 @@ async function buildPost() {
     content: description,
     price: parseFloat(price),
     onSale: operation === "Alquiler" ? false : true,
-    ubication: ubication,
+    ubication: address,
+    city: city,
+    neighborhood: neighborhood,
     frontImage: urlImages[0],
     images: urlImages,
     type: type,
@@ -142,6 +122,8 @@ let preview = document.getElementById("preview");
 let btnPost = document.getElementById("btnPost");
 let btnSave = document.getElementById("btnSave");
 
+
+// Limpiar la preview de imagenes
 document.addEventListener("DOMContentLoaded", () => {
   while (preview.firstChild) {
     preview.removeChild(preview.firstChild);
@@ -149,8 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Evento que se dispara cuando se seleccionan imagenes
+let urlImages = [];
 
-images.addEventListener("change", (e) => {
+images.addEventListener("change", async (e) => {
   let files = e.target.files; // Imagenes seleccionadas
 
   if (!files) {
@@ -160,12 +143,18 @@ images.addEventListener("change", (e) => {
   for (let i = 0; i < files.length; i++) {
     let reader = new FileReader();
     reader.readAsDataURL(files[i]);
-    reader.onload = () => {
+    reader.onload =  () => {
       let img = document.createElement("img");
       img.src = reader.result;
       preview.appendChild(img);
     };
   }
+
+  for (let i = 0; i < files.length; i++) {
+    let url = await compressAndUploadImage(files[i]);
+    urlImages.push(url);
+  }
+  console.log(urlImages); 
 });
 
 btnPost.addEventListener("click", async () => {
@@ -177,49 +166,61 @@ btnPost.addEventListener("click", async () => {
   post = JSON.stringify(post);
 
   console.log(post);
-  console.log(localStorage.getItem("token"))
+  console.log(localStorage.getItem("token"));
 
-  //Fetch al backend, esto lo tiro el copilot, pero hay que hacerla xd
-  // fetch("http://localhost:3010/seller/post/createPost", {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "Authorization": localStorage.getItem("token"),
-  //   },
-  //   method: "POST",
-  //   body: post,
-  // })
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     if (data.error) {
-  //       console.log(data.error);
-  //       return;
-  //     }
-
-  //     console.log("Producto creado con éxito");
-  //   });
+  //Fetch al backend, crea el post autorizandose con el token del seller
   fetch("http://localhost:3010/seller/post/createPost", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": localStorage.getItem("token"),
+      "Authorization":sessionStorage.getItem("token"),
     },
     body: post,
   })
-    .then(async (response) => {
-      const rsp = await response.json();
-      console.log(rsp);
-    })
-    .catch((error) => {
-      console.log(error);
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      }
+      else{
+        console.log("Producto creado con éxito");
+        window.location.href = "../../shd/profile/profile.html";
+      }
+
+      
     });
 });
 
 btnSave.addEventListener("click", async () => {
   event.preventDefault();
 
-  let { post, property } = await buildPost();
+  let post = await buildPost();
   post.published = false;
 
+  post = JSON.stringify(post);
+  
   console.log(post);
-  console.log(property);
+
+  //Fetch al backend, crea el post autorizandose con el token del seller
+  fetch("http://localhost:3010/seller/post/createPost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization":sessionStorage.getItem("token"),
+    },
+    body: post,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      }
+      else{
+        console.log("Producto guardado con éxito");
+        window.location.href = "../../shd/profile/profile.html";
+      }
+
+      
+    });
+
 });
