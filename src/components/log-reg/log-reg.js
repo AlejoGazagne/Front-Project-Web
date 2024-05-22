@@ -16,7 +16,7 @@ const recuperarContrasenia = document.getElementById("recuperar-contrasenia");
 const continuarRecuperacion = document.getElementById("continuar-rec");
 
 const registrarse = document.getElementById("regist");
-const btnRegistrar = document.getElementById("probando");
+const btnRegistrar = document.getElementById("btn-register");
 
 const seleccionCuenta = document.getElementById("seleccion-cuenta");
 const formVisitante = document.getElementById("formVisitante");
@@ -33,16 +33,16 @@ const error = document.getElementById("error");
 
 btnIniciarSesion.addEventListener("click", () => {
   event.preventDefault();
+  error.classList.remove("mostrar");
 
   if (mail.value != "" && password.value != "") {
-    console.log("click");
-    console.log(mail.value);
-    console.log(password.value);
 
     let bodyContent = JSON.stringify({
       email: mail.value,
       password: password.value,
     });
+
+    console.log(bodyContent);
 
     fetch("http://localhost:3010/account/login", {
       method: "POST",
@@ -52,24 +52,40 @@ btnIniciarSesion.addEventListener("click", () => {
       body: bodyContent,
     })
       .then(async (response) => {
-        const rsp = await response.json();
-        localStorage.setItem("token", rsp.token);
+      
+        const rsp = await response.json()
 
-        const index = window.parent.document;
-        const log_reg = index.getElementById("log-reg");
-        const marcoFlotante = index.getElementById("marco-flotante");
-        const atras = index.getElementById("atras");
+        if(response.status === 200){
+          sessionStorage.setItem("token", rsp.token);
 
-        log_reg.classList.remove("mostrar");
-        atras.classList.remove("mostrar");
-        marcoFlotante.classList.remove("mostrar");
+          const index = window.parent.document;
+          const log_reg = index.getElementById("log-reg");
+          const marcoFlotante = index.getElementById("marco-flotante");
+          const atras = index.getElementById("atras");
 
-        btnSesion.classList.remove("mostrar");
-        btnProfile.classList.add("mostrar");
+          log_reg.classList.remove("mostrar");
+          atras.classList.remove("mostrar");
+          marcoFlotante.classList.remove("mostrar");
+
+          btnSesion.classList.remove("mostrar");
+          btnProfile.classList.add("mostrar");
+        }
+        else{
+          error.innerHTML = "Email o contraseña incorrectos. <br>Deseas crear una cuenta? Pulsa el boton \"Registrarme\"";
+          error.classList.add("mostrar");
+        }
+        
+        
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+  else{
+    error.textContent = "Por favor, rellena todos los campos"
+    error.classList.add("mostrar");
+    console.log("error");
+  
   }
 });
 
@@ -108,7 +124,7 @@ btnRegistrar.addEventListener("click", () => {
     let bodyContent = JSON.stringify({
       email: emailUsuario.value,
       password: contraseniaUsuario.value,
-      type: seleccionCuenta.value,
+      type: parseInt(seleccionCuenta.value),
     });
 
     console.log(bodyContent)
@@ -122,7 +138,7 @@ btnRegistrar.addEventListener("click", () => {
     })
       .then(async (response) => {
         const rsp = await response.json();
-        localStorage.setItem("token", rsp.token);
+        sessionStorage.setItem("token", rsp.token);
 
         const index = window.parent.document;
         const log_reg = index.getElementById("log-reg");
@@ -132,6 +148,10 @@ btnRegistrar.addEventListener("click", () => {
         log_reg.classList.remove("mostrar");
         atras.classList.remove("mostrar");
         marcoFlotante.classList.remove("mostrar");
+
+        registrarse.style.display = "none";
+        iniciarSesion.style.display = "flex";
+        recuperarContrasenia.style.display = "none";
       })
       .catch((error) => {
         console.log(error);
@@ -162,12 +182,20 @@ btnRegistrar.addEventListener("click", () => {
     })
       .then(async (response) => {
         const rsp = await response.json();
-        localStorage.setItem("token", rsp.token);
+        sessionStorage.setItem("token", rsp.token);
 
-        error.classList.remove("mostrar");
-        recuperarContrasenia.style.display = "none";
-        iniciarSesion.style.display = "flex";
+        const index = window.parent.document;
+        const log_reg = index.getElementById("log-reg");
+        const marcoFlotante = index.getElementById("marco-flotante");
+        const atras = index.getElementById("atras");
+
+        log_reg.classList.remove("mostrar");
+        atras.classList.remove("mostrar");
+        marcoFlotante.classList.remove("mostrar");
+
         registrarse.style.display = "none";
+        iniciarSesion.style.display = "flex";
+        recuperarContrasenia.style.display = "none";
         
       })
       .catch((error) => {

@@ -21,26 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(data);
       data.forEach(async (post) => {
         const postCardTemplate = await getPostCardTemplate();    
-        
-        // const hashImage = post.frontImage.replace('https://i.imgur.com/', '')
-        // .replace('.jpeg', '')
-        // .replace('.jpg', '')
-        // .replace('.png', '');
-
-        // var myHeaders = new Headers();
-        // myHeaders.append("Authorization", "Client-ID 53fe1a7ee9c3b07");
-
-        
-        // var requestOptions = {
-        //     method: 'GET',
-        //     headers: myHeaders,
-        //     redirect: 'follow'
-        // };
-
-        // const response = await fetch("https://api.imgur.com/3/image/" + hashImage, requestOptions);
-
-        // console.log(response);
-
         let cardPost = postCardTemplate.replace('img-source', post.frontImage)
           .replace("Title", post.title)
           .replace("Price", post.price)
@@ -56,26 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(error);
     });
 });
-
-// navbar.addEventListener("load", () => {
-//   let btnSesion = navbar.contentDocument.getElementById("btn-sesion");
-//   let btnCatalogue = navbar.contentDocument.getElementById("btn-catalogue");
-//   let btnPost = navbar.contentDocument.getElementById("btn-post");
-
-//   btnSesion.addEventListener("click", () => {
-//     log_reg.classList.add("mostrar");
-//     atras.classList.add("mostrar");
-//     marcoFlotante.classList.add("mostrar");
-//   });
-
-//   btnCatalogue.addEventListener("click", () => {
-//     window.location.href = "../../../src/shd/catalogue/catalogue.html";
-//   });
-
-//   btnPost.addEventListener("click", () => {
-//     window.location.href = "../../../src/seller/newPost/newPost.html";
-//   });
-// });
 
 atras.addEventListener("click", () => {
   log_reg.classList.remove("mostrar");

@@ -68,6 +68,9 @@ async function buildPost() {
     ", " +
     document.getElementById("province").value +
     ", Argentina";
+  
+  let city = document.getElementById("city").value;
+  let neighborhood = document.getElementById("neighborhood").value;
 
   if (images.length === 0) {
     alert("Debe seleccionar al menos una imagen");
@@ -83,7 +86,9 @@ async function buildPost() {
     !area ||
     !price ||
     !operation ||
-    !address
+    !address ||
+    !city ||
+    !neighborhood
   ) {
     alert("Faltan completar campos");
   }
@@ -94,6 +99,8 @@ async function buildPost() {
     price: parseFloat(price),
     onSale: operation === "Alquiler" ? false : true,
     ubication: address,
+    city: city,
+    neighborhood: neighborhood,
     frontImage: urlImages[0],
     images: urlImages,
     type: type,
@@ -166,7 +173,7 @@ btnPost.addEventListener("click", async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization":localStorage.getItem("token"),
+      "Authorization":sessionStorage.getItem("token"),
     },
     body: post,
   })
@@ -176,7 +183,8 @@ btnPost.addEventListener("click", async () => {
         console.log(data.error);
       }
       else{
-        console.log("Producto creado con éxito"); 
+        console.log("Producto creado con éxito");
+        window.location.href = "../../shd/profile/profile.html";
       }
 
       
@@ -186,9 +194,33 @@ btnPost.addEventListener("click", async () => {
 btnSave.addEventListener("click", async () => {
   event.preventDefault();
 
-  let { post, property } = await buildPost();
+  let post = await buildPost();
   post.published = false;
 
+  post = JSON.stringify(post);
+  
   console.log(post);
-  console.log(property);
+
+  //Fetch al backend, crea el post autorizandose con el token del seller
+  fetch("http://localhost:3010/seller/post/createPost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization":sessionStorage.getItem("token"),
+    },
+    body: post,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      }
+      else{
+        console.log("Producto guardado con éxito");
+        window.location.href = "../../shd/profile/profile.html";
+      }
+
+      
+    });
+
 });
