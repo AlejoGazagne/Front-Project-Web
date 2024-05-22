@@ -12,22 +12,18 @@ const atras = parent.getElementById("atras");
 const marcoFlotante = parent.getElementById("marco-flotante");
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("http://localhost:3010/seller/validate",{
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
-        }
-    }).then((response)=>{
-        if (response.status === 200){
-            btnSesion.classList.remove("mostrar");
-            btnProfile.classList.add("mostrar");
-        }else{
-            btnSesion.classList.add("mostrar");
-            btnProfile.classList.remove("mostrar");
-        }
-    })
+
+   
+    if(sessionStorage.getItem("token") === null){
+        btnSesion.classList.add("mostrar");
+        btnProfile.classList.remove("mostrar");
+    }
+    else{
+        btnSesion.classList.remove("mostrar");
+        btnProfile.classList.add("mostrar");
+    }
 });
+
 
 logo.addEventListener("click", () => {
     ref.window.location.href = "../../../src/index.html";
@@ -38,11 +34,11 @@ btnCatalogue.addEventListener("click", () => {
 });
 
 btnPost.addEventListener("click", () => {
-    fetch("http://localhost:3010/seller/validate",{
+    fetch("http://localhost:3010/validate",{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": sessionStorage.getItem("token")
         }
     }).then((response)=>{
         if (response.status === 200){
@@ -63,7 +59,22 @@ btnSesion.addEventListener("click", () => {
 });
 
 btnProfile.addEventListener("click", () => {
-    ref.window.location.href = "../../../src/seller/profile/profile.html";
+    fetch("http://localhost:3010/validate",{
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": sessionStorage.getItem("token")
+        }
+    }).then((response)=>{
+        if (response.status === 200){
+            ref.window.location.href = "../../../src/shd/profile/profile.html";
+        }else{
+            log_reg.classList.add("mostrar");
+            atras.classList.add("mostrar");
+            marcoFlotante.classList.add("mostrar");
+        }
+    })
+    
 });
 
 

@@ -33,11 +33,13 @@
               <label for="password">Password</label>
               <input id="contrasenia" type="password" name="password"
                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
-
+              
+              <p id="error"></p>
               <button class="botn" id="iniciar-sesion">Iniciar sesion</button><br />
             </form>
+            
 
-            <button id="olvide-contrasenia">Olvide mi contraseña</button><br />
+            <button class="mt-3" id="olvide-contrasenia">Olvide mi contraseña</button><br />
             <button id="registrarme">Registrarme</button>
           </div>
         </div>
@@ -97,8 +99,8 @@
                 </div>
               </div>
 
-              <p id="error">Faltan campos por completar</p>
-              <button class="botn" id="probando">Registrarme</button>
+              
+              <button class="botn" id="btn-register">Registrarme</button>
             </form>
           </div>
         </div>

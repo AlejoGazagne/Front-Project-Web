@@ -108,12 +108,39 @@ async function getPostCardTemplate() {
 
 let postSection = document.getElementById("posts");
 
+window.addEventListener("load", async () => {
+  fetch("http://localhost:3010/catalogue",{
+    method: "GET",
+  }).then(async (response) => {
+    const postCardTemplate = await getPostCardTemplate();
+    const rsp = await response.json()
+
+    console.log(rsp)
+  
+    let post = postCardTemplate
+    .replace("Title", "Casa en venta")
+    .replace("Price", "Precio: $1000000")
+    .replace("Description", "Casa en venta en la zona de la playa")
+    .replace("Rooms", "3")
+    .replace("WC", "2")
+    .replace("Garage", "1");
+    
+    postSection.insertAdjacentHTML("beforeend", post);
+  
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+});
+
+
+
 search.addEventListener("click", async () => {
   event.preventDefault();
 
   const postCardTemplate = await getPostCardTemplate();
 
-  console.log(postCardTemplate);
+  
   let post = postCardTemplate
     .replace("Title", "Casa en venta")
     .replace("Price", "Precio: $1000000")
@@ -121,7 +148,7 @@ search.addEventListener("click", async () => {
     .replace("Rooms", "3")
     .replace("WC", "2")
     .replace("Garage", "1");
-  console.log(post);
+  
   postSection.insertAdjacentHTML("beforeend", post);
 });
 

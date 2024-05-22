@@ -89,6 +89,11 @@ footer a {
   max-width: 100%;
 }
 
+#imgCard{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
 .iconos-caracteristicas {
   max-width: 50rem;
   list-style: none;
