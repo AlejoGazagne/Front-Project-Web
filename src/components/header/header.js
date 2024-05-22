@@ -12,69 +12,85 @@ const atras = parent.getElementById("atras");
 const marcoFlotante = parent.getElementById("marco-flotante");
 
 document.addEventListener("DOMContentLoaded", () => {
-
-   
-    if(sessionStorage.getItem("token") === null){
-        btnSesion.classList.add("mostrar");
-        btnProfile.classList.remove("mostrar");
-    }
-    else{
-        btnSesion.classList.remove("mostrar");
-        btnProfile.classList.add("mostrar");
-    }
+  if (sessionStorage.getItem("token") === null) {
+    btnSesion.classList.add("mostrar");
+    btnProfile.classList.remove("mostrar");
+  }
+  else {
+    btnSesion.classList.remove("mostrar");
+    btnProfile.classList.add("mostrar");
+  }
 });
 
 
 logo.addEventListener("click", () => {
-    ref.window.location.href = "../../../src/index.html";
+  ref.window.location.href = "../../../src/index.html";
 });
 
 btnCatalogue.addEventListener("click", () => {
-    ref.window.location.href = "../../../src/shd/catalogue/catalogue.html";
+  ref.window.location.href = "../../../src/shd/catalogue/catalogue.html";
 });
 
-btnPost.addEventListener("click", () => {
-    fetch("http://localhost:3010/validate",{
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": sessionStorage.getItem("token")
-        }
-    }).then((response)=>{
-        if (response.status === 200){
-            ref.window.location.href = "../../../src/seller/newPost/newPost.html";
-        }else{
-            log_reg.classList.add("mostrar");
-            atras.classList.add("mostrar");
-            marcoFlotante.classList.add("mostrar");
-        }
-    })
-    
-});
+btnPost.addEventListener("click", async () => {
+  const response = await fetch("http://localhost:3010/validate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("token")
+    }
+  })
+  const data = await response.json()
 
-btnSesion.addEventListener("click", () => {    
+  console.log(data.message);
+  if (data.message === "seller") {
+    ref.window.location.href = "../../../src/seller/newPost/newPost.html";
+  } else {
     log_reg.classList.add("mostrar");
     atras.classList.add("mostrar");
     marcoFlotante.classList.add("mostrar");
+  }
+  // fetch("http://localhost:3010/validate", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "Authorization": sessionStorage.getItem("token")
+  //   }
+  // }).then((response) => {
+  //   console.log(response);
+  //   if (response.message === "seller") {
+  //     ref.window.location.href = "../../../src/seller/newPost/newPost.html";
+  //   } else {
+  //     log_reg.classList.add("mostrar");
+  //     atras.classList.add("mostrar");
+  //     marcoFlotante.classList.add("mostrar");
+  //   }
+  // })
+
+});
+
+btnSesion.addEventListener("click", () => {
+  log_reg.classList.add("mostrar");
+  atras.classList.add("mostrar");
+  marcoFlotante.classList.add("mostrar");
 });
 
 btnProfile.addEventListener("click", () => {
-    fetch("http://localhost:3010/validate",{
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": sessionStorage.getItem("token")
-        }
-    }).then((response)=>{
-        if (response.status === 200){
-            ref.window.location.href = "../../../src/shd/profile/profile.html";
-        }else{
-            log_reg.classList.add("mostrar");
-            atras.classList.add("mostrar");
-            marcoFlotante.classList.add("mostrar");
-        }
-    })
-    
+  fetch("http://localhost:3010/validate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("token")
+    }
+  }).then((response) => {
+    if (response.status === 200) {
+      ref.window.location.href = "../../../src/shd/profile/profile.html";
+    } else {
+      log_reg.classList.add("mostrar");
+      atras.classList.add("mostrar");
+      marcoFlotante.classList.add("mostrar");
+    }
+  })
+
 });
 
 

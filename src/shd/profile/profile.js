@@ -7,32 +7,61 @@ async function getPostCardTemplate() {
   return text;
 }
 
+fetch("http://localhost:3010/validate", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": sessionStorage.getItem("token")
+  }
+}).then((response) => {
+  if (response.status === 401 || response.status === 403) {
+    window.location.href = "../../index.html";
+    console.log("ajuera")
+  }
+  if (response.message === "seller") {
+    console.log("seller")
+    //logica si es seller??
+
+  } else {
+    console.log("user")
+    //logica si es usuario??
+
+  }
+})
+
 
 document.addEventListener("DOMContentLoaded", () => {
-  // fetch("http://localhost:3010/api/usuarios")
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  fetch("http://localhost:3010/seller/myAccount", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("token")
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   let posts = document.getElementById("seller-posts");
 
-  fetch("http://localhost:3010/seller/post/getMyPosts",{
+  fetch("http://localhost:3010/seller/post/getMyPosts", {
     method: "GET",
     headers: {
-      "Authorization":sessionStorage.getItem("token"),
-    }}).then((response) => response.json())
+      "Authorization": sessionStorage.getItem("token"),
+    }
+  }).then((response) => response.json())
     .then((data) => {
       console.log(data);
       data.data.forEach(async (post) => {
-        const postCardTemplate = await getPostCardTemplate();    
+        const postCardTemplate = await getPostCardTemplate();
         let cardPost = postCardTemplate.replace('img-source', post.frontImage)
           .replace("Title", post.title)
           .replace("Price", post.price)
-          .replace("Description", post.content) 
+          .replace("Description", post.content)
           .replace("Rooms", post.rooms)
           .replace("WC", post.bathrooms)
           .replace("Garage", post.garage)
