@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => {
       console.log(data);
       data.forEach(async (post) => {
-        const postCardTemplate = await getPostCardTemplate();    
+        const postCardTemplate = await getPostCardTemplate();
         let cardPost = postCardTemplate.replace('img-source', post.frontImage)
           .replace("Title", post.title)
-          .replace("Price", post.price)
-          .replace("Description", post.content) 
+          .replace("value", post.price)
+          .replace("Description", post.content)
           .replace("Rooms", post.rooms)
           .replace("WC", post.bathrooms)
           .replace("Garage", post.garage);

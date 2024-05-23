@@ -109,28 +109,33 @@ async function getPostCardTemplate() {
 let postSection = document.getElementById("posts");
 
 window.addEventListener("load", async () => {
-  fetch("http://localhost:3010/catalogue",{
+  fetch("http://localhost:3010/catalogue", {
     method: "GET",
   }).then(async (response) => {
     const postCardTemplate = await getPostCardTemplate();
     const rsp = await response.json()
 
     console.log(rsp)
-  
-    let post = postCardTemplate
-    .replace("Title", "Casa en venta")
-    .replace("Price", "Precio: $1000000")
-    .replace("Description", "Casa en venta en la zona de la playa")
-    .replace("Rooms", "3")
-    .replace("WC", "2")
-    .replace("Garage", "1");
-    
-    postSection.insertAdjacentHTML("beforeend", post);
-  
+
+    rsp.forEach(function (post) {
+      let newPost = postCardTemplate
+        .replace('img-source', post.frontImage)
+        .replace("Title", post.title)
+        .replace("value", post.price)
+        .replace("Description", post.content)
+        .replace("Rooms", post.rooms)
+        .replace("WC", post.bathrooms)
+        .replace("Garage", post.garage);
+
+      postSection.insertAdjacentHTML("beforeend", newPost);
+    });
+
+
+
   })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 });
 
 
@@ -140,7 +145,7 @@ search.addEventListener("click", async () => {
 
   const postCardTemplate = await getPostCardTemplate();
 
-  
+
   let post = postCardTemplate
     .replace("Title", "Casa en venta")
     .replace("Price", "Precio: $1000000")
@@ -148,7 +153,7 @@ search.addEventListener("click", async () => {
     .replace("Rooms", "3")
     .replace("WC", "2")
     .replace("Garage", "1");
-  
+
   postSection.insertAdjacentHTML("beforeend", post);
 });
 

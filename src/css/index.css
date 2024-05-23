@@ -81,6 +81,7 @@ footer a {
 }
 
 .card-title {
+  font-size: x-large;
   position: relative;
   left: 25%;
 }

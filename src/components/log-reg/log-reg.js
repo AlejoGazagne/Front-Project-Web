@@ -1,12 +1,20 @@
-let parent = window.parent.document;
-let navbar = parent.getElementById("navbar");
-let btnSesion = navbar.contentDocument.getElementById("btn-sesion");
-let btnProfile = navbar.contentDocument.getElementById("btn-profile");
+// Componentes Externos
+const parent = window.parent.document;
+const log_reg = parent.getElementById("log-reg");
+const marcoFlotante = parent.getElementById("marco-flotante");
+const atras = parent.getElementById("atras");
+const navbar = parent.getElementById("navbar");
+const btnSesion = navbar.contentDocument.getElementById("btn-sesion");
+const btnProfile = navbar.contentDocument.getElementById("btn-profile");
+const btnLogout = navbar.contentDocument.getElementById("btn-logout");
 
+
+// Botones internos
 const btnIniciarSesion = document.getElementById("iniciar-sesion");
 const btnIrOlvContrasenia = document.getElementById("olvide-contrasenia");
 const btnIrRegistrarse = document.getElementById("registrarme");
 
+//Login
 const iniciarSesion = document.getElementById("init-sesion");
 
 const mail = document.getElementById("gmail");
@@ -18,6 +26,7 @@ const continuarRecuperacion = document.getElementById("continuar-rec");
 const registrarse = document.getElementById("regist");
 const btnRegistrar = document.getElementById("btn-register");
 
+// Registro de Cuenta
 const seleccionCuenta = document.getElementById("seleccion-cuenta");
 const formVisitante = document.getElementById("formVisitante");
 const emailUsuario = document.getElementById("regGmail");
@@ -31,6 +40,46 @@ const contraseniaPublicador = document.getElementById("pubContrasenia");
 
 const error = document.getElementById("error");
 
+function modifyView() {
+  log_reg.classList.remove("mostrar");
+  atras.classList.remove("mostrar");
+  marcoFlotante.classList.remove("mostrar");
+
+  btnSesion.classList.remove("mostrar");
+  btnProfile.classList.add("mostrar");
+  btnLogout.classList.add("mostrar");
+}
+
+function register(bodyContent) {
+  fetch("http://localhost:3010/account/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: bodyContent,
+  })
+    .then(async (response) => {
+      const rsp = await response.json();
+      if (response.status !== 200) {
+        error.innerHTML = rsp.error;
+        error.classList.add("mostrar");
+        return;
+      }
+
+      sessionStorage.setItem("token", rsp.token);
+
+      modifyView();
+
+      registrarse.style.display = "none";
+      iniciarSesion.style.display = "flex";
+      recuperarContrasenia.style.display = "none";
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
 btnIniciarSesion.addEventListener("click", () => {
   event.preventDefault();
   error.classList.remove("mostrar");
@@ -42,8 +91,6 @@ btnIniciarSesion.addEventListener("click", () => {
       password: password.value,
     });
 
-    console.log(bodyContent);
-
     fetch("http://localhost:3010/account/login", {
       method: "POST",
       headers: {
@@ -52,40 +99,30 @@ btnIniciarSesion.addEventListener("click", () => {
       body: bodyContent,
     })
       .then(async (response) => {
-      
+
         const rsp = await response.json()
 
-        if(response.status === 200){
+        if (response.status === 200) {
           sessionStorage.setItem("token", rsp.token);
+          modifyView();
 
-          const index = window.parent.document;
-          const log_reg = index.getElementById("log-reg");
-          const marcoFlotante = index.getElementById("marco-flotante");
-          const atras = index.getElementById("atras");
-
-          log_reg.classList.remove("mostrar");
-          atras.classList.remove("mostrar");
-          marcoFlotante.classList.remove("mostrar");
-
-          btnSesion.classList.remove("mostrar");
-          btnProfile.classList.add("mostrar");
         }
-        else{
+        else {
           error.innerHTML = "Email o contraseña incorrectos. <br>Deseas crear una cuenta? Pulsa el boton \"Registrarme\"";
           error.classList.add("mostrar");
         }
-        
-        
+
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
-  else{
+  else {
     error.textContent = "Por favor, rellena todos los campos"
     error.classList.add("mostrar");
     console.log("error");
-  
+
   }
 });
 
@@ -120,49 +157,23 @@ seleccionCuenta.addEventListener("click", () => {
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
 
-  if(seleccionCuenta.value == 1 && emailUsuario.value != "" && contraseniaUsuario.value != ""){
+  if (seleccionCuenta.value == 1 && emailUsuario.value != "" && contraseniaUsuario.value != "") {
     let bodyContent = JSON.stringify({
       email: emailUsuario.value,
       password: contraseniaUsuario.value,
       type: parseInt(seleccionCuenta.value),
     });
 
-    console.log(bodyContent)
+    register(bodyContent);
 
-    fetch("http://localhost:3010/account/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: bodyContent,
-    })
-      .then(async (response) => {
-        const rsp = await response.json();
-        sessionStorage.setItem("token", rsp.token);
 
-        const index = window.parent.document;
-        const log_reg = index.getElementById("log-reg");
-        const marcoFlotante = index.getElementById("marco-flotante");
-        const atras = index.getElementById("atras");
-
-        log_reg.classList.remove("mostrar");
-        atras.classList.remove("mostrar");
-        marcoFlotante.classList.remove("mostrar");
-
-        registrarse.style.display = "none";
-        iniciarSesion.style.display = "flex";
-        recuperarContrasenia.style.display = "none";
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
-  else if(seleccionCuenta.value == 2 && 
-    nombrePublicador.value != "" && 
-    numeroPublicador.value != "" && 
-    emailPublicador.value != "" && 
-    contraseniaPublicador.value != ""){
-    
+  else if (seleccionCuenta.value == 2 &&
+    nombrePublicador.value != "" &&
+    numeroPublicador.value != "" &&
+    emailPublicador.value != "" &&
+    contraseniaPublicador.value != "") {
+
     let bodyContent = JSON.stringify({
       name: nombrePublicador.value,
       phoneNumber: numeroPublicador.value,
@@ -171,40 +182,12 @@ btnRegistrar.addEventListener("click", () => {
       type: parseInt(seleccionCuenta.value),
     });
 
-    console.log(bodyContent)
-
-    fetch("http://localhost:3010/account/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: bodyContent,
-    })
-      .then(async (response) => {
-        const rsp = await response.json();
-        sessionStorage.setItem("token", rsp.token);
-
-        const index = window.parent.document;
-        const log_reg = index.getElementById("log-reg");
-        const marcoFlotante = index.getElementById("marco-flotante");
-        const atras = index.getElementById("atras");
-
-        log_reg.classList.remove("mostrar");
-        atras.classList.remove("mostrar");
-        marcoFlotante.classList.remove("mostrar");
-
-        registrarse.style.display = "none";
-        iniciarSesion.style.display = "flex";
-        recuperarContrasenia.style.display = "none";
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    register(bodyContent);
   }
-  else{
+  else {
+    error.textContent = "Por favor, rellena todos los campos"
     error.classList.add("mostrar");
     console.log("error");
   }
-  
+
 });

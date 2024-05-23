@@ -68,12 +68,13 @@ async function buildPost() {
     ", " +
     document.getElementById("province").value +
     ", Argentina";
-  
+
   let city = document.getElementById("city").value;
   let neighborhood = document.getElementById("neighborhood").value;
 
   if (images.length === 0) {
     alert("Debe seleccionar al menos una imagen");
+    return;
   }
 
   if (
@@ -91,8 +92,11 @@ async function buildPost() {
     !neighborhood
   ) {
     alert("Faltan completar campos");
+    return;
   }
 
+  console.log(new Date().toISOString());
+  // Construye el objeto post
   let post = {
     title: title,
     content: description,
@@ -110,6 +114,7 @@ async function buildPost() {
     area: parseFloat(area),
     pool: pool,
     pets: pets,
+    datetime: new Date().toISOString(),
   };
 
   return post;
@@ -143,7 +148,7 @@ images.addEventListener("change", async (e) => {
   for (let i = 0; i < files.length; i++) {
     let reader = new FileReader();
     reader.readAsDataURL(files[i]);
-    reader.onload =  () => {
+    reader.onload = () => {
       let img = document.createElement("img");
       img.src = reader.result;
       preview.appendChild(img);
@@ -154,7 +159,7 @@ images.addEventListener("change", async (e) => {
     let url = await compressAndUploadImage(files[i]);
     urlImages.push(url);
   }
-  console.log(urlImages); 
+  console.log(urlImages);
 });
 
 btnPost.addEventListener("click", async () => {
@@ -173,7 +178,7 @@ btnPost.addEventListener("click", async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization":sessionStorage.getItem("token"),
+      "Authorization": sessionStorage.getItem("token"),
     },
     body: post,
   })
@@ -182,12 +187,12 @@ btnPost.addEventListener("click", async () => {
       if (data.error) {
         console.log(data.error);
       }
-      else{
+      else {
         console.log("Producto creado con éxito");
         window.location.href = "../../shd/profile/profile.html";
       }
 
-      
+
     });
 });
 
@@ -198,7 +203,7 @@ btnSave.addEventListener("click", async () => {
   post.published = false;
 
   post = JSON.stringify(post);
-  
+
   console.log(post);
 
   //Fetch al backend, crea el post autorizandose con el token del seller
@@ -206,7 +211,7 @@ btnSave.addEventListener("click", async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization":sessionStorage.getItem("token"),
+      "Authorization": sessionStorage.getItem("token"),
     },
     body: post,
   })
@@ -215,12 +220,12 @@ btnSave.addEventListener("click", async () => {
       if (data.error) {
         console.log(data.error);
       }
-      else{
+      else {
         console.log("Producto guardado con éxito");
         window.location.href = "../../shd/profile/profile.html";
       }
 
-      
+
     });
 
 });

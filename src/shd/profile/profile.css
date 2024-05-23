@@ -35,6 +35,21 @@ i {
   font-size: 1.7rem;
 }
 
+#btn-newPost {
+  display: none;
+}
+
+#phone {
+  display: inline;
+}
+
+#btn-newPost.mostrar {
+  display: block;
+}
+
+#phone.ocultar {
+  display: none;
+}
 /* POST CARD */
 
 .card {
@@ -55,18 +70,18 @@ i {
 .card-title {
   font-size: 1.5rem;
   position: relative;
-  left: 25%;
+  left: 3%;
 }
 
-.headerCard .col-4{
-  opacity: 0;
+#idPost {
+  display: none;
 }
 
 .card-image {
   max-width: 100%;
 }
 
-#imgCard{
+#imgCard {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
