@@ -73,7 +73,7 @@ async function getPosts() {
         data.data.forEach(async (post) => {
           const postCardTemplate = await getPostCardTemplate();
           let cardPost = postCardTemplate.replace('img-source', post.frontImage)
-            .replace("idpostval", post.id)
+            .replace("idPost", post.id)
             .replace("Title", post.title)
             .replace("value", post.price)
             .replace("Description", post.content)
@@ -83,11 +83,26 @@ async function getPosts() {
             .replace("Ver más", "Editar");
 
           posts.insertAdjacentHTML("beforeend", cardPost);
+
+          let btn = document.querySelector(`[data-id="${post.id}"]`)
+          btn.addEventListener("click", () => {
+            let idPost = btn.getAttribute("data-id");
+            console.log("click en " + idPost);
+            window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
+          });
         })
+
+
+
+
+
+
       })
       .catch((error) => {
         console.log(error);
       });
+
+
   }
   else if (sessionStorage.getItem("rol") === "user") {
     // Fetch a la base de datos para traer los favoritos
@@ -155,6 +170,7 @@ btnEdit.addEventListener("click", () => {
       }
 
       body = JSON.stringify(body);
+      console.log(body)
 
       if (newName === "" || newEmail === "" || newTelefono === "" || newPassword === "") {
         alert("Por favor llene todos los campos");
@@ -210,3 +226,4 @@ btnEdit.addEventListener("click", () => {
 btnNewPost.addEventListener("click", () => {
   window.location.href = "../../../src/seller/newPost/newPost.html";
 });
+

@@ -1,3 +1,5 @@
+// TRATAMIENTO DE IMAGENES
+
 async function uploadImage(image) {
   const formData = new FormData();
   formData.append("image", image);
@@ -43,6 +45,79 @@ async function compressAndUploadImage(file) {
   const url = await uploadImage(blob);
   return url;
 }
+
+//////////////////////////////////////////////////////
+
+let images = document.getElementById("images");
+let preview = document.getElementById("preview");
+let btnPost = document.getElementById("btnPost");
+let btnSave = document.getElementById("btnSave");
+
+
+// Limpiar la preview de imagenes
+document.addEventListener("DOMContentLoaded", () => {
+  while (preview.firstChild) {
+    preview.removeChild(preview.firstChild);
+  }
+});
+
+// EVENTO QUE SE DISPARA CON LA SELECCION DE IMAGENES
+let urlImages = [];
+
+images.addEventListener("change", async (e) => {
+  let files = e.target.files; // Imagenes seleccionadas
+
+  if (!files) {
+    return;
+  }
+
+  // Convertir a array para poder usar métodos de array
+  let filesArray = Array.from(files);
+
+  for (let i = 0; i < filesArray.length; i++) {
+    let reader = new FileReader();
+    reader.readAsDataURL(filesArray[i]);
+    reader.onload = async () => {
+      let img = document.createElement("img");
+      img.src = reader.result;
+
+
+      let deleteButton = document.createElement("i");
+      deleteButton.className = "fa-solid fa-trash";
+      deleteButton.style.fontSize = "20px";
+      deleteButton.style.color = "#c01c28";
+      deleteButton.style.position = "absolute";
+      deleteButton.style.top = "20px";
+      deleteButton.style.right = "20px";
+      deleteButton.style.cursor = "pointer";
+      deleteButton.style.borderRadius = "0.5rem";
+      deleteButton.style.padding = "0.3rem"
+      deleteButton.style.backgroundColor = "rgba(255, 255, 255, 0.367)";
+
+      let div = document.createElement("div");
+      div.style.position = "relative";
+      div.appendChild(img);
+      div.appendChild(deleteButton);
+
+      deleteButton.addEventListener('click', function () {
+        // Elimina la imagen del arreglo
+        filesArray.splice(i, 1);
+        // Elimina la URL de la imagen del array urlImages
+        urlImages.splice(i, 1);
+        // Elimina el div (que contiene la imagen y el botón) del DOM
+        div.remove();
+      });
+
+      // Comprime y sube la imagen, y guarda la URL en urlImages
+      urlImages.push(await compressAndUploadImage(filesArray[i]));
+
+      preview.appendChild(div);
+    }
+  }
+
+});
+
+// ARMADO DEL POST
 
 async function buildPost() {
   let images = document.getElementById("images").files;
@@ -95,7 +170,8 @@ async function buildPost() {
     return;
   }
 
-  console.log(new Date().toISOString());
+  console.log(urlImages);
+
   // Construye el objeto post
   let post = {
     title: title,
@@ -120,47 +196,7 @@ async function buildPost() {
   return post;
 }
 
-//////////////////////////////////////////////////////
-
-let images = document.getElementById("images");
-let preview = document.getElementById("preview");
-let btnPost = document.getElementById("btnPost");
-let btnSave = document.getElementById("btnSave");
-
-
-// Limpiar la preview de imagenes
-document.addEventListener("DOMContentLoaded", () => {
-  while (preview.firstChild) {
-    preview.removeChild(preview.firstChild);
-  }
-});
-
-// Evento que se dispara cuando se seleccionan imagenes
-let urlImages = [];
-
-images.addEventListener("change", async (e) => {
-  let files = e.target.files; // Imagenes seleccionadas
-
-  if (!files) {
-    return;
-  }
-
-  for (let i = 0; i < files.length; i++) {
-    let reader = new FileReader();
-    reader.readAsDataURL(files[i]);
-    reader.onload = () => {
-      let img = document.createElement("img");
-      img.src = reader.result;
-      preview.appendChild(img);
-    };
-  }
-
-  for (let i = 0; i < files.length; i++) {
-    let url = await compressAndUploadImage(files[i]);
-    urlImages.push(url);
-  }
-  console.log(urlImages);
-});
+// SUBIDA DEL POST
 
 btnPost.addEventListener("click", async () => {
   event.preventDefault();
@@ -169,9 +205,6 @@ btnPost.addEventListener("click", async () => {
   post.published = true;
 
   post = JSON.stringify(post);
-
-  console.log(post);
-  console.log(localStorage.getItem("token"));
 
   //Fetch al backend, crea el post autorizandose con el token del seller
   fetch("http://localhost:3010/seller/post/createPost", {
@@ -202,9 +235,9 @@ btnSave.addEventListener("click", async () => {
   let post = await buildPost();
   post.published = false;
 
-  post = JSON.stringify(post);
-
   console.log(post);
+
+  post = JSON.stringify(post);
 
   //Fetch al backend, crea el post autorizandose con el token del seller
   fetch("http://localhost:3010/seller/post/createPost", {
