@@ -14,6 +14,7 @@ async function getPostCardTemplate() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
   let anunces = document.getElementById("anuncios-destacados");
   fetch("http://localhost:3010/")
     .then((response) => response.json())
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data.forEach(async (post) => {
         const postCardTemplate = await getPostCardTemplate();
         let cardPost = postCardTemplate.replace('img-source', post.frontImage)
+          .replace(/idPost/gi, post.id)
           .replace("Title", post.title)
           .replace("value", post.price)
           .replace("Description", post.content)
@@ -31,6 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
           .replace("Garage", post.garage);
 
         anunces.insertAdjacentHTML("beforeend", cardPost);
+
+        // Boton Favorito
+        let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+        btnFav.addEventListener("click", () => {
+          let idPost = btnFav.getAttribute("id-fav");
+          console.log("fav en " + idPost);
+        });
+
+
+        // Boton View More
+        let btnVM = document.querySelector(`[data-id="${post.id}"]`)
+        btnVM.addEventListener("click", () => {
+          let idPost = btnVM.getAttribute("data-id");
+          console.log("click en " + idPost);
+          window.location.href = `../../src/shd/publication/post.html?id=${idPost}`;
+        });
+
       });
     })
     .catch((error) => {

@@ -73,10 +73,11 @@ async function getPosts() {
         data.data.forEach(async (post) => {
           const postCardTemplate = await getPostCardTemplate();
           let cardPost = postCardTemplate.replace('img-source', post.frontImage)
-            .replace("idPost", post.id)
+            .replace(/idPost/gi, post.id)
             .replace("Title", post.title)
             .replace("value", post.price)
             .replace("Description", post.content)
+            .replace("Ubication", post.ubication)
             .replace("Rooms", post.rooms)
             .replace("WC", post.bathrooms)
             .replace("Garage", post.garage)
@@ -84,18 +85,24 @@ async function getPosts() {
 
           posts.insertAdjacentHTML("beforeend", cardPost);
 
-          let btn = document.querySelector(`[data-id="${post.id}"]`)
-          btn.addEventListener("click", () => {
-            let idPost = btn.getAttribute("data-id");
-            console.log("click en " + idPost);
+          // Boton Editar
+          let btnEdit = document.querySelector(`[post-edit="${post.id}"]`)
+          btnEdit.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnEdit.getAttribute("post-edit");
+            console.log("edit en " + idPost);
             window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
           });
+
+          // Boton Ver Mas
+          let btnVM = document.querySelector(`[data-id="${post.id}"]`)
+          btnVM.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnVM.getAttribute("data-id");
+            console.log("click en " + idPost);
+            window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
+          });
         })
-
-
-
-
-
 
       })
       .catch((error) => {

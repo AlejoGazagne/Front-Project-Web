@@ -109,6 +109,21 @@ async function getPostCardTemplate() {
 let postSection = document.getElementById("posts");
 
 window.addEventListener("load", async () => {
+
+  // Fetch para setear el rol
+  fetch("http://localhost:3010/validate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("token")
+    }
+  }).then(async (response) => {
+    const rsp = await response.json()
+    sessionStorage.setItem("rol", rsp.message);
+  }).catch((error) => {
+    console.log(error);
+  });
+
   fetch("http://localhost:3010/catalogue", {
     method: "GET",
   }).then(async (response) => {
@@ -118,8 +133,9 @@ window.addEventListener("load", async () => {
     console.log(rsp)
 
     rsp.forEach(function (post) {
-      let newPost = postCardTemplate
-        .replace('img-source', post.frontImage)
+
+      let newPost = postCardTemplate.replace('img-source', post.frontImage)
+        .replace(/idPost/gi, post.id)
         .replace("Title", post.title)
         .replace("value", post.price)
         .replace("Description", post.content)
@@ -129,6 +145,36 @@ window.addEventListener("load", async () => {
         .replace("Garage", post.garage);
 
       postSection.insertAdjacentHTML("beforeend", newPost);
+
+      // Selecciona todos los elementos con la clase .card__description
+      const descriptions = document.querySelectorAll('.card__description');
+
+      descriptions.forEach(description => {
+
+        if (description.scrollHeight > description.clientHeight) {
+          // Si el texto es más alto, aplica la clase .fade
+          description.classList.add('fade');
+        }
+      });
+
+
+      // Boton Editar
+      let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+      btnFav.addEventListener("click", () => {
+        event.preventDefault();
+        let idPost = btnFav.getAttribute("id-fav");
+        console.log("edit en " + idPost);
+        window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
+      });
+
+      // Boton Ver Mas
+      let btnVM = document.querySelector(`[data-id="${post.id}"]`)
+      btnVM.addEventListener("click", () => {
+        event.preventDefault();
+        let idPost = btnVM.getAttribute("data-id");
+        console.log("click en " + idPost);
+        window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
+      });
     });
 
 
