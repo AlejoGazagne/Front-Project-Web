@@ -143,30 +143,30 @@ btnIrRegistrarse.addEventListener("click", () => {
   recuperarContrasenia.style.display = "none";
 });
 
-seleccionCuenta.addEventListener("click", () => {
-  if (seleccionCuenta.value == 1) {
-    formVisitante.style.display = "flex";
-    formPublicador.style.display = "none";
-  }
-  if (seleccionCuenta.value == 2) {
-    formVisitante.style.display = "none";
-    formPublicador.style.display = "flex";
-  }
-});
+// seleccionCuenta.addEventListener("click", () => {
+//   if (seleccionCuenta.value == 1) {
+//     formVisitante.style.display = "flex";
+//     formPublicador.style.display = "none";
+//   }
+//   if (seleccionCuenta.value == 2) {
+//     formVisitante.style.display = "none";
+//     formPublicador.style.display = "flex";
+//   }
+// });
 
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
 
-  if (seleccionCuenta.value == 1 && emailUsuario.value != "" && contraseniaUsuario.value != "") {
+  if (seleccionCuenta.value == 1 && emailPublicador.value != "" && contraseniaPublicador.value != "") {
     let bodyContent = JSON.stringify({
-      email: emailUsuario.value,
-      password: contraseniaUsuario.value,
+      email: emailPublicador.value,
+      password: contraseniaPublicador.value,
       type: parseInt(seleccionCuenta.value),
+      name: nombrePublicador.value,
+      phoneNumber: numeroPublicador.value,
     });
 
     register(bodyContent);
-
-
   }
   else if (seleccionCuenta.value == 2 &&
     nombrePublicador.value != "" &&

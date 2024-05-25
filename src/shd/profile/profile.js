@@ -113,9 +113,48 @@ async function getPosts() {
   }
   else if (sessionStorage.getItem("rol") === "user") {
     // Fetch a la base de datos para traer los favoritos
+    console.log("fetch a favoritos")
+    fetch("http://localhost:3010/user/favorite/getFavorites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": sessionStorage.getItem("token")
+      }
+    }).then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        data.data.forEach(async (post) => {
+          const postCardTemplate = await getPostCardTemplate();
+          let cardPost = postCardTemplate.replace('img-source', post.frontImage)
+            .replace(/idPost/gi, post.id)
+            .replace("Title", post.title)
+            .replace("value", post.price)
+            .replace("Description", post.content)
+            .replace("Ubication", post.ubication)
+            .replace("Rooms", post.rooms)
+            .replace("WC", post.bathrooms)
+            .replace("Garage", post.garage)
+            .replace("Ver más", "Editar");
+
+          posts.insertAdjacentHTML("beforeend", cardPost);
+
+          // Boton Ver Mas
+          let btnVM = document.querySelector(`[data-id="${post.id}"]`)
+          btnVM.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnVM.getAttribute("data-id");
+            console.log("click en " + idPost);
+            window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
+          });
+        })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }
 }
-
 document.addEventListener("DOMContentLoaded", () => {
 
   console.log(Date())
