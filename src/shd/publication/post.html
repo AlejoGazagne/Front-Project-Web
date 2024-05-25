@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
     <title>Document</title>
 
     <link
@@ -19,7 +20,6 @@
       crossorigin=""
     />
 
-    <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../../css/util.css" />
     <link rel="stylesheet" href="./post.css" />
   </head>
@@ -38,35 +38,27 @@
       <div class="row">
         <div id="carrousel-img" class="col-8"></div>
         <div class="col-4">
-          <h2 id="title">Casa en Villa Allende</h2>
-          <h3>Precio: <span id="price">$1.500.000</span></h3>
-          <p id="description">
-            Casa en Villa Allende, 3 dormitorios, 2 baños, cocina, living,
-            comedor, cochera, patio, asador, pileta, 200 m2 cubiertos, 800 m2 de
-            terreno, excelente ubicación, a 2 cuadras de la ruta E53. Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Provident nobis
-            ullam reprehenderit autem maiores iste distinctio doloremque eum?
-            Tempore repellendus nam, dolor non deserunt ducimus aperiam dolores
-            inventore corporis tempora.
-          </p>
+          <h2 id="title"></h2>
+          <h3>Precio: $<span id="price"></span></h3>
+          <p id="description"></p>
           <h4>Prestaciones</h4>
           <div class="row">
             <ul class="iconos-prestaciones">
               <li>
                 <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                <p class="ms-2">200 m<sup>2</sup></p>
+                <p id="area" class="ms-2">200 m<sup>2</sup></p>
               </li>
               <li>
                 <i class="fa-solid fa-bed"></i>
-                <p class="ms-2">3</p>
+                <p id="rooms" class="ms-2">3</p>
               </li>
               <li>
                 <i class="fa-solid fa-bath"></i>
-                <p class="ms-2">3</p>
+                <p id="wc" class="ms-2">3</p>
               </li>
               <li>
                 <i class="fa-solid fa-car"></i>
-                <p class="ms-2">2</p>
+                <p id="garage" class="ms-2">2</p>
               </li>
             </ul>
           </div>
@@ -74,12 +66,11 @@
             <ul class="iconos-prestaciones-extras">
               <li>
                 <i class="fa-solid fa-person-swimming"></i>
-              </li>
-              <li>
-                <i class="fa-solid fa-wifi"></i>
+                <p id="pool"></p>
               </li>
               <li>
                 <i class="fa-solid fa-dog"></i>
+                <p id="pets"></p>
               </li>
             </ul>
           </div>

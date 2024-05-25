@@ -158,13 +158,28 @@ window.addEventListener("load", async () => {
       });
 
 
-      // Boton Editar
+      // Boton Favorito
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
       btnFav.addEventListener("click", () => {
         event.preventDefault();
         let idPost = btnFav.getAttribute("id-fav");
         console.log("edit en " + idPost);
-        window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
+        fetch("http://localhost:3010/user/favorite/createFavorite", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": sessionStorage.getItem("token")
+          },
+          body: JSON.stringify({
+            postId: parseInt(idPost),
+          })
+        }).then(async (response) => {
+          const rsp = await response.json()
+          console.log(rsp)
+        }).catch((error) => {
+          console.log(error);
+        });
+
       });
 
       // Boton Ver Mas
