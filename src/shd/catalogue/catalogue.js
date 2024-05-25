@@ -157,7 +157,7 @@ window.addEventListener("load", async () => {
         }
       });
 
-      // Boton Editar
+      // Boton Favorito
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
       btnFav.addEventListener("click", () => {
         event.preventDefault();
@@ -178,6 +178,7 @@ window.addEventListener("load", async () => {
         }).catch((error) => {
           console.log(error);
         });
+
       });
 
       // Boton Ver Mas

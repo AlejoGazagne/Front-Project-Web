@@ -13,6 +13,20 @@ header {
 
 /* ------------------------------- */
 
+.col-4 h2 {
+  font-size: 3.2rem;
+}
+
+.col-4 h3 {
+  font-size: 2.5rem;
+}
+
+#description {
+  font-size: 1.5rem;
+  max-height: 10rem;
+  overflow-y: scroll;
+}
+
 .iconos-prestaciones {
   max-width: 100%;
   list-style: none;
@@ -26,9 +40,14 @@ header {
   align-items: center;
 }
 
+.iconos-prestaciones li i {
+  font-size: 2.2rem;
+  margin-right: 0.3rem;
+}
+
 .iconos-prestaciones li p {
   margin: 0;
-  font-size: x-large;
+  font-size: 2rem;
   font-style: bold;
 }
 
@@ -38,6 +57,7 @@ header {
   padding: 0;
   display: flex;
   justify-content: space-evenly;
+  font-size: 2rem;
 }
 
 .iconos-prestaciones-extras li {
@@ -45,9 +65,14 @@ header {
   align-items: center;
 }
 
+.iconos-prestaciones-extras li i {
+  font-size: 2.2rem;
+  margin-right: 0.3rem;
+}
+
 .iconos-prestaciones-extras li p {
   margin: 0;
-  font-size: x-large;
+  font-size: 2rem;
   font-style: bold;
 }
 
