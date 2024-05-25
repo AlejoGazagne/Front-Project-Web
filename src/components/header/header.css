@@ -40,6 +40,7 @@ body{
         display: none;
     }
 } */
+
 .nav-link:hover{
     color: #a2a6aa;
 }
@@ -52,11 +53,20 @@ body{
     display: none;
 }
 
+#btn-logout{
+    font-size: 1.5rem;
+    display: none;
+}
+
 
 #btn-profile.mostrar{
     display: block;
 }
 
 #btn-sesion.mostrar{
+    display: block;
+}
+
+#btn-logout.mostrar{
     display: block;
 }

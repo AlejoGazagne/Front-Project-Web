@@ -98,14 +98,17 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .card-title {
   position: relative;
-  left: -16%;
+}
+
+#idPost {
+  display: none;
 }
 
 .card-image {
   max-width: 100%;
 }
 
-#imgCard{
+#imgCard {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }

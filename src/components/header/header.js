@@ -2,6 +2,7 @@ let btnSesion = document.getElementById("btn-sesion");
 let btnCatalogue = document.getElementById("btn-catalogue");
 let btnProfile = document.getElementById("btn-profile");
 let btnPost = document.getElementById("btn-post");
+let btnLogout = document.getElementById("btn-logout");
 let logo = document.getElementById("logo");
 
 const parent = window.parent.document;
@@ -15,10 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (sessionStorage.getItem("token") === null) {
     btnSesion.classList.add("mostrar");
     btnProfile.classList.remove("mostrar");
+    btnLogout.classList.remove("mostrar");
   }
   else {
     btnSesion.classList.remove("mostrar");
     btnProfile.classList.add("mostrar");
+    btnLogout.classList.add("mostrar");
   }
 });
 
@@ -93,5 +96,16 @@ btnProfile.addEventListener("click", () => {
 
 });
 
+btnLogout.addEventListener("click", () => {
+  sessionStorage.removeItem("token");
+  console.log(window.location.pathname);
+  if(ref.location.pathname === "/src/shd/profile/profile.html" || ref.location.pathname === "/src/seller/newPost/newPost.html"){
+    ref.window.location.href = "../../../src/index.html";
+  }
+  else{
+    window.location.reload();
+  }
+  
+});
 
 
