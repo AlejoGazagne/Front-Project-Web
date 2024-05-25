@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .replace("Title", post.title)
           .replace("value", post.price)
           .replace("Description", post.content)
+          .replace("Ubication", post.ubication)
           .replace("Rooms", post.rooms)
           .replace("WC", post.bathrooms)
           .replace("Garage", post.garage);
@@ -41,4 +42,13 @@ atras.addEventListener("click", () => {
   log_reg.classList.remove("mostrar");
   atras.classList.remove("mostrar");
   marcoFlotante.classList.remove("mostrar");
+});
+
+/* boton de favoritos */
+const likeButtons = document.querySelectorAll(".card__btn");
+likeButtons.forEach((likeButton) => {
+  likeButton.addEventListener("click", () => {
+    console.log("like button clicked");
+    likeButton.classList.toggle("card__btn--like");
+  });
 });

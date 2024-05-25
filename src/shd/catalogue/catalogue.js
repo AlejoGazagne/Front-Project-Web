@@ -123,6 +123,7 @@ window.addEventListener("load", async () => {
         .replace("Title", post.title)
         .replace("value", post.price)
         .replace("Description", post.content)
+        .replace("Ubication", post.ubication)
         .replace("Rooms", post.rooms)
         .replace("WC", post.bathrooms)
         .replace("Garage", post.garage);
