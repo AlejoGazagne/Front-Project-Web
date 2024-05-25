@@ -3,6 +3,7 @@
   height: 110px;
   background-color: #000000ab;
 }
+
 /* ------------------------------- */
 .datos {
   padding: 1rem;
@@ -50,57 +51,137 @@ i {
 #phone.ocultar {
   display: none;
 }
-/* POST CARD */
+
+/* ------------------ Carta ----------------------- */
+.contenedor-publicaciones {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 2rem;
+}
 
 .card {
-  text-align: center;
-  border: none;
-  padding: 0;
-  border: 1px solid rgba(114, 114, 114, 0.812);
-  border-radius: 1rem;
-}
-
-.headerCard {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: #0000001a 0px 2px 6px;
   display: flex;
-  justify-content: right;
-  align-items: center;
-  margin-bottom: 2rem;
+  width: 22rem;
+  height: 30rem;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
 }
 
-.card-title {
-  font-size: 1.5rem;
+.card:hover {
+  box-shadow: #0000001a 0px 6px 16px;
+}
+
+.card__preview {
+  height: 12rem;
+  width: 100%;
   position: relative;
-  left: 3%;
+  overflow: hidden;
 }
 
-.card-image {
-  max-width: 100%;
+.card__preview img {
+  width: 100%;
+  object-fit: contain;
+  transition: all 0.4s ease-out;
 }
 
-#imgCard {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+.card:hover .card__preview img {
+  transform: scale(1.15);
 }
 
-.iconos-caracteristicas {
-  max-width: 50rem;
-  list-style: none;
-  padding: 0;
+.card__title {
+  font-size: 1.5rem;
+}
+
+.card__address {
+  margin: 0;
+}
+
+.cards {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-.iconos-caracteristicas li {
+.card__price {
+  background-color: #fff;
+  color: #262626;
+  z-index: 1;
+  position: absolute;
+  bottom: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  left: 1.25rem;
+  font-weight: bold;
+}
+
+.card__content {
+  padding: 1.25rem;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: #262626;
+}
+
+.card__bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.iconos-caracteristicas li p {
-  margin: 0;
-  font-size: x-large;
-  font-style: bold;
+.card__description {
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
 }
 
-.btnOpen {
-  width: 75%;
+.card__buttons {
+  display: flex;
+  gap: 0.5rem;
 }
+
+.card__btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.card__btn svg {
+  height: 2rem;
+  width: 2rem;
+  stroke: #262626;
+  stroke-width: 1.5px;
+}
+
+.card__btn--like svg {
+  stroke: #FF3040;
+  fill: #FF3040;
+}
+
+.btn__vm {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: .5rem;
+  background-color: #fda54c;
+  border: none;
+  color: ghostwhite;
+}
+
+/* --------------------------------------------------- */

@@ -3,6 +3,7 @@
   height: 110px;
   background-color: #000000ab;
 }
+
 header {
   margin-bottom: 2rem;
 }
@@ -25,19 +26,23 @@ header {
   margin: auto;
   text-align: center;
   overflow: auto;
-  scrollbar-width: none; /* Ocultar barra de scroll Para Firefox */
+  scrollbar-width: none;
+  /* Ocultar barra de scroll Para Firefox */
 }
 
 .filters::-webkit-scrollbar {
-  display: none; /* Para Chrome, Safari y Opera */
+  display: none;
+  /* Para Chrome, Safari y Opera */
 }
 
 .form-group {
   margin-top: 1rem;
 }
+
 .form-group p {
   margin-bottom: 0.3rem;
 }
+
 .form-control {
   text-align: center;
 }
@@ -59,6 +64,7 @@ header {
   border-radius: 8px;
   border: 4px solid #333333;
 }
+
 #btnSearch:hover {
   border: 4px solid #ffab3d;
 }
@@ -76,7 +82,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* ------------------------------- */
 
-#posts {
+/* #posts {
   margin-left: 24%;
   width: 75%;
 }
@@ -138,4 +144,135 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btnOpen {
   width: 75%;
+} */
+/* ------------------ Carta ----------------------- */
+#posts {
+  margin-left: 20%;
 }
+
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: #0000001a 0px 2px 6px;
+  display: flex;
+  width: 80%;
+  height: 19rem;
+  flex-direction: row;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: #0000001a 0px 6px 16px;
+}
+
+.card__preview {
+  height: 19rem;
+  width: 500px;
+  position: relative;
+  overflow: hidden;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.card__preview img {
+  width: 500px;
+  object-fit: fill;
+  transition: all 0.4s ease-out;
+}
+
+.card:hover .card__preview img {
+  transform: scale(1.1);
+}
+
+.card__title {
+  font-size: 1.5rem;
+}
+
+.card__address {
+  margin: 0;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.card__price {
+  background-color: #fff;
+  color: #262626;
+  z-index: 1;
+  position: absolute;
+  bottom: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  left: 1.25rem;
+  font-weight: bold;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.25rem 1.25rem .5rem;
+  flex-grow: 1;
+  color: #262626;
+}
+
+.card__bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__description {
+  margin-top: 0.5rem;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.card__buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card__btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__btn svg {
+  height: 2rem;
+  width: 2rem;
+  stroke: #262626;
+  stroke-width: 1.5px;
+}
+
+.card__btn--like svg {
+  stroke: #FF3040;
+  fill: #FF3040;
+}
+
+.btn__vm {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: .5rem;
+  background-color: #fda54c;
+  border: none;
+  color: ghostwhite;
+}
+
+/* --------------------------------------------------- */
