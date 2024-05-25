@@ -111,10 +111,10 @@ inputImages.addEventListener("change", async (e) => {
 
 // CARGA INICIAL DE DATOS
 
+const urlParams = new URLSearchParams(window.location.search);
+const id = parseInt(urlParams.get("id"));
+
 window.addEventListener("load", async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-    console.log(id);
 
     fetch("http://localhost:3010/catalogue/" + id, {
         method: "GET",
@@ -228,6 +228,7 @@ async function buildPost() {
 
     // Construye el objeto post
     let post = {
+        id: id,
         title: title,
         content: description,
         price: parseFloat(price),

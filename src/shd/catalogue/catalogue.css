@@ -168,12 +168,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .card__preview {
   height: 19rem;
-  width: 500px;
+  min-width: 500px;
   position: relative;
   overflow: hidden;
   /* display: flex;
   justify-content: center;
   align-items: center; */
+}
+
+.card__preview #btn-edit-post {
+  display: none;
 }
 
 .card__preview img {
@@ -217,7 +221,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .card__content {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 1.25rem 1.25rem .5rem;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
   flex-grow: 1;
   color: #262626;
 }
@@ -235,6 +239,17 @@ input[type="number"]::-webkit-outer-spin-button {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
+  position: relative;
+}
+
+.fade::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1em;
+  background: linear-gradient(to top, white, transparent);
 }
 
 .card__buttons {
@@ -260,8 +275,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .card__btn--like svg {
-  stroke: #FF3040;
-  fill: #FF3040;
+  stroke: #ff3040;
+  fill: #ff3040;
 }
 
 .btn__vm {
@@ -269,7 +284,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 1rem;
   font-size: 1rem;
   font-weight: bold;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: #fda54c;
   border: none;
   color: ghostwhite;

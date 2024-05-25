@@ -74,6 +74,10 @@ header {
   overflow: hidden;
 }
 
+.card__preview #btn-edit-post {
+  display: none;
+}
+
 .card__preview img {
   width: 100%;
   object-fit: contain;
@@ -158,8 +162,8 @@ header {
 }
 
 .card__btn--like svg {
-  stroke: #FF3040;
-  fill: #FF3040;
+  stroke: #ff3040;
+  fill: #ff3040;
 }
 
 .btn__vm {
@@ -167,7 +171,7 @@ header {
   padding: 1rem;
   font-size: 1rem;
   font-weight: bold;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: #fda54c;
   border: none;
   color: ghostwhite;
