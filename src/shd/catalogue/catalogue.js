@@ -157,7 +157,6 @@ window.addEventListener("load", async () => {
         }
       });
 
-
       // Boton Favorito
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
       btnFav.addEventListener("click", () => {

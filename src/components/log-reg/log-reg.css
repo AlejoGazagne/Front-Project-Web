@@ -128,12 +128,12 @@ input:focus {
     margin-bottom: .6rem;
 }
 
-#formVisitante {
+/* #formVisitante {
     display: none;
-}
+} */
 
 #formPublicador {
-    display: none;
+    display: block;
 }
 
 #error {
