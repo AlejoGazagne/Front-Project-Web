@@ -151,22 +151,43 @@ window.addEventListener("load", async () => {
       btnFav.addEventListener("click", () => {
         event.preventDefault();
         let idPost = btnFav.getAttribute("id-fav");
+        btnFav.classList.toggle("card__btn--like");
         console.log("edit en " + idPost);
-        fetch("http://localhost:3010/user/favorite/createFavorite", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": sessionStorage.getItem("token")
-          },
-          body: JSON.stringify({
-            postId: parseInt(idPost),
-          })
-        }).then(async (response) => {
-          const rsp = await response.json()
-          console.log(rsp)
-        }).catch((error) => {
-          console.log(error);
-        });
+        if (btnFav.classList.contains("card__btn--like")) {
+          fetch("http://localhost:3010/user/favorite/createFavorite", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": sessionStorage.getItem("token")
+            },
+            body: JSON.stringify({
+              postId: parseInt(idPost),
+            })
+          }).then(async (response) => {
+            const rsp = await response.json()
+            console.log(rsp)
+          }).catch((error) => {
+            console.log(error);
+          });
+
+        }
+        else {
+          fetch("http://localhost:3010/user/favorite/deleteFavorite", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": sessionStorage.getItem("token")
+            },
+            body: JSON.stringify({
+              postId: parseInt(idPost),
+            })
+          }).then(async (response) => {
+            const rsp = await response.json()
+            console.log(rsp)
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
 
       });
 
