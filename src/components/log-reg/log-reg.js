@@ -215,7 +215,7 @@ async function uploadImage(image) {
 // Carga de imagen y generacion de link
 
 let urlImage;
-pubImagen.addEventListener("change", async (e) => {
+imagenPublicador.addEventListener("change", async (e) => {
   const file = e.target.files;
 
   console.log(file)
@@ -236,15 +236,14 @@ pubImagen.addEventListener("change", async (e) => {
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
 
-  if (seleccionCuenta.value == 1 && emailPublicador.value != "" && contraseniaPublicador.value != "") {
+  if (seleccionCuenta.value == 1 && emailUsuario.value != "" && contraseniaUsuario.value != ""
+    && nombreUsuario.value != "" && numeroUsuario.value != "") {
     let bodyContent = JSON.stringify({
       name: nombreUsuario.value,
       phoneNumber: numeroUsuario.value,
       email: emailPublicador.value,
       password: contraseniaPublicador.value,
       type: parseInt(seleccionCuenta.value),
-      name: nombrePublicador.value,
-      phoneNumber: numeroPublicador.value,
     });
 
     register(bodyContent);

@@ -62,7 +62,21 @@ document.addEventListener("DOMContentLoaded", () => {
               })
           }
           else {
-            // Eliminar favorito
+            fetch("http://localhost:3010/user/favorite/deleteFavorite", {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("token")
+              },
+              body: JSON.stringify({
+                postId: parseInt(idPost),
+              })
+            }).then(async (response) => {
+              const rsp = await response.json()
+              console.log(rsp)
+            }).catch((error) => {
+              console.log(error);
+            });
           }
 
         });

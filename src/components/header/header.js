@@ -98,14 +98,15 @@ btnProfile.addEventListener("click", () => {
 
 btnLogout.addEventListener("click", () => {
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("rol");
   console.log(window.location.pathname);
-  if(ref.location.pathname === "/src/shd/profile/profile.html" || ref.location.pathname === "/src/seller/newPost/newPost.html"){
+  if (ref.location.pathname === "/src/shd/profile/profile.html" || ref.location.pathname === "/src/seller/newPost/newPost.html") {
     ref.window.location.href = "../../../src/index.html";
   }
-  else{
+  else {
     window.location.reload();
   }
-  
+
 });
 
 

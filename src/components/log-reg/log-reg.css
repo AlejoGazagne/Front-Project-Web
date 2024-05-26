@@ -1,150 +1,150 @@
 html {
-    background-color: #ffffff;
-    border-radius: 1rem;
-    overflow: auto;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  overflow: auto;
 }
 
 #modal-registro {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background-color: #ffffff00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: #ffffff00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-contenido {
-    background-color: #fefefe;
-    width: 380px;
-    height: 490px;
-    padding: 1rem;
-    border-radius: 1rem;
-    z-index: 2;
-    margin-top: 3rem;
-    /* display: flex;
+  background-color: #fefefe;
+  width: 380px;
+  height: 490px;
+  padding: 1rem;
+  border-radius: 1rem;
+  z-index: 2;
+  margin-top: 3rem;
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
 
 .log-p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
 }
 
 input,
 select {
-    margin-bottom: 1rem;
-    background-color: #f0f0f0;
-    width: 100%;
-    padding: .5rem .4rem;
-    border-radius: .3rem;
-    border: 1px solid #8f8f8f;
+  margin-bottom: 1rem;
+  background-color: #f0f0f0;
+  width: 100%;
+  padding: 0.5rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid #8f8f8f;
 }
 
 input:user-invalid {
-    background-color: white;
-    color: red;
-    border: 1px solid red;
+  background-color: white;
+  color: red;
+  border: 1px solid red;
 }
 
-input:user-invalid~.error-message {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.8rem;
-    color: red;
+input:user-invalid ~ .error-message {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: red;
 }
 
 input:focus {
-    border: none;
-    box-shadow: #63636333 0px 1px 4px 0px;
+  border: none;
+  box-shadow: #63636333 0px 1px 4px 0px;
 }
 
 .botn {
-    width: 100%;
-    padding: .8rem 5rem;
-    border: none;
-    border-radius: .3rem;
-    background-color: #ffab3d;
-    color: aliceblue;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    box-shadow: 0 0 10px #8f8f8f;
-    transition-duration: 0.3s;
+  width: 100%;
+  padding: 0.8rem 5rem;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #ffab3d;
+  color: aliceblue;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  box-shadow: 0 0 10px #8f8f8f;
+  transition-duration: 0.3s;
 }
 
 .botn:hover {
-    background-color: #ff9100;
+  background-color: #ff9100;
 }
 
 #olvide-contrasenia {
-    color: #ffab3d;
-    font-weight: bold;
-    background-color: #fefefe;
-    padding: 0;
-    border: none;
-    margin-bottom: .5rem;
+  color: #ffab3d;
+  font-weight: bold;
+  background-color: #fefefe;
+  padding: 0;
+  border: none;
+  margin-bottom: 0.5rem;
 }
 
 #registrarme {
-    color: #ffab3d;
-    font-weight: bold;
-    background-color: #fefefe;
-    padding: 0;
-    border: none;
+  color: #ffab3d;
+  font-weight: bold;
+  background-color: #fefefe;
+  padding: 0;
+  border: none;
 }
 
 #recuperar-contrasenia {
-    display: none;
+  display: none;
 }
 
 #regist {
-    display: none;
+  display: none;
 }
 
 /* ----------------------------------------------  */
 .seleccionCuenta {
-    width: 100%;
-    padding: .2rem;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.2rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
 .mensage {
-    font-size: 15px;
-    color: #777777;
+  font-size: 15px;
+  color: #777777;
 }
 
 #formVisitante input {
-    width: 100%;
-    margin-bottom: .6rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
 }
 
 #formPublicador input {
-    margin-bottom: .6rem;
+  margin-bottom: 0.6rem;
 }
 
-/* #formVisitante {
-    display: none;
-} */
+#formVisitante {
+  display: none;
+}
 
 #formPublicador {
-    display: block;
+  display: none;
 }
 
 #error {
-    color: red;
-    opacity: 0;
+  color: red;
+  opacity: 0;
 }
 
 #error.mostrar {
-    opacity: 1;
+  opacity: 1;
 }
 
 #registrar {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
