@@ -36,9 +36,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Boton Favorito
         let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+        if (sessionStorage.getItem("rol") === "seller") {
+          btnFav.style.display = "none";
+        }
         btnFav.addEventListener("click", () => {
           let idPost = btnFav.getAttribute("id-fav");
           console.log("fav en " + idPost);
+          btnFav.classList.toggle("card__btn--like");
+          if (btnFav.classList.contains("card__btn--like")) {
+            fetch("http://localhost:3010/user/favorite/createFavorite", {
+              method: POST,
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("token"),
+              },
+              body: JSON.stringify(post)
+            }).then((res) => res.json())
+              .then((data) => {
+                if (data.error) {
+                  console.log(data.error)
+                }
+                else {
+                  console.log("nuevo favorito")
+                }
+              })
+          }
+          else {
+            // Eliminar favorito
+          }
+
         });
 
 
@@ -63,11 +89,3 @@ atras.addEventListener("click", () => {
   marcoFlotante.classList.remove("mostrar");
 });
 
-/* boton de favoritos */
-const likeButtons = document.querySelectorAll(".card__btn");
-likeButtons.forEach((likeButton) => {
-  likeButton.addEventListener("click", () => {
-    console.log("like button clicked");
-    likeButton.classList.toggle("card__btn--like");
-  });
-});

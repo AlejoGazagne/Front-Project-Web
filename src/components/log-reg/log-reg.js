@@ -29,16 +29,22 @@ const btnRegistrar = document.getElementById("btn-register");
 // Registro de Cuenta
 const seleccionCuenta = document.getElementById("seleccion-cuenta");
 const formVisitante = document.getElementById("formVisitante");
+const nombreUsuario = document.getElementById("regNombre")
+const numeroUsuario = document.getElementById("regNumero")
 const emailUsuario = document.getElementById("regGmail");
 const contraseniaUsuario = document.getElementById("regContrasenia");
 
 const formPublicador = document.getElementById("formPublicador");
+const imagenPublicador = document.getElementById("pubImage")
 const nombrePublicador = document.getElementById("pubNombre");
 const numeroPublicador = document.getElementById("pubNumero");
+const descripcionPublicador = document.getElementById("pubDescripcion")
 const emailPublicador = document.getElementById("pubGmail");
 const contraseniaPublicador = document.getElementById("pubContrasenia");
 
 const error = document.getElementById("error");
+
+// Funciones
 
 function modifyView() {
   log_reg.classList.remove("mostrar");
@@ -66,19 +72,35 @@ function register(bodyContent) {
         return;
       }
 
-      sessionStorage.setItem("token", rsp.token);
-
       modifyView();
 
       registrarse.style.display = "none";
       iniciarSesion.style.display = "flex";
       recuperarContrasenia.style.display = "none";
+
+      sessionStorage.setItem("token", rsp.token);
+      // Fetch para setear el rol
+      fetch("http://localhost:3010/validate", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": sessionStorage.getItem("token")
+        }
+      }).then(async (response) => {
+        const rsp = await response.json()
+        sessionStorage.setItem("rol", rsp.message);
+      }).catch((error) => {
+        console.log(error);
+      });
+
+
     })
     .catch((error) => {
       console.log(error);
     });
 }
 
+// Inicio de Sesion
 
 btnIniciarSesion.addEventListener("click", () => {
   event.preventDefault();
@@ -104,6 +126,19 @@ btnIniciarSesion.addEventListener("click", () => {
 
         if (response.status === 200) {
           sessionStorage.setItem("token", rsp.token);
+          // Fetch para setear el rol
+          fetch("http://localhost:3010/validate", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": sessionStorage.getItem("token")
+            }
+          }).then(async (response) => {
+            const rsp = await response.json()
+            sessionStorage.setItem("rol", rsp.message);
+          }).catch((error) => {
+            console.log(error);
+          });
           modifyView();
 
         }
@@ -126,6 +161,8 @@ btnIniciarSesion.addEventListener("click", () => {
   }
 });
 
+// Cambios de vista
+
 btnIrOlvContrasenia.addEventListener("click", () => {
   recuperarContrasenia.style.display = "flex";
   iniciarSesion.style.display = "none";
@@ -143,22 +180,66 @@ btnIrRegistrarse.addEventListener("click", () => {
   recuperarContrasenia.style.display = "none";
 });
 
-// seleccionCuenta.addEventListener("click", () => {
-//   if (seleccionCuenta.value == 1) {
-//     formVisitante.style.display = "flex";
-//     formPublicador.style.display = "none";
-//   }
-//   if (seleccionCuenta.value == 2) {
-//     formVisitante.style.display = "none";
-//     formPublicador.style.display = "flex";
-//   }
-// });
+seleccionCuenta.addEventListener("click", () => {
+  if (seleccionCuenta.value == 1) {
+    formVisitante.style.display = "flex";
+    formPublicador.style.display = "none";
+  }
+  if (seleccionCuenta.value == 2) {
+    formVisitante.style.display = "none";
+    formPublicador.style.display = "flex";
+  }
+});
+
+// Generacion de Link para imagen de perfil
+async function uploadImage(image) {
+  const formData = new FormData();
+  formData.append("image", image);
+
+  const response = await fetch("https://api.imgur.com/3/image", {
+    method: "POST",
+    headers: {
+      Authorization: "Client-ID 53fe1a7ee9c3b07",
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.data.link;
+}
+
+// Carga de imagen y generacion de link
+
+let urlImage;
+pubImagen.addEventListener("change", async (e) => {
+  const file = e.target.files;
+
+  console.log(file)
+
+  if (!file) {
+    return;
+  }
+
+  let reader = new FileReader();
+  reader.readAsDataURL(file[0]);
+  reader.onload = async () => {
+    urlImage = await uploadImage(file[0]);
+  }
+})
+
+// Registro
 
 btnRegistrar.addEventListener("click", () => {
   event.preventDefault();
 
   if (seleccionCuenta.value == 1 && emailPublicador.value != "" && contraseniaPublicador.value != "") {
     let bodyContent = JSON.stringify({
+      name: nombreUsuario.value,
+      phoneNumber: numeroUsuario.value,
       email: emailPublicador.value,
       password: contraseniaPublicador.value,
       type: parseInt(seleccionCuenta.value),
@@ -175,12 +256,16 @@ btnRegistrar.addEventListener("click", () => {
     contraseniaPublicador.value != "") {
 
     let bodyContent = JSON.stringify({
+      profileImage: urlImage,
       name: nombrePublicador.value,
       phoneNumber: numeroPublicador.value,
+      description: descripcionPublicador.value,
       email: emailPublicador.value,
       password: contraseniaPublicador.value,
       type: parseInt(seleccionCuenta.value),
     });
+
+    console.log(bodyContent)
 
     register(bodyContent);
   }

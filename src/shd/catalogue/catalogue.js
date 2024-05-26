@@ -110,20 +110,6 @@ let postSection = document.getElementById("posts");
 
 window.addEventListener("load", async () => {
 
-  // Fetch para setear el rol
-  fetch("http://localhost:3010/validate", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": sessionStorage.getItem("token")
-    }
-  }).then(async (response) => {
-    const rsp = await response.json()
-    sessionStorage.setItem("rol", rsp.message);
-  }).catch((error) => {
-    console.log(error);
-  });
-
   fetch("http://localhost:3010/catalogue", {
     method: "GET",
   }).then(async (response) => {
@@ -159,6 +145,9 @@ window.addEventListener("load", async () => {
 
       // Boton Favorito
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+      if (sessionStorage.getItem("rol") === "seller") {
+        btnFav.style.display = "none";
+      }
       btnFav.addEventListener("click", () => {
         event.preventDefault();
         let idPost = btnFav.getAttribute("id-fav");
