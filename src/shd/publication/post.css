@@ -12,6 +12,9 @@ header {
 }
 
 /* ------------------------------- */
+.mt4 {
+  margin-top: 2rem;
+}
 
 .col-4 h2 {
   font-size: 3.2rem;
@@ -19,12 +22,6 @@ header {
 
 .col-4 h3 {
   font-size: 2.5rem;
-}
-
-#description {
-  font-size: 1.5rem;
-  max-height: 10rem;
-  overflow-y: scroll;
 }
 
 .iconos-prestaciones {
@@ -41,13 +38,13 @@ header {
 }
 
 .iconos-prestaciones li i {
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   margin-right: 0.3rem;
 }
 
 .iconos-prestaciones li p {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-style: bold;
 }
 
@@ -66,13 +63,13 @@ header {
 }
 
 .iconos-prestaciones-extras li i {
-  font-size: 2.2rem;
-  margin-right: 0.3rem;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .iconos-prestaciones-extras li p {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-style: bold;
 }
 
@@ -80,6 +77,7 @@ header {
   height: 25rem;
   max-height: 25rem;
   width: 100%;
+  z-index: -1;
 }
 
 #consulta {

@@ -212,25 +212,6 @@ async function uploadImage(image) {
   return data.data.link;
 }
 
-// Carga de imagen y generacion de link
-
-let urlImage;
-imagenPublicador.addEventListener("change", async (e) => {
-  const file = e.target.files;
-
-  console.log(file)
-
-  if (!file) {
-    return;
-  }
-
-  let reader = new FileReader();
-  reader.readAsDataURL(file[0]);
-  reader.onload = async () => {
-    urlImage = await uploadImage(file[0]);
-  }
-})
-
 // Registro
 
 btnRegistrar.addEventListener("click", () => {
@@ -241,8 +222,8 @@ btnRegistrar.addEventListener("click", () => {
     let bodyContent = JSON.stringify({
       name: nombreUsuario.value,
       phoneNumber: numeroUsuario.value,
-      email: emailPublicador.value,
-      password: contraseniaPublicador.value,
+      email: emailUsuario.value,
+      password: contraseniaUsuario.value,
       type: parseInt(seleccionCuenta.value),
     });
 
@@ -253,6 +234,25 @@ btnRegistrar.addEventListener("click", () => {
     numeroPublicador.value != "" &&
     emailPublicador.value != "" &&
     contraseniaPublicador.value != "") {
+
+    // Carga de imagen y generacion de link
+
+    let urlImage;
+    imagenPublicador.addEventListener("change", async (e) => {
+      const file = e.target.files;
+
+      console.log(file)
+
+      if (!file) {
+        return;
+      }
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file[0]);
+      reader.onload = async () => {
+        urlImage = await uploadImage(file[0]);
+      }
+    })
 
     let bodyContent = JSON.stringify({
       profileImage: urlImage,

@@ -1,7 +1,7 @@
 const navbar = document.getElementById("navbar");
+
 const log_reg = document.getElementById("log-reg");
 const marcoFlotante = document.getElementById("marco-flotante");
-
 const atras = document.getElementById("atras");
 
 async function getPostCardTemplate() {
@@ -39,18 +39,28 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sessionStorage.getItem("rol") === "seller") {
           btnFav.style.display = "none";
         }
+
         btnFav.addEventListener("click", () => {
+          if (sessionStorage.getItem("token") === null) {
+            log_reg.classList.add("mostrar");
+            atras.classList.add("mostrar");
+            marcoFlotante.classList.add("mostrar");
+            return;
+          }
+
           let idPost = btnFav.getAttribute("id-fav");
           console.log("fav en " + idPost);
           btnFav.classList.toggle("card__btn--like");
           if (btnFav.classList.contains("card__btn--like")) {
             fetch("http://localhost:3010/user/favorite/createFavorite", {
-              method: POST,
+              method: "POST",
               headers: {
                 "Content-Type": "application/json",
                 "Authorization": sessionStorage.getItem("token"),
               },
-              body: JSON.stringify(post)
+              body: JSON.stringify({
+                postId: parseInt(idPost),
+              })
             }).then((res) => res.json())
               .then((data) => {
                 if (data.error) {
