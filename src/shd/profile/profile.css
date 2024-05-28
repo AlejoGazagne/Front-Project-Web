@@ -84,7 +84,7 @@ i {
   overflow: hidden;
 }
 
-.card__preview #btn-edit-post {
+.card__preview #btn-on-post {
   color: #fff;
   position: absolute;
   top: 1rem;

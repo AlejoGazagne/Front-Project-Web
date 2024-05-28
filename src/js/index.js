@@ -39,6 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sessionStorage.getItem("rol") === "seller") {
           btnFav.style.display = "none";
         }
+        else {
+          btnFav.style.display = "inline";
+        }
 
         btnFav.addEventListener("click", () => {
           if (sessionStorage.getItem("token") === null) {
@@ -72,15 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
               })
           }
           else {
-            fetch("http://localhost:3010/user/favorite/deleteFavorite", {
+            fetch("http://localhost:3010/user/favorite/deleteFavorite/" + idPost, {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
                 "Authorization": sessionStorage.getItem("token")
-              },
-              body: JSON.stringify({
-                postId: parseInt(idPost),
-              })
+              }
             }).then(async (response) => {
               const rsp = await response.json()
               console.log(rsp)

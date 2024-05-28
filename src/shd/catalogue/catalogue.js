@@ -107,16 +107,34 @@ async function getPostCardTemplate() {
 }
 
 let postSection = document.getElementById("posts");
+let favorites = [];
 
-window.addEventListener("load", async () => {
+async function getFavorites() {
+  if (sessionStorage.getItem("rol") === "user") {
+    fetch("http://localhost:3010/user/favorite/getFavorites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": sessionStorage.getItem("token")
+      }
+    }).then(async (response) => {
+      const rsp = await response.json();
+      console.log(rsp.data)
+      favorites = rsp.data;
 
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+async function loadPosts() {
   fetch("http://localhost:3010/catalogue", {
     method: "GET",
   }).then(async (response) => {
-    const postCardTemplate = await getPostCardTemplate();
-    const rsp = await response.json()
 
-    console.log(rsp)
+    const postCardTemplate = await getPostCardTemplate();
+    const rsp = await response.json();
 
     rsp.forEach(function (post) {
 
@@ -132,28 +150,34 @@ window.addEventListener("load", async () => {
 
       postSection.insertAdjacentHTML("beforeend", newPost);
 
-      // Selecciona todos los elementos con la clase .card__description
-      const descriptions = document.querySelectorAll('.card__description');
-
-      descriptions.forEach(description => {
-
-        if (description.scrollHeight > description.clientHeight) {
-          // Si el texto es más alto, aplica la clase .fade
-          description.classList.add('fade');
-        }
-      });
-
       // Boton Favorito
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
       if (sessionStorage.getItem("rol") === "seller") {
         btnFav.style.display = "none";
+        return;
       }
+
+      console.log(favorites)
+      // Verificacion de existencia en favoritoS
+      favorites.forEach(favorite => {
+        console.log("vuelta " + favorite.postId + " " + post.id)
+        if (favorite.id === post.id) {
+          btnFav.classList.toggle("card__btn--like");
+        }
+      })
+
       btnFav.addEventListener("click", () => {
         event.preventDefault();
+        if (sessionStorage.getItem("token") === null) {
+          log_reg.classList.add("mostrar");
+          atras.classList.add("mostrar");
+          marcoFlotante.classList.add("mostrar");
+          return;
+        }
         let idPost = btnFav.getAttribute("id-fav");
-        btnFav.classList.toggle("card__btn--like");
-        console.log("edit en " + idPost);
-        if (btnFav.classList.contains("card__btn--like")) {
+
+        if (!btnFav.classList.contains("card__btn--like")) {
+          btnFav.classList.toggle("card__btn--like");
           fetch("http://localhost:3010/user/favorite/createFavorite", {
             method: "POST",
             headers: {
@@ -172,15 +196,13 @@ window.addEventListener("load", async () => {
 
         }
         else {
-          fetch("http://localhost:3010/user/favorite/deleteFavorite", {
+          btnFav.classList.remove("card__btn--like");
+          fetch("http://localhost:3010/user/favorite/deleteFavorite/" + idPost, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
               "Authorization": sessionStorage.getItem("token")
-            },
-            body: JSON.stringify({
-              postId: parseInt(idPost),
-            })
+            }
           }).then(async (response) => {
             const rsp = await response.json()
             console.log(rsp)
@@ -200,13 +222,19 @@ window.addEventListener("load", async () => {
         window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
       });
     });
-
-
-
   })
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+async function init() {
+  await getFavorites();
+  loadPosts();
+}
+
+window.addEventListener("load", async () => {
+  init();
 });
 
 

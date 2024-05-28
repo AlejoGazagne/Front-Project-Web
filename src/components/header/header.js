@@ -104,7 +104,7 @@ btnLogout.addEventListener("click", () => {
     ref.window.location.href = "../../../src/index.html";
   }
   else {
-    window.location.reload();
+    ref.window.location.reload();
   }
 
 });
