@@ -86,7 +86,7 @@ async function getPosts() {
           posts.insertAdjacentHTML("beforeend", cardPost);
 
           // Boton Editar
-          let btnEdit = document.querySelector(`[post-edit="${post.id}"]`)
+          let btnEdit = document.querySelector(`[on-post="${post.id}"]`)
           btnEdit.addEventListener("click", () => {
             event.preventDefault();
             let idPost = btnEdit.getAttribute("post-edit");
@@ -137,6 +137,54 @@ async function getPosts() {
             .replace("Ver más", "Editar");
 
           posts.insertAdjacentHTML("beforeend", cardPost);
+
+          let btnEdit = document.querySelector(`[on-post="${post.id}"]`)
+          btnEdit.style.display = "none";
+
+          let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+          btnFav.style.display = "inline";
+          btnFav.classList.add("card__btn--like");
+
+          btnFav.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnFav.getAttribute("id-fav");
+            console.log("fav en " + idPost);
+
+            if (btnFav.classList.contains("card__btn--like")) {
+              btnFav.classList.remove("card__btn--like");
+              fetch("http://localhost:3010/user/favorite/deleteFavorite/" + idPost, {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": sessionStorage.getItem("token")
+                },
+              }).then((response) => {
+                if (response.status === 200) {
+                  console.log("favorito eliminado");
+                }
+              }).catch((error) => {
+                console.log(error);
+              });
+            }
+            else {
+              btnFav.classList.add("card__btn--like");
+              fetch("http://localhost:3010/user/favorite/createFavorite", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": sessionStorage.getItem("token")
+                },
+                body: JSON.stringify({
+                  postId: parseInt(idPost),
+                })
+              }).then(async (response) => {
+                const rsp = await response.json()
+                console.log(rsp)
+              }).catch((error) => {
+                console.log(error);
+              });
+            }
+          });
 
           // Boton Ver Mas
           let btnVM = document.querySelector(`[data-id="${post.id}"]`)

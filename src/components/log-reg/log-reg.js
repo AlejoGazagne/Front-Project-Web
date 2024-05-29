@@ -1,5 +1,6 @@
 // Componentes Externos
 const parent = window.parent.document;
+const ref = window.parent;
 const log_reg = parent.getElementById("log-reg");
 const marcoFlotante = parent.getElementById("marco-flotante");
 const atras = parent.getElementById("atras");
@@ -35,7 +36,7 @@ const emailUsuario = document.getElementById("regGmail");
 const contraseniaUsuario = document.getElementById("regContrasenia");
 
 const formPublicador = document.getElementById("formPublicador");
-const imagenPublicador = document.getElementById("pubImage")
+const imagenPublicador = document.getElementById("pubImagen")
 const nombrePublicador = document.getElementById("pubNombre");
 const numeroPublicador = document.getElementById("pubNumero");
 const descripcionPublicador = document.getElementById("pubDescripcion")
@@ -47,6 +48,9 @@ const error = document.getElementById("error");
 // Funciones
 
 function modifyView() {
+
+  ref.window.location.reload();
+
   log_reg.classList.remove("mostrar");
   atras.classList.remove("mostrar");
   marcoFlotante.classList.remove("mostrar");
@@ -79,21 +83,7 @@ function register(bodyContent) {
       recuperarContrasenia.style.display = "none";
 
       sessionStorage.setItem("token", rsp.token);
-      // Fetch para setear el rol
-      fetch("http://localhost:3010/validate", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": sessionStorage.getItem("token")
-        }
-      }).then(async (response) => {
-        const rsp = await response.json()
-        sessionStorage.setItem("rol", rsp.message);
-      }).catch((error) => {
-        console.log(error);
-      });
-
-
+      sessionStorage.setItem("rol", rsp.role);
     })
     .catch((error) => {
       console.log(error);
@@ -123,31 +113,17 @@ btnIniciarSesion.addEventListener("click", () => {
       .then(async (response) => {
 
         const rsp = await response.json()
+        console.log(rsp)
 
         if (response.status === 200) {
           sessionStorage.setItem("token", rsp.token);
-          // Fetch para setear el rol
-          fetch("http://localhost:3010/validate", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": sessionStorage.getItem("token")
-            }
-          }).then(async (response) => {
-            const rsp = await response.json()
-            sessionStorage.setItem("rol", rsp.message);
-          }).catch((error) => {
-            console.log(error);
-          });
+          sessionStorage.setItem("rol", rsp.role);
           modifyView();
-
         }
         else {
           error.innerHTML = "Email o contraseña incorrectos. <br>Deseas crear una cuenta? Pulsa el boton \"Registrarme\"";
           error.classList.add("mostrar");
         }
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -212,6 +188,25 @@ async function uploadImage(image) {
   return data.data.link;
 }
 
+// Carga de imagen y generacion de link
+
+let urlImage;
+imagenPublicador.addEventListener("change", async (e) => {
+  const file = e.target.files;
+
+  console.log(file)
+
+  if (!file) {
+    return;
+  }
+
+  let reader = new FileReader();
+  reader.readAsDataURL(file[0]);
+  reader.onload = async () => {
+    urlImage = await uploadImage(file[0]);
+  }
+})
+
 // Registro
 
 btnRegistrar.addEventListener("click", () => {
@@ -235,26 +230,7 @@ btnRegistrar.addEventListener("click", () => {
     emailPublicador.value != "" &&
     contraseniaPublicador.value != "") {
 
-    // Carga de imagen y generacion de link
-
-    let urlImage;
-    imagenPublicador.addEventListener("change", async (e) => {
-      const file = e.target.files;
-
-      console.log(file)
-
-      if (!file) {
-        return;
-      }
-
-      let reader = new FileReader();
-      reader.readAsDataURL(file[0]);
-      reader.onload = async () => {
-        urlImage = await uploadImage(file[0]);
-      }
-    })
-
-    let bodyContent = JSON.stringify({
+    let bodyContent = {
       profileImage: urlImage,
       name: nombrePublicador.value,
       phoneNumber: numeroPublicador.value,
@@ -262,9 +238,11 @@ btnRegistrar.addEventListener("click", () => {
       email: emailPublicador.value,
       password: contraseniaPublicador.value,
       type: parseInt(seleccionCuenta.value),
-    });
+    };
 
     console.log(bodyContent)
+
+    bodyContent = JSON.stringify(bodyContent);
 
     register(bodyContent);
   }

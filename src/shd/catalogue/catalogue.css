@@ -168,20 +168,20 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .card__preview {
   height: 19rem;
-  min-width: 500px;
+  min-width: 50vm;
   position: relative;
   overflow: hidden;
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 
-.card__preview #btn-edit-post {
+.card__preview #btn-on-post {
   display: none;
 }
 
 .card__preview img {
-  width: 500px;
+  width: 100%;
   object-fit: fill;
   transition: all 0.4s ease-out;
 }
