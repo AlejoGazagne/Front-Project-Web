@@ -5,20 +5,18 @@
 }
 
 header {
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
 }
 
 /* ------------------------------- */
-.container {
-  max-width: 95%;
-}
-
 .filtersColumn {
-  width: 18%;
-  height: 70%;
-  border: 1px solid #727272cf;
-  border-radius: 2rem;
-  background-color: #e7e7e7a8;
+  margin-left: .5rem;
+  width: 20%;
+  height: 78%;
+  border: solid 1px #000000;
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 1rem .2rem .5rem .2rem;
 }
 
 .filters {
@@ -30,18 +28,22 @@ header {
   /* Ocultar barra de scroll Para Firefox */
 }
 
+.select-propiedad {
+  width: 70%;
+  margin-bottom: 1rem;
+  padding: .2rem;
+  border-radius: 4px;
+}
+
+.select-propiedad:hover {
+  cursor: pointer;
+}
+
 .filters::-webkit-scrollbar {
   display: none;
   /* Para Chrome, Safari y Opera */
 }
 
-.form-group {
-  margin-top: 1rem;
-}
-
-.form-group p {
-  margin-bottom: 0.3rem;
-}
 
 .form-control {
   text-align: center;
@@ -80,71 +82,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* ------------------------------- */
-
-/* #posts {
-  margin-left: 24%;
-  width: 75%;
-}
-
-.card {
-  text-align: center;
-  border: none;
-  padding: 0;
-  border: 1px solid rgba(114, 114, 114, 0.812);
-  border-radius: 1rem;
-}
-
-.headerCard {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.card-title {
-  position: relative;
-}
-
-#idPost {
-  display: none;
-}
-
-.card-image {
-  max-width: 100%;
-}
-
-#imgCard {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.iconos-caracteristicas {
-  max-width: 50rem;
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.iconos-caracteristicas li {
-  display: flex;
-  align-items: center;
-}
-
-.iconos-caracteristicas li i {
-  font-size: xx-large;
-}
-
-.iconos-caracteristicas li p {
-  margin: 0;
-  font-size: x-large;
-  font-style: bold;
-}
-
-.btnOpen {
-  width: 75%;
-} */
 /* ------------------ Carta ----------------------- */
 #posts {
   margin-left: 20%;
