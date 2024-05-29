@@ -13,8 +13,29 @@ async function getPostCardTemplate() {
   return text;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+let favorites = [];
 
+async function getFavorites() {
+  if (sessionStorage.getItem("rol") === "user") {
+    console.log("favoritos")
+    await fetch("http://localhost:3010/user/favorite/getFavorites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": sessionStorage.getItem("token")
+      }
+    }).then(async (response) => {
+      const rsp = await response.json();
+      favorites = rsp.data;
+      console.log(favorites)
+
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+}
+
+async function loadPosts() {
   let anunces = document.getElementById("anuncios-destacados");
   fetch("http://localhost:3010/")
     .then((response) => response.json())
@@ -41,6 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
           btnFav.style.display = "inline";
+        }
+
+        for (let j = 0; j < favorites.length; j++) {
+          console.log("vuelta " + favorites[j].postId + " " + post.id)
+          if (favorites[j].id === post.id) {
+            btnFav.classList.toggle("card__btn--like");
+          }
         }
 
         btnFav.addEventListener("click", () => {
@@ -105,6 +133,17 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       console.log(error);
     });
+}
+
+async function init() {
+  await getFavorites();
+
+  loadPosts();
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  init();
 });
 
 atras.addEventListener("click", () => {

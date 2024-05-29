@@ -47,9 +47,11 @@ const error = document.getElementById("error");
 
 // Funciones
 
-function modifyView() {
+async function modifyView() {
 
   ref.window.location.reload();
+
+  ref.window.scrollTo(0, localStorage.getItem("scrollPosition"));
 
   log_reg.classList.remove("mostrar");
   atras.classList.remove("mostrar");
@@ -58,6 +60,8 @@ function modifyView() {
   btnSesion.classList.remove("mostrar");
   btnProfile.classList.add("mostrar");
   btnLogout.classList.add("mostrar");
+
+
 }
 
 function register(bodyContent) {

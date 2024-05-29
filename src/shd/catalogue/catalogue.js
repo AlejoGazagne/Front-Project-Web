@@ -111,7 +111,8 @@ let favorites = [];
 
 async function getFavorites() {
   if (sessionStorage.getItem("rol") === "user") {
-    fetch("http://localhost:3010/user/favorite/getFavorites", {
+    console.log("favoritos")
+    await fetch("http://localhost:3010/user/favorite/getFavorites", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -119,8 +120,8 @@ async function getFavorites() {
       }
     }).then(async (response) => {
       const rsp = await response.json();
-      console.log(rsp.data)
       favorites = rsp.data;
+      console.log(favorites)
 
     }).catch((error) => {
       console.log(error);
@@ -136,7 +137,8 @@ async function loadPosts() {
     const postCardTemplate = await getPostCardTemplate();
     const rsp = await response.json();
 
-    rsp.forEach(function (post) {
+    for (let i = 0; i < rsp.length; i++) {
+      let post = rsp[i];
 
       let newPost = postCardTemplate.replace('img-source', post.frontImage)
         .replace(/idPost/gi, post.id)
@@ -159,12 +161,12 @@ async function loadPosts() {
 
       console.log(favorites)
       // Verificacion de existencia en favoritoS
-      favorites.forEach(favorite => {
-        console.log("vuelta " + favorite.postId + " " + post.id)
-        if (favorite.id === post.id) {
+      for (let j = 0; j < favorites.length; j++) {
+        console.log("vuelta " + favorites[j].postId + " " + post.id)
+        if (favorites[j].id === post.id) {
           btnFav.classList.toggle("card__btn--like");
         }
-      })
+      }
 
       btnFav.addEventListener("click", () => {
         event.preventDefault();
@@ -221,7 +223,7 @@ async function loadPosts() {
         console.log("click en " + idPost);
         window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
       });
-    });
+    }
   })
     .catch((error) => {
       console.error("Error:", error);
@@ -230,7 +232,9 @@ async function loadPosts() {
 
 async function init() {
   await getFavorites();
+
   loadPosts();
+
 }
 
 window.addEventListener("load", async () => {
