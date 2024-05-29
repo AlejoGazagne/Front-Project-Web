@@ -30,23 +30,46 @@
       ></iframe>
     </header>
 
-    <div class="container d-flex">
+    <div>
       <div
         id="filtersColumn"
         class="col-2 d-flex flex-column filtersColumn position-fixed"
       >
         <form id="filters" class="filters">
-          <div class="form-group">
-            <p>Tipo de propiedad</p>
-            <select class="form-control" id="type">
-              <option>Casa</option>
-              <option>Departamento</option>
-            </select>
+          <select class="select-propiedad" id="type">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="expand-icon"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+            <option default disabled selected>Tipo de propiedad</option>
+            <option>Casa</option>
+            <option>Departamento</option>
+            <option>Ambos</option>
+          </select> <br>
+
+          <div>
+            <p>Rango de precio:</p>
+            <input type="number" id="precio" placeholder="Precio minimo">
+            <input type="number" id="precio" placeholder="Precio maximo">
           </div>
-          <div class="form-group">
-            <p>Precio</p>
-            <input type="number" class="form-control" id="priceInput" min="0" />
+
+          <div>
+            <p>Ciudad</p>
+            <input type="text">
+            <p>Barrio</p>
+            <input type="text">
           </div>
+
           <div class="form-group">
             <p>Habitaciones</p>
             <div class="d-flex justify-content-between">
@@ -61,7 +84,6 @@
                 type="number"
                 class="form-control me-3 ms-3"
                 id="bedroomCount"
-                min="1"
                 value="1"
               />
               <button
@@ -73,6 +95,7 @@
               </button>
             </div>
           </div>
+
           <div class="form-group">
             <p>Baños</p>
             <div class="d-flex">
@@ -87,7 +110,6 @@
                 type="number"
                 class="form-control me-3 ms-3"
                 id="bathroomCount"
-                min="1"
                 value="1"
               />
               <button
@@ -113,7 +135,6 @@
                 type="number"
                 class="form-control me-3 ms-3"
                 id="garageCount"
-                min="1"
                 value="1"
               />
               <button
