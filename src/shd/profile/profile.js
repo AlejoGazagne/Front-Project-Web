@@ -89,7 +89,7 @@ async function getPosts() {
           let btnEdit = document.querySelector(`[on-post="${post.id}"]`)
           btnEdit.addEventListener("click", () => {
             event.preventDefault();
-            let idPost = btnEdit.getAttribute("post-edit");
+            let idPost = btnEdit.getAttribute("on-post");
             console.log("edit en " + idPost);
             window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
           });

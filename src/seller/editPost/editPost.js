@@ -113,6 +113,7 @@ inputImages.addEventListener("change", async (e) => {
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = parseInt(urlParams.get("id"));
+let timestamp;
 
 window.addEventListener("load", async () => {
 
@@ -127,6 +128,9 @@ window.addEventListener("load", async () => {
         console.log(data.data);
 
         data = data.data;
+
+        // guardamos fecha de creacion del post
+        timestamp = data.datetime;
 
         let number = data.ubication.split(",")[0].split(" ")[0].trim();
         let street = data.ubication.split(",")[0].replace(number, "").trim();
@@ -245,7 +249,7 @@ async function buildPost() {
         area: parseFloat(area),
         pool: pool,
         pets: pets,
-        datetime: new Date().toISOString(),
+        datetime: timestamp,
     };
     ready = true;
     return post;

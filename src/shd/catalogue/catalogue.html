@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="referrer" content="no-referrer" /> 
+    <meta name="referrer" content="no-referrer" />
     <title>Document</title>
 
     <link
@@ -31,9 +31,7 @@
     </header>
 
     <div class="contenedor">
-      <div
-        id="filtersColumn"
-        class="col-2 d-flex flex-column filtersColumn">
+      <div id="filtersColumn" class="col-2 d-flex flex-column filtersColumn">
         <h2>Afile su búsqueda</h2>
 
         <form id="filters" class="filters">
@@ -48,27 +46,51 @@
               stroke="currentColor"
               fill="none"
               stroke-linecap="round"
-              stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M9 6l6 6l-6 6" />
             </svg>
             <option default disabled selected>Tipo de propiedad</option>
             <option>Casa</option>
             <option>Departamento</option>
             <option>Ambos</option>
-          </select> <br>
+          </select>
+          <br />
+
+          <select class="select-propiedad" id="operation">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="expand-icon"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+            <option default disabled selected>Operación</option>
+            <option>Venta</option>
+            <option>Alquiler</option>
+          </select>
+          <br />
 
           <div class="rango-precio">
             <p>Rango de precio:</p>
-            <input type="number" id="precio" placeholder="Precio minimo">
-            <input type="number" id="precio" placeholder="Precio maximo">
+            <input type="number" id="precio-min" placeholder="Precio minimo" />
+            <input type="number" id="precio-max" placeholder="Precio maximo" />
           </div>
 
           <div class="ubicacion">
             <p>Ciudad</p>
-            <input type="text">
+            <input type="text" id="city" />
             <p>Barrio</p>
-            <input type="text">
+            <input type="text" id="neighborhood" />
           </div>
 
           <div class="caract">
@@ -78,12 +100,16 @@
                 <button
                   type="button"
                   id="decrementRoom"
-                  class="btn btn-outline-secondary">-</button>
+                  class="btn btn-outline-secondary"
+                >
+                  -
+                </button>
                 <input
                   type="number"
                   class="form-input me-3 ms-3"
                   id="bedroomCount"
-                  value="1"/>
+                  value="1"
+                />
                 <button
                   type="button"
                   id="incrementRoom"
@@ -151,7 +177,9 @@
             <input type="radio" id="poolCheck" />
           </div>
 
-          <div class="form-input d-flex justify-content-between align-items-center input-check">
+          <div
+            class="form-input d-flex justify-content-between align-items-center input-check"
+          >
             <label for="poolCheck">Admite mascotas</label>
             <input type="radio" id="petsCheck" />
           </div>
