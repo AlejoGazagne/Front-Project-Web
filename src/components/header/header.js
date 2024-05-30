@@ -52,22 +52,6 @@ btnPost.addEventListener("click", async () => {
     atras.classList.add("mostrar");
     marcoFlotante.classList.add("mostrar");
   }
-  // fetch("http://localhost:3010/validate", {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "Authorization": sessionStorage.getItem("token")
-  //   }
-  // }).then((response) => {
-  //   console.log(response);
-  //   if (response.message === "seller") {
-  //     ref.window.location.href = "../../../src/seller/newPost/newPost.html";
-  //   } else {
-  //     log_reg.classList.add("mostrar");
-  //     atras.classList.add("mostrar");
-  //     marcoFlotante.classList.add("mostrar");
-  //   }
-  // })
 
 });
 
@@ -75,6 +59,8 @@ btnSesion.addEventListener("click", () => {
   log_reg.classList.add("mostrar");
   atras.classList.add("mostrar");
   marcoFlotante.classList.add("mostrar");
+
+  localStorage.setItem("scrollPosition", ref.window.scrollY);
 });
 
 btnProfile.addEventListener("click", () => {
