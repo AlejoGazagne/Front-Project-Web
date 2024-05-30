@@ -116,7 +116,7 @@ const id = parseInt(urlParams.get("id"));
 
 window.addEventListener("load", async () => {
 
-    fetch("http://localhost:3010/catalogue/" + id, {
+    fetch("http://localhost:3010/properties/" + id, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -269,7 +269,7 @@ btnPost.addEventListener("click", async () => {
         post = JSON.stringify(post);
 
         //Fetch al backend, actualiza el post autorizandose con el token del seller
-        fetch("http://localhost:3010/seller/post/updatePost", {
+        fetch("http://localhost:3010/seller/post/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -304,7 +304,7 @@ btnSave.addEventListener("click", async () => {
         post = JSON.stringify(post);
 
         //Fetch al backend, actualiza el post autorizandose con el token del seller
-        fetch("http://localhost:3010/seller/post/updatePost", {
+        fetch("http://localhost:3010/seller/post/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

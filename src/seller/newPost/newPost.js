@@ -207,7 +207,7 @@ btnPost.addEventListener("click", async () => {
   post = JSON.stringify(post);
 
   //Fetch al backend, crea el post autorizandose con el token del seller
-  fetch("http://localhost:3010/seller/post/createPost", {
+  fetch("http://localhost:3010/seller/post/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -240,7 +240,7 @@ btnSave.addEventListener("click", async () => {
   post = JSON.stringify(post);
 
   //Fetch al backend, crea el post autorizandose con el token del seller
-  fetch("http://localhost:3010/seller/post/createPost", {
+  fetch("http://localhost:3010/seller/post/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -17,7 +17,7 @@ async function getData() {
 
   //ROL SELLER
   if (sessionStorage.getItem("rol") === "seller") {
-    fetch("http://localhost:3010/seller/myAccount", {
+    fetch("http://localhost:3010/seller/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ async function getData() {
   //ROL USER
   else if (sessionStorage.getItem("rol") === "user") {
     document.getElementById("phone").classList.add("ocultar");
-    fetch("http://localhost:3010/user/myAccount", {
+    fetch("http://localhost:3010/user/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ async function getData() {
 
 async function getPosts() {
   if (sessionStorage.getItem("rol") === "seller") {
-    fetch("http://localhost:3010/seller/post/getMyPosts", {
+    fetch("http://localhost:3010/seller/post/", {
       method: "GET",
       headers: {
         "Authorization": sessionStorage.getItem("token"),
@@ -114,7 +114,7 @@ async function getPosts() {
   else if (sessionStorage.getItem("rol") === "user") {
     // Fetch a la base de datos para traer los favoritos
     console.log("fetch a favoritos")
-    fetch("http://localhost:3010/user/favorite/getFavorites", {
+    fetch("http://localhost:3010/user/favorite/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +152,7 @@ async function getPosts() {
 
             if (btnFav.classList.contains("card__btn--like")) {
               btnFav.classList.remove("card__btn--like");
-              fetch("http://localhost:3010/user/favorite/deleteFavorite/" + idPost, {
+              fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
                 method: "DELETE",
                 headers: {
                   "Content-Type": "application/json",
@@ -168,7 +168,7 @@ async function getPosts() {
             }
             else {
               btnFav.classList.add("card__btn--like");
-              fetch("http://localhost:3010/user/favorite/createFavorite", {
+              fetch("http://localhost:3010/user/favorite/create", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -276,7 +276,7 @@ btnEdit.addEventListener("click", () => {
       }
 
       if (sessionStorage.getItem("rol") === "seller") {
-        fetch("http://localhost:3010/seller/updateSeller", {
+        fetch("http://localhost:3010/seller/update", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -295,7 +295,7 @@ btnEdit.addEventListener("click", () => {
         });
       }
       else if (sessionStorage.getItem("rol") === "user") {
-        fetch("http://localhost:3010/user/updateUser", {
+        fetch("http://localhost:3010/user/update", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

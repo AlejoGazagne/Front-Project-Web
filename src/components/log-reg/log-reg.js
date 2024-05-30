@@ -65,7 +65,7 @@ async function modifyView() {
 }
 
 function register(bodyContent) {
-  fetch("http://localhost:3010/account/register", {
+  fetch("http://localhost:3010/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +107,7 @@ btnIniciarSesion.addEventListener("click", () => {
       password: password.value,
     });
 
-    fetch("http://localhost:3010/account/login", {
+    fetch("http://localhost:3010/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

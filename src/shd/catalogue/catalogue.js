@@ -112,7 +112,7 @@ let favorites = [];
 async function getFavorites() {
   if (sessionStorage.getItem("rol") === "user") {
     console.log("favoritos")
-    await fetch("http://localhost:3010/user/favorite/getFavorites", {
+    await fetch("http://localhost:3010/user/favorite/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -130,7 +130,7 @@ async function getFavorites() {
 }
 
 async function loadPosts() {
-  fetch("http://localhost:3010/catalogue", {
+  fetch("http://localhost:3010/properties/", {
     method: "GET",
   }).then(async (response) => {
 
@@ -180,7 +180,7 @@ async function loadPosts() {
 
         if (!btnFav.classList.contains("card__btn--like")) {
           btnFav.classList.toggle("card__btn--like");
-          fetch("http://localhost:3010/user/favorite/createFavorite", {
+          fetch("http://localhost:3010/user/favorite/create", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -199,7 +199,7 @@ async function loadPosts() {
         }
         else {
           btnFav.classList.remove("card__btn--like");
-          fetch("http://localhost:3010/user/favorite/deleteFavorite/" + idPost, {
+          fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
