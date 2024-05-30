@@ -6,13 +6,6 @@ header {
   color: aliceblue;
 }
 
-header h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-top: 50rem;
-  margin-bottom: 0;
-}
-
 #navbar {
   height: 110px;
   background-color: #0000003d;

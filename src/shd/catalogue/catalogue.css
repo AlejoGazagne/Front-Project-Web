@@ -5,7 +5,7 @@
 }
 
 header {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 /* ------------------------------- */
@@ -14,18 +14,17 @@ header {
 }
 
 .filtersColumn {
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   width: 20%;
   /* height: 78%; */
   /* border: solid 1px #000000; */
   border-radius: 8px;
   background-color: #ffffff;
-  padding: 1rem .2rem .5rem 1rem;
+  padding: 1rem 0.2rem 0.5rem 1rem;
 }
 
 .filtersColumn h2 {
   font-size: 1.2rem;
-
 }
 
 .filters {
@@ -40,8 +39,8 @@ header {
 .select-propiedad {
   height: 2rem;
   width: 100%;
-  margin: .5rem 0 .5rem 0;
-  padding: .2rem;
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 0.2rem;
   border-radius: 4px;
   background-color: #fff;
 }
@@ -51,11 +50,12 @@ header {
 }
 
 .rango-precio {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
+  padding: 0.2rem;
 }
 
 .ubicacion {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .ubicacion input {
@@ -68,7 +68,7 @@ form div p {
 
 form div input {
   width: 100%;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   height: 2rem;
   border: 1px solid black;
   border-radius: 5px;
@@ -80,7 +80,7 @@ form div input {
 } */
 
 .form-group {
-  margin: .7rem 0;
+  margin: 0.7rem 0;
 }
 
 .form-input {
@@ -94,7 +94,7 @@ form div input {
 
 .input-check {
   width: 100%;
-  margin: .8rem 0;
+  margin: 0.8rem 0;
 }
 
 .input-check input {
@@ -107,7 +107,7 @@ form div input {
   width: 20%;
   padding: 0;
   height: 1.7rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: black;
   /* font-weight: bold; */
   background-color: #ffab3d;

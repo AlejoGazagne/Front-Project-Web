@@ -25,10 +25,15 @@ atras.addEventListener("click", () => {
   marcoFlotante.classList.remove("mostrar");
 });
 
-// ---------------------------------------------- //
+// --------------LOGICA DE FILTROS------------------ //
 
 let type = document.getElementById("type");
-let price = document.getElementById("priceInput");
+let operation = document.getElementById("operation");
+let priceMin = document.getElementById("precio-min");
+let priceMax = document.getElementById("precio-max");
+
+let city = document.getElementById("city");
+let neighborhood = document.getElementById("neighborhood");
 
 let btnDRoom = document.getElementById("decrementRoom");
 let roomCount = document.getElementById("bedroomCount");
@@ -93,9 +98,7 @@ pets.addEventListener("click", function () {
   wasChecked[this.id] = this.checked;
 });
 
-/////////////////////////////////////
-//DESARROLLAR LA LOGICA CON EL BACK//
-/////////////////////////////////////
+/// CARGA INICIAL DE PUBLICACIONES ///
 
 async function getPostCardTemplate() {
   const response = await fetch(
@@ -157,62 +160,66 @@ async function loadPosts() {
       if (sessionStorage.getItem("rol") === "seller") {
         btnFav.style.display = "none";
       }
+      else {
 
-      console.log(favorites)
-      // Verificacion de existencia en favoritoS
-      for (let j = 0; j < favorites.length; j++) {
-        console.log("vuelta " + favorites[j].postId + " " + post.id)
-        if (favorites[j].id === post.id) {
-          btnFav.classList.toggle("card__btn--like");
+
+        console.log(favorites)
+        // Verificacion de existencia en favoritoS
+        for (let j = 0; j < favorites.length; j++) {
+          console.log("vuelta " + favorites[j].postId + " " + post.id)
+          if (favorites[j].id === post.id) {
+            btnFav.classList.toggle("card__btn--like");
+          }
         }
+
+        btnFav.addEventListener("click", () => {
+          event.preventDefault();
+          if (sessionStorage.getItem("token") === null) {
+            log_reg.classList.add("mostrar");
+            atras.classList.add("mostrar");
+            marcoFlotante.classList.add("mostrar");
+            return;
+          }
+          let idPost = btnFav.getAttribute("id-fav");
+
+          if (!btnFav.classList.contains("card__btn--like")) {
+            btnFav.classList.toggle("card__btn--like");
+            fetch("http://localhost:3010/user/favorite/create", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("token")
+              },
+              body: JSON.stringify({
+                postId: parseInt(idPost),
+              })
+            }).then(async (response) => {
+              const rsp = await response.json()
+              console.log(rsp)
+            }).catch((error) => {
+              console.log(error);
+            });
+
+          }
+          else {
+            btnFav.classList.remove("card__btn--like");
+            fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("token")
+              }
+            }).then(async (response) => {
+              const rsp = await response.json()
+              console.log(rsp)
+            }).catch((error) => {
+              console.log(error);
+            });
+          }
+
+        });
       }
 
-      btnFav.addEventListener("click", () => {
-        event.preventDefault();
-        if (sessionStorage.getItem("token") === null) {
-          log_reg.classList.add("mostrar");
-          atras.classList.add("mostrar");
-          marcoFlotante.classList.add("mostrar");
-          return;
-        }
-        let idPost = btnFav.getAttribute("id-fav");
-
-        if (!btnFav.classList.contains("card__btn--like")) {
-          btnFav.classList.toggle("card__btn--like");
-          fetch("http://localhost:3010/user/favorite/create", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": sessionStorage.getItem("token")
-            },
-            body: JSON.stringify({
-              postId: parseInt(idPost),
-            })
-          }).then(async (response) => {
-            const rsp = await response.json()
-            console.log(rsp)
-          }).catch((error) => {
-            console.log(error);
-          });
-
-        }
-        else {
-          btnFav.classList.remove("card__btn--like");
-          fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": sessionStorage.getItem("token")
-            }
-          }).then(async (response) => {
-            const rsp = await response.json()
-            console.log(rsp)
-          }).catch((error) => {
-            console.log(error);
-          });
-        }
-
-      });
 
       // Boton Ver Mas
       let btnVM = document.querySelector(`[data-id="${post.id}"]`)
@@ -241,22 +248,123 @@ window.addEventListener("load", async () => {
 });
 
 
+// ---------BUSQUEDA POR FILTROS--------- //
 
 search.addEventListener("click", async () => {
   event.preventDefault();
 
-  const postCardTemplate = await getPostCardTemplate();
+  let filters = {
+    type: type.value,
+    operation: operation.value,
+    priceMin: priceMin.value,
+    priceMax: priceMax.value,
+    city: city.value,
+    neighborhood: neighborhood.value,
+    roomCount: roomCount.value,
+    bathroomCount: bathroomCount.value,
+    garageCount: garageCount.value,
+    pool: pool.checked,
+    pets: pets.checked
+  };
 
+  let urlParameters = [];
 
-  let post = postCardTemplate
-    .replace("Title", "Casa en venta")
-    .replace("Price", "Precio: $1000000")
-    .replace("Description", "Casa en venta en la zona de la playa")
-    .replace("Rooms", "3")
-    .replace("WC", "2")
-    .replace("Garage", "1");
+  for (let [key, value] of Object.entries(filters)) {
+    if (value !== "") {
+      urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    }
+  }
 
-  postSection.insertAdjacentHTML("beforeend", post);
+  console.log(urlParameters)
+
+  // fetch(`http://localhost:3010/properties/search?${urlParameters.join('&')}`, {
+  //   method: "GET",
+  // }).then(async (response) => {
+
+  //   const postCardTemplate = await getPostCardTemplate();
+  //   const rsp = await response.json();
+
+  //   postSection.innerHTML = "";
+
+  //   for (let i = 0; i < rsp.length; i++) {
+  //     let post = rsp[i];
+
+  //     let newPost = postCardTemplate.replace('img-source', post.frontImage)
+  //       .replace(/idPost/gi, post.id)
+  //       .replace("Title", post.title)
+  //       .replace("value", post.price)
+  //       .replace("Description", post.content)
+  //       .replace("Ubication", post.ubication)
+  //       .replace("Rooms", post.rooms)
+  //       .replace("WC", post.bathrooms)
+  //       .replace("Garage", post.garage);
+
+  //     postSection.insertAdjacentHTML("beforeend", newPost);
+
+  //     // Boton Favorito
+  //     let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+  //     if (sessionStorage.getItem("rol") === "seller") {
+  //       btnFav.style.display = "none";
+  //     }
+  //     else {
+
+  //       // Verificacion de existencia en favoritoS
+  //       for (let j = 0; j < favorites.length; j++) {
+  //         if (favorites[j].id === post.id) {
+  //           btnFav.classList.toggle("card__btn--like");
+  //         }
+  //       }
+
+  //       btnFav.addEventListener("click", () => {
+  //         event.preventDefault();
+  //         if (sessionStorage.getItem("token") === null) {
+  //           log_reg.classList.add("mostrar");
+  //           atras.classList.add("mostrar");
+  //           marcoFlotante.classList.add("mostrar");
+  //           return;
+  //         }
+  //         let idPost = btnFav.getAttribute("id-fav");
+
+  //         if (!btnFav.classList.contains("card__btn--like")) {
+  //           btnFav.classList.toggle("card__btn--like");
+  //           fetch("http://localhost:3010/user/favorite/create", {
+  //             method: "POST",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //               "Authorization": sessionStorage.getItem("token")
+  //             },
+  //             body: JSON.stringify({
+  //               postId: parseInt(idPost),
+  //             })
+  //           }).then(async (response) => {
+  //             const rsp = await response.json()
+  //             console.log(rsp)
+  //           }).catch((error) => {
+  //             console.log(error);
+  //           });
+
+  //         }
+  //         else {
+  //           btnFav.classList.remove("card__btn--like");
+  //           fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
+  //             method: "DELETE",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //               "Authorization": sessionStorage.getItem("token")
+  //             }
+  //           }).then(async (response) => {
+  //             const rsp = await response.json()
+  //             console.log(rsp)
+  //           }).catch((error) => {
+  //             console.log(error);
+  //           });
+  //         }
+  //       });
+  //     }
+  //   }
+  // }).catch((error) => {
+  //   console.error("Error:", error);
+  // });
 });
 
 // ------------------------------------- //
