@@ -9,66 +9,125 @@ header {
 }
 
 /* ------------------------------- */
+.contenedor {
+  display: flex;
+}
+
 .filtersColumn {
   margin-left: .5rem;
   width: 20%;
-  height: 78%;
+  /* height: 78%; */
   border: solid 1px #000000;
   border-radius: 8px;
   background-color: #ffffff;
-  padding: 1rem .2rem .5rem .2rem;
+  padding: 1rem .2rem .5rem 1rem;
+}
+
+.filtersColumn h2 {
+  font-size: 1.2rem;
+
 }
 
 .filters {
   max-width: 90%;
-  margin: auto;
-  text-align: center;
-  overflow: auto;
-  scrollbar-width: none;
+  margin: 0;
+  /* text-align: center; */
+  /* overflow: auto;
+  scrollbar-width: none; */
   /* Ocultar barra de scroll Para Firefox */
 }
 
 .select-propiedad {
-  width: 70%;
-  margin-bottom: 1rem;
+  height: 2rem;
+  width: 100%;
+  margin: .5rem 0 .5rem 0;
   padding: .2rem;
   border-radius: 4px;
+  background-color: #fff;
 }
 
 .select-propiedad:hover {
   cursor: pointer;
 }
 
-.filters::-webkit-scrollbar {
-  display: none;
-  /* Para Chrome, Safari y Opera */
+.rango-precio {
+  margin: .5rem 0;
 }
 
+.ubicacion {
+  margin: .5rem 0;
+}
 
-.form-control {
+.ubicacion input {
+  margin: 0;
+}
+
+form div p {
+  margin: 0;
+}
+
+form div input {
+  width: 100%;
+  margin-bottom: .5rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+/* .filters::-webkit-scrollbar {
+  display: none;
+   Para Chrome, Safari y Opera 
+} */
+
+.form-group {
+  margin: .7rem 0;
+}
+
+.form-input {
   text-align: center;
+  height: 1.7rem;
+}
+
+.caract {
+  margin: 1.5rem 0;
+}
+
+.input-check {
+  width: 100%;
+  margin: .8rem 0;
+}
+
+.input-check input {
+  width: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 .btn {
-  width: 3rem;
+  width: 20%;
+  padding: 0;
+  height: 1.7rem;
+  font-size: .9rem;
   color: black;
-  font-style: bold;
+  /* font-weight: bold; */
   background-color: #ffab3d;
-  border-color: rgba(114, 114, 114, 0.812);
+  border-color: #727272cf;
 }
 
 #btnSearch {
-  width: 7rem;
+  width: 100%;
+  height: 2rem;
   font-weight: bold;
   color: #ffffff;
   background-color: #333333;
-  padding: 0.6rem 0.2rem;
+  padding: auto;
   border-radius: 8px;
-  border: 4px solid #333333;
+  border: 3px solid #333333;
+  transition-duration: 0.3s;
 }
 
 #btnSearch:hover {
-  border: 4px solid #ffab3d;
+  border: 3px solid #ffab3d;
 }
 
 /* Ocultar los botones de incremento y decremento en los inputs de tipo número */
@@ -84,7 +143,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* ------------------ Carta ----------------------- */
 #posts {
-  margin-left: 20%;
+  margin-left: 4rem;
 }
 
 .card {
@@ -92,7 +151,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 1rem;
   box-shadow: #0000001a 0px 2px 6px;
   display: flex;
-  width: 80%;
+  width: 95%;
   height: 19rem;
   flex-direction: row;
   overflow: hidden;
