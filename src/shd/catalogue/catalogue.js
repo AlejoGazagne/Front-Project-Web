@@ -156,7 +156,6 @@ async function loadPosts() {
       let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
       if (sessionStorage.getItem("rol") === "seller") {
         btnFav.style.display = "none";
-        return;
       }
 
       console.log(favorites)
