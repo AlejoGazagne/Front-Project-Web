@@ -13,7 +13,20 @@ async function getPostCardTemplate() {
   return text;
 }
 
+async function getProfileTemplate() {
+  const response = await fetch("../../../src/components/profile/profile.html");
+
+  const text = await response.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+
+  return doc;
+}
+
 async function getData() {
+
+  const profileTemplate = await getProfileTemplate();
 
   //ROL SELLER
   if (sessionStorage.getItem("rol") === "seller") {
@@ -27,6 +40,8 @@ async function getData() {
 
       const rsp = await response.json()
       console.log(rsp);
+
+      document.getElementById("profile").appendChild(profileTemplate.body);
 
       document.getElementById("yourName").textContent = rsp.data.name;
       document.getElementById("email-value").textContent = rsp.data.email;
@@ -42,6 +57,8 @@ async function getData() {
   }
   //ROL USER
   else if (sessionStorage.getItem("rol") === "user") {
+
+    document.getElementById("profile").appendChild(profileTemplate.body);
     document.getElementById("phone").classList.add("ocultar");
     fetch("http://localhost:3010/user/me", {
       method: "GET",
