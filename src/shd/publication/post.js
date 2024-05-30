@@ -78,7 +78,7 @@ window.addEventListener("load", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
 
-  fetch(`http://localhost:3010/catalogue/${id}`, {
+  fetch(`http://localhost:3010/properties/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
