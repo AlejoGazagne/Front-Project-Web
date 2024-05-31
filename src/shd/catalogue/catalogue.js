@@ -132,119 +132,116 @@ async function getFavorites() {
   }
 }
 
-async function loadPosts() {
-  fetch("http://localhost:3010/properties/", {
-    method: "GET",
-  }).then(async (response) => {
+async function loadPosts(rsp) {
 
-    const postCardTemplate = await getPostCardTemplate();
-    const rsp = await response.json();
+  const postCardTemplate = await getPostCardTemplate();
 
-    for (let i = 0; i < rsp.length; i++) {
-      let post = rsp[i];
+  postSection.innerHTML = "";
 
-      let newPost = postCardTemplate.replace('img-source', post.frontImage)
-        .replace(/idPost/gi, post.id)
-        .replace("Title", post.title)
-        .replace("value", post.price)
-        .replace("Description", post.content)
-        .replace("Ubication", post.ubication)
-        .replace("Rooms", post.rooms)
-        .replace("WC", post.bathrooms)
-        .replace("Garage", post.garage);
+  for (let i = 0; i < rsp.length; i++) {
+    let post = rsp[i];
 
-      postSection.insertAdjacentHTML("beforeend", newPost);
+    let newPost = postCardTemplate.replace('img-source', post.frontImage)
+      .replace(/idPost/gi, post.id)
+      .replace("Title", post.title)
+      .replace("value", post.price)
+      .replace("Description", post.content)
+      .replace("Ubication", post.ubication)
+      .replace("Rooms", post.rooms)
+      .replace("WC", post.bathrooms)
+      .replace("Garage", post.garage);
 
-      // Boton Favorito
-      let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
-      if (sessionStorage.getItem("rol") === "seller") {
-        btnFav.style.display = "none";
+    postSection.insertAdjacentHTML("beforeend", newPost);
+
+    // Boton Favorito
+    let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
+    if (sessionStorage.getItem("rol") === "seller") {
+      btnFav.style.display = "none";
+    }
+    else {
+      // Verificacion de existencia en favoritoS
+      for (let j = 0; j < favorites.length; j++) {
+        console.log("vuelta " + favorites[j].postId + " " + post.id)
+        if (favorites[j].id === post.id) {
+          btnFav.classList.toggle("card__btn--like");
+        }
       }
-      else {
 
+      btnFav.addEventListener("click", () => {
+        event.preventDefault();
+        if (sessionStorage.getItem("token") === null) {
+          log_reg.classList.add("mostrar");
+          atras.classList.add("mostrar");
+          marcoFlotante.classList.add("mostrar");
+          return;
+        }
+        let idPost = btnFav.getAttribute("id-fav");
 
-        console.log(favorites)
-        // Verificacion de existencia en favoritoS
-        for (let j = 0; j < favorites.length; j++) {
-          console.log("vuelta " + favorites[j].postId + " " + post.id)
-          if (favorites[j].id === post.id) {
-            btnFav.classList.toggle("card__btn--like");
-          }
+        if (!btnFav.classList.contains("card__btn--like")) {
+          btnFav.classList.toggle("card__btn--like");
+          fetch("http://localhost:3010/user/favorite/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": sessionStorage.getItem("token")
+            },
+            body: JSON.stringify({
+              postId: parseInt(idPost),
+            })
+          }).then(async (response) => {
+            const rsp = await response.json()
+            console.log(rsp)
+          }).catch((error) => {
+            console.log(error);
+          });
+
+        }
+        else {
+          btnFav.classList.remove("card__btn--like");
+          fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": sessionStorage.getItem("token")
+            }
+          }).then(async (response) => {
+            const rsp = await response.json()
+            console.log(rsp)
+          }).catch((error) => {
+            console.log(error);
+          });
         }
 
-        btnFav.addEventListener("click", () => {
-          event.preventDefault();
-          if (sessionStorage.getItem("token") === null) {
-            log_reg.classList.add("mostrar");
-            atras.classList.add("mostrar");
-            marcoFlotante.classList.add("mostrar");
-            return;
-          }
-          let idPost = btnFav.getAttribute("id-fav");
-
-          if (!btnFav.classList.contains("card__btn--like")) {
-            btnFav.classList.toggle("card__btn--like");
-            fetch("http://localhost:3010/user/favorite/create", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": sessionStorage.getItem("token")
-              },
-              body: JSON.stringify({
-                postId: parseInt(idPost),
-              })
-            }).then(async (response) => {
-              const rsp = await response.json()
-              console.log(rsp)
-            }).catch((error) => {
-              console.log(error);
-            });
-
-          }
-          else {
-            btnFav.classList.remove("card__btn--like");
-            fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": sessionStorage.getItem("token")
-              }
-            }).then(async (response) => {
-              const rsp = await response.json()
-              console.log(rsp)
-            }).catch((error) => {
-              console.log(error);
-            });
-          }
-
-        });
-      }
-
-
-      // Boton Ver Mas
-      let btnVM = document.querySelector(`[data-id="${post.id}"]`)
-      btnVM.addEventListener("click", () => {
-        event.preventDefault();
-        let idPost = btnVM.getAttribute("data-id");
-        console.log("click en " + idPost);
-        window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
       });
     }
-  })
-    .catch((error) => {
-      console.error("Error:", error);
+
+    // Boton Ver Mas
+    let btnVM = document.querySelector(`[data-id="${post.id}"]`)
+    btnVM.addEventListener("click", () => {
+      event.preventDefault();
+      let idPost = btnVM.getAttribute("data-id");
+      console.log("click en " + idPost);
+      window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
     });
-}
-
-async function init() {
-  await getFavorites();
-
-  loadPosts();
+  }
 
 }
 
 window.addEventListener("load", async () => {
-  init();
+  await getFavorites();
+
+  fetch("http://localhost:3010/properties/", {
+    method: "GET",
+  }).then(async (response) => {
+
+    const rsp = await response.json();
+
+    loadPosts(rsp.data);
+
+  }).catch((error) => {
+    console.error("Error:", error);
+  });
+
 });
 
 
@@ -252,17 +249,22 @@ window.addEventListener("load", async () => {
 
 search.addEventListener("click", async () => {
   event.preventDefault();
+  let precioMin;
+  let precioMax;
+  let habitaciones;
+  let banios;
+  let garages;
 
   let filters = {
-    type: type.value,
-    operation: operation.value == "Alquiler" ? 0 : 1,
-    priceMin: parseFloat(priceMin.value),
-    priceMax: parseFloat(priceMax.value),
+    type: type.value == "Ambos" ? "" : type.value,
+    operation: operation.value == "Alquiler" ? false : true,
+    priceMin: precioMin,
+    priceMax: precioMax,
     city: city.value,
     neighborhood: neighborhood.value,
-    roomCount: parseInt(roomCount.value),
-    bathroomCount: parseInt(bathroomCount.value),
-    garageCount: parseFloat(garageCount.value),
+    roomCount: habitaciones,
+    bathroomCount: banios,
+    garageCount: garages,
     pool: pool.checked,
     pets: pets.checked
   };
@@ -270,7 +272,7 @@ search.addEventListener("click", async () => {
   let urlParameters = [];
 
   for (let [key, value] of Object.entries(filters)) {
-    if (value !== "") {
+    if (value !== "" || value !== null) {
       urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
     }
   }
@@ -280,88 +282,9 @@ search.addEventListener("click", async () => {
   fetch(`http://localhost:3010/properties/search?${urlParameters.join('&')}`, {
     method: "GET",
   }).then(async (response) => {
-
-    const postCardTemplate = await getPostCardTemplate();
     const rsp = await response.json();
-
-    postSection.innerHTML = "";
-
-    for (let i = 0; i < rsp.length; i++) {
-      let post = rsp[i];
-
-      let newPost = postCardTemplate.replace('img-source', post.frontImage)
-        .replace(/idPost/gi, post.id)
-        .replace("Title", post.title)
-        .replace("value", post.price)
-        .replace("Description", post.content)
-        .replace("Ubication", post.ubication)
-        .replace("Rooms", post.rooms)
-        .replace("WC", post.bathrooms)
-        .replace("Garage", post.garage);
-
-      postSection.insertAdjacentHTML("beforeend", newPost);
-
-      // Boton Favorito
-      let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
-      if (sessionStorage.getItem("rol") === "seller") {
-        btnFav.style.display = "none";
-      }
-      else {
-
-        // Verificacion de existencia en favoritoS
-        for (let j = 0; j < favorites.length; j++) {
-          if (favorites[j].id === post.id) {
-            btnFav.classList.toggle("card__btn--like");
-          }
-        }
-
-        btnFav.addEventListener("click", () => {
-          event.preventDefault();
-          if (sessionStorage.getItem("token") === null) {
-            log_reg.classList.add("mostrar");
-            atras.classList.add("mostrar");
-            marcoFlotante.classList.add("mostrar");
-            return;
-          }
-          let idPost = btnFav.getAttribute("id-fav");
-
-          if (!btnFav.classList.contains("card__btn--like")) {
-            btnFav.classList.toggle("card__btn--like");
-            fetch("http://localhost:3010/user/favorite/create", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": sessionStorage.getItem("token")
-              },
-              body: JSON.stringify({
-                postId: parseInt(idPost),
-              })
-            }).then(async (response) => {
-              const rsp = await response.json()
-              console.log(rsp)
-            }).catch((error) => {
-              console.log(error);
-            });
-
-          }
-          else {
-            btnFav.classList.remove("card__btn--like");
-            fetch("http://localhost:3010/user/favorite/delete/" + idPost, {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": sessionStorage.getItem("token")
-              }
-            }).then(async (response) => {
-              const rsp = await response.json()
-              console.log(rsp)
-            }).catch((error) => {
-              console.log(error);
-            });
-          }
-        });
-      }
-    }
+    console.log(rsp.data)
+    loadPosts(rsp.data);
   }).catch((error) => {
     console.error("Error:", error);
   });
