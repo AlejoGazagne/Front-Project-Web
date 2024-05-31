@@ -35,52 +35,17 @@ let priceMax = document.getElementById("precio-max");
 let city = document.getElementById("city");
 let neighborhood = document.getElementById("neighborhood");
 
-let btnDRoom = document.getElementById("decrementRoom");
 let roomCount = document.getElementById("bedroomCount");
-let btnIRoom = document.getElementById("incrementRoom");
 
-let btnDBathroom = document.getElementById("decrementBathroom");
 let bathroomCount = document.getElementById("bathroomCount");
-let btnIBathroom = document.getElementById("incrementBathroom");
 
-let btnDGarage = document.getElementById("decrementGarage");
 let garageCount = document.getElementById("garageCount");
-let btnIGarage = document.getElementById("incrementGarage");
 
 let pool = document.getElementById("poolCheck");
 let pets = document.getElementById("petsCheck");
 
 let search = document.getElementById("btnSearch");
 
-btnDRoom.addEventListener("click", () => {
-  if (roomCount.value > 0) {
-    roomCount.value = parseInt(roomCount.value) - 1;
-  }
-});
-
-btnIRoom.addEventListener("click", () => {
-  roomCount.value = parseInt(roomCount.value) + 1;
-});
-
-btnDBathroom.addEventListener("click", () => {
-  if (bathroomCount.value > 0) {
-    bathroomCount.value = parseInt(bathroomCount.value) - 1;
-  }
-});
-
-btnIBathroom.addEventListener("click", () => {
-  bathroomCount.value = parseInt(bathroomCount.value) + 1;
-});
-
-btnDGarage.addEventListener("click", () => {
-  if (garageCount.value > 0) {
-    garageCount.value = parseInt(garageCount.value) - 1;
-  }
-});
-
-btnIGarage.addEventListener("click", () => {
-  garageCount.value = parseInt(garageCount.value) + 1;
-});
 
 let wasChecked = {};
 
@@ -249,22 +214,17 @@ window.addEventListener("load", async () => {
 
 search.addEventListener("click", async () => {
   event.preventDefault();
-  let precioMin;
-  let precioMax;
-  let habitaciones;
-  let banios;
-  let garages;
 
   let filters = {
     type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
     onSale: operation.value === "Operación" ? undefined : operation.Value === "Venta" ? true : false,
-    priceMin: precioMin,
-    priceMax: precioMax,
-    city: city.value,
-    neighborhood: neighborhood.value,
-    roomCount: habitaciones,
-    bathroomCount: banios,
-    garageCount: garages,
+    priceMin: priceMin.value === "" ? 0 : parseFloat(priceMin.value),
+    priceMax: priceMax.value === "" ? 999999999 : parseFloat(priceMax.value),
+    city: city.value === "" ? "" : city.value,
+    neighborhood: neighborhood.value === "" ? "" : neighborhood.value,
+    roomCount: roomCount.value === "Habitaciones" ? "" : parseInt(roomCount.value),
+    bathroomCount: bathroomCount.value === "Baños" ? "" : parseInt(bathroomCount.value),
+    garageCount: garageCount.value === "Plazas de Garage" ? "" : parseInt(garageCount.value),
     pool: pool.checked,
     pets: pets.checked
   };
@@ -272,7 +232,8 @@ search.addEventListener("click", async () => {
   let urlParameters = [];
 
   for (let [key, value] of Object.entries(filters)) {
-    if (value !== "" || value !== null) {
+    console.log(key, value)
+    if (value !== "") {
       urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
     }
   }

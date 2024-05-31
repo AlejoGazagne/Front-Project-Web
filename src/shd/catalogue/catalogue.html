@@ -93,84 +93,77 @@
             <input type="text" id="neighborhood" />
           </div>
 
-          <div class="caract">
-            <div class="form-group">
-              <p>Habitaciones</p>
-              <div class="d-flex justify-content-between">
-                <button
-                  type="button"
-                  id="decrementRoom"
-                  class="btn btn-outline-secondary"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  class="form-input me-3 ms-3"
-                  id="bedroomCount"
-                  value="1"
-                />
-                <button
-                  type="button"
-                  id="incrementRoom"
-                  class="btn btn-outline-secondary"
-                >
-                  +
-                </button>
-              </div>
-            </div>
+          <select class="select-propiedad" id="bedroomCount">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="expand-icon"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+            <option default disabled selected>Habitaciones</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4 o mas</option>
+          </select>
+          <br />
 
-            <div class="form-group">
-              <p>Baños</p>
-              <div class="d-flex">
-                <button
-                  type="button"
-                  id="decrementBathroom"
-                  class="btn btn-outline-secondary"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  class="form-input me-3 ms-3"
-                  id="bathroomCount"
-                  value="1"
-                />
-                <button
-                  type="button"
-                  id="incrementBathroom"
-                  class="btn btn-outline-secondary"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div class="form-group">
-              <p>Plazas de Garage</p>
-              <div class="d-flex">
-                <button
-                  type="button"
-                  id="decrementGarage"
-                  class="btn btn-outline-secondary"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  class="form-input me-3 ms-3"
-                  id="garageCount"
-                  value="1"
-                />
-                <button
-                  type="button"
-                  id="incrementGarage"
-                  class="btn btn-outline-secondary"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
+          <select class="select-propiedad" id="bathroomCount">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="expand-icon"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+            <option default disabled selected>Baños</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4 o mas</option>
+          </select>
+          <br />
+
+          <select class="select-propiedad" id="garageCount">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="expand-icon"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+            <option default disabled selected>Plazas de Garage</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4 o mas</option>
+          </select>
+          <br />
 
           <div class="form-input d-flex justify-content-between input-check">
             <label for="poolCheck">Tiene pileta</label>
@@ -191,9 +184,7 @@
       </div>
       <!----------------------------------------------------------------------->
 
-      <div>
-        <div id="posts" class="col-9 me-5"></div>
-      </div>
+      <div id="posts" class="col-9 me-5"></div>
     </div>
 
     <!----------------------------------------------------------------------->
