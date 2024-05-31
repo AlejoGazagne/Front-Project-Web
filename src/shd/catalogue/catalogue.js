@@ -256,8 +256,8 @@ search.addEventListener("click", async () => {
   let garages;
 
   let filters = {
-    type: type.value == "Ambos" ? "" : type.value,
-    operation: operation.value == "Alquiler" ? false : true,
+    type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
+    onSale: operation.value === "Operación" ? undefined : operation.Value === "Venta" ? true : false,
     priceMin: precioMin,
     priceMax: precioMax,
     city: city.value,
