@@ -217,9 +217,9 @@ search.addEventListener("click", async () => {
 
   let filters = {
     type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
-    onSale: operation.value === "Operación" ? undefined : operation.Value === "Venta" ? true : false,
-    priceMin: priceMin.value === "" ? 0 : parseFloat(priceMin.value),
-    priceMax: priceMax.value === "" ? 999999999 : parseFloat(priceMax.value),
+    onSale: operation.value === "Operación" ? "" : operation.Value === "Venta" ? true : false,
+    priceMin: priceMin.value,
+    priceMax: priceMax.value,
     city: city.value === "" ? "" : city.value,
     neighborhood: neighborhood.value === "" ? "" : neighborhood.value,
     roomCount: roomCount.value === "Habitaciones" ? "" : parseInt(roomCount.value),
