@@ -1,6 +1,6 @@
 let title = document.getElementById("title");
+let btnEditProfile;
 let btnNewPost = document.getElementById("btn-newPost");
-let btnEdit = document.getElementById("btn-edit");
 let posts = document.getElementById("posts");
 
 
@@ -28,6 +28,8 @@ async function getData() {
 
   const profileTemplate = await getProfileTemplate();
 
+  document.getElementById("profile").appendChild(profileTemplate.body);
+
   //ROL SELLER
   if (sessionStorage.getItem("rol") === "seller") {
     fetch("http://localhost:3010/seller/me", {
@@ -41,16 +43,29 @@ async function getData() {
       const rsp = await response.json()
       console.log(rsp);
 
-      document.getElementById("profile").appendChild(profileTemplate.body);
+      document.getElementById("profile_img").src = rsp.data.profileImage;
 
-      document.getElementById("yourName").textContent = rsp.data.name;
-      document.getElementById("email-value").textContent = rsp.data.email;
-      document.getElementById("phone-value").textContent = rsp.data.phoneNumber;
+      document.getElementById("name").innerHTML = rsp.data.name;
 
-      document.getElementById("name").value = rsp.data.name;
-      document.getElementById("mail").value = rsp.data.email;
-      document.getElementById("phoneNumber").value = rsp.data.phoneNumber;
+      let data = document.getElementById("tab1-content");
 
+      // Insertar email
+      let emailDiv = document.createElement('div');
+      emailDiv.id = 'emailDiv';
+      emailDiv.textContent = `email: ${rsp.data.email}`;
+      data.appendChild(emailDiv);
+
+      // Insertar phone
+      let phoneDiv = document.createElement('div');
+      phoneDiv.id = 'phoneDiv';
+      phoneDiv.textContent = `numero de contacto: ${rsp.data.phoneNumber}`;
+      data.appendChild(phoneDiv);
+
+      // Insertar description
+      let descriptionDiv = document.createElement('div');
+      descriptionDiv.id = 'descriptionDiv';
+      descriptionDiv.textContent = rsp.data.description;
+      data.appendChild(descriptionDiv);
     }).catch((error) => {
       console.log(error);
     });
@@ -58,7 +73,7 @@ async function getData() {
   //ROL USER
   else if (sessionStorage.getItem("rol") === "user") {
 
-    document.getElementById("profile").appendChild(profileTemplate.body);
+
     document.getElementById("phone").classList.add("ocultar");
     fetch("http://localhost:3010/user/me", {
       method: "GET",
@@ -70,11 +85,73 @@ async function getData() {
 
       const rsp = await response.json()
       console.log(rsp);
-      document.getElementById("email-value").textContent = rsp.data.email;
+
+      document.getElementById("name").innerHTML = rsp.data.name;
+
+      let data = document.getElementById("tab1-content");
+
+      // Insertar email
+      let emailDiv = document.createElement('div');
+      emailDiv.id = 'emailDiv';
+      emailDiv.textContent = `email: ${rsp.data.email}`;
+      data.appendChild(emailDiv);
+
+      // Insertar phone
+      let phoneDiv = document.createElement('div');
+      phoneDiv.id = 'phoneDiv';
+      phoneDiv.textContent = `numero de contacto: ${rsp.data.phoneNumber}`;
+      data.appendChild(phoneDiv);
     }).catch((error) => {
       console.log(error);
     });
   }
+
+  btnEditProfile = document.getElementById("edit-profile");
+  btnEditProfile.addEventListener("click", () => {
+
+    let emailDiv = document.getElementById('emailDiv');
+    let phoneDiv = document.getElementById('phoneDiv');
+    let descriptionDiv = document.getElementById('descriptionDiv');
+
+
+    let emailInput = document.createElement('input');
+    emailInput.id = 'emailInput';
+    let phoneInput = document.createElement('input');
+    phoneInput.id = 'phoneInput';
+    let descriptionInput = document.createElement('textarea');
+    descriptionInput.id = 'descriptionInput';
+
+    emailDiv.innerHTML = 'email: ';
+    emailDiv.appendChild(emailInput);
+
+    phoneDiv.innerHTML = 'numero de contacto: ';
+    phoneDiv.appendChild(phoneInput);
+
+    descriptionDiv.innerHTML = 'sobre ti: ';
+    descriptionDiv.appendChild(descriptionInput);
+
+    if (sessionStorage.getItem("rol") === "seller") {
+      fetch("http://localhost:3010/seller/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": sessionStorage.getItem("token")
+        },
+        body: JSON.stringify({
+          email: document.getElementById("emailInput").value,
+          phoneNumber: document.getElementById("phoneInput").value,
+          description: document.getElementById("descriptionInput").value
+        })
+      }).then(async (response) => {
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
+  });
 }
 
 async function getPosts() {
@@ -87,6 +164,9 @@ async function getPosts() {
     }).then((response) => response.json())
       .then((data) => {
         console.log(data);
+
+        document.getElementById("cant-posts").innerText = data.data.length
+
         data.data.forEach(async (post) => {
           const postCardTemplate = await getPostCardTemplate();
           let cardPost = postCardTemplate.replace('img-source', post.frontImage)
@@ -241,98 +321,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (rsp.message === "seller") {
       title.innerHTML = "Tus publicaciones";
       btnNewPost.classList.add("mostrar");
-      getData()
+      await getData()
       getPosts()
 
     } else if (rsp.message === "user") {
       title.innerHTML = "Tus favoritos";
 
-      getData()
+      await getData()
       getPosts()
     }
   })
 
 });
 
-btnEdit.addEventListener("click", () => {
-  event.preventDefault();
-  let info = document.getElementById("datos");
-  let edit = document.getElementById("editDatos");
 
-  info.classList.toggle("ocultar");
-  edit.classList.remove("ocultar");
 
-  let btnGuardar = document.getElementById("btn-save");
-
-  btnGuardar.addEventListener("click", () => {
-    event.preventDefault();
-    if (sessionStorage.getItem("rol") === "seller") {
-
-      let newName = document.getElementById("name").value;
-      let newEmail = document.getElementById("mail").value;
-      let newTelefono = document.getElementById("phoneNumber").value;
-      let newPassword = document.getElementById("password").value;
-
-      let body = {
-        name: newName,
-        email: newEmail,
-        phoneNumber: newTelefono,
-        password: newPassword
-      }
-
-      body = JSON.stringify(body);
-      console.log(body)
-
-      if (newName === "" || newEmail === "" || newTelefono === "" || newPassword === "") {
-        alert("Por favor llene todos los campos");
-        return;
-      }
-      if (newPassword.length < 8) {
-        alert("La contraseña debe tener al menos 8 caracteres");
-        return;
-      }
-
-      if (sessionStorage.getItem("rol") === "seller") {
-        fetch("http://localhost:3010/seller/update", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": sessionStorage.getItem("token")
-          },
-          body: body,
-
-        }).then((response) => {
-          if (response.status === 200) {
-            getData()
-            info.classList.remove("ocultar");
-            edit.classList.add("ocultar");
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-      else if (sessionStorage.getItem("rol") === "user") {
-        fetch("http://localhost:3010/user/update", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": sessionStorage.getItem("token")
-          },
-          body: body,
-        }).then((response) => {
-          if (response.status === 200) {
-            getData()
-            info.classList.remove("ocultar");
-            edit.classList.add("ocultar");
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-
-    }
-  });
-});
 
 btnNewPost.addEventListener("click", () => {
   window.location.href = "../../../src/seller/newPost/newPost.html";
