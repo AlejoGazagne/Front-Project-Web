@@ -117,6 +117,7 @@ async function getData() {
     let name = document.getElementById("name");
     let nameInput = document.getElementById("nameInput");
     let btnSave = document.getElementById("save");
+    let btnDiscard = document.getElementById("discard");
 
     dataDiv.classList.add("ocultar");
     editDiv.classList.remove("ocultar");
@@ -180,7 +181,16 @@ async function getData() {
       }
     });
 
+    btnDiscard.addEventListener("click", () => {
+      dataDiv.classList.remove("ocultar");
+      editDiv.classList.add("ocultar");
 
+      name.classList.remove("ocultar");
+      nameInput.classList.add("ocultar");
+
+      btnEditProfile.classList.remove("ocultar");
+      btnSave.classList.add("ocultar");
+    });
 
   });
 }
