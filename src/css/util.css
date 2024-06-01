@@ -6,12 +6,13 @@
   height: 70%;
   left: 25%;
   top: 15%;
-  border-radius: 1rem;
+  border-radius: .8rem;
 }
 
 #log-reg.mostrar {
   display: block;
 }
+
 #atras {
   display: none;
   border: none;
@@ -19,6 +20,7 @@
   font-weight: bold;
   background-color: #ffffff00;
 }
+
 #atras.mostrar {
   position: fixed;
   z-index: 2;
@@ -26,6 +28,7 @@
   top: 17%;
   display: block;
 }
+
 #marco-flotante {
   display: none;
   z-index: 1;
@@ -36,6 +39,7 @@
   width: 100%;
   height: 100%;
 }
+
 #marco-flotante.mostrar {
   display: block;
 }
@@ -48,10 +52,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
-  backdrop-filter: blur(8px); /* Aplicar filtro de desenfoque */
-  z-index: 9998; /* Por debajo del loader pero encima del contenido */
-  display: none; /* Oculto por defecto */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Color de fondo semitransparente */
+  backdrop-filter: blur(8px);
+  /* Aplicar filtro de desenfoque */
+  z-index: 9998;
+  /* Por debajo del loader pero encima del contenido */
+  display: none;
+  /* Oculto por defecto */
 }
 
 .loader {
@@ -61,8 +69,10 @@
   width: 54px;
   height: 54px;
   border-radius: 10px;
-  z-index: 9999; /* Por encima de todo */
-  display: none; /* Oculto por defecto */
+  z-index: 9999;
+  /* Por encima de todo */
+  display: none;
+  /* Oculto por defecto */
 }
 
 .loader div {

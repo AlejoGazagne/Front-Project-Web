@@ -43,6 +43,8 @@ const descripcionPublicador = document.getElementById("pubDescripcion")
 const emailPublicador = document.getElementById("pubGmail");
 const contraseniaPublicador = document.getElementById("pubContrasenia");
 
+const volverIniciar = document.getElementById("volver-iniciar");
+
 const error = document.getElementById("error");
 
 // Funciones
@@ -170,6 +172,20 @@ seleccionCuenta.addEventListener("click", () => {
     formPublicador.style.display = "flex";
   }
 });
+
+volverIniciar.addEventListener("click", () => {
+  registrarse.style.display = "none";
+  iniciarSesion.style.display = "flex";
+  recuperarContrasenia.style.display = "none";
+})
+
+let textarea = document.getElementById('pubDescripcion');
+textarea.addEventListener('input', autoResize, false);
+
+function autoResize() {
+  this.style.height = 'auto';
+  this.style.height = this.scrollHeight + 'px';
+}
 
 // Generacion de Link para imagen de perfil
 async function uploadImage(image) {
