@@ -1,29 +1,38 @@
-html{
+html {
     background-color: #ffffff00;
 }
-body{
+
+body {
     background-color: #00000063;
 }
-.barra{
+
+.barra {
     font-weight: bold;
     padding: 0.4rem 10%;
     background-color: #ffffff00;
 }
-.navbar{
+
+.navbar {
     background-color: #ffffff00;
     height: 110px;
 }
-.navbar-nav{
-    width: 40%;
+
+.navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
+
 .nav-item a {
     color: aliceblue;
 }
 
-#img-logo{
-    width: 8rem;
+#img-logo {
+    width: 6rem;
 }
-.nav-item button{
+
+.nav-item button {
     width: max-content;
     border: none;
     background-color: #f0f8ff00;
@@ -31,42 +40,37 @@ body{
     color: aliceblue;
     transition-duration: 0.3s;
 }
-.nav-item button:hover{
+
+.nav-item button:hover {
     color: #fda54c;
 }
 
-/* @media screen and (max-width: 1024px){
-    #img-logo{
-        display: none;
-    }
-} */
-
-.nav-link:hover{
+.nav-link:hover {
     color: #a2a6aa;
 }
 
-#btn-profile{
+#btn-profile {
     display: none;
 }
 
-#btn-sesion{
+#btn-sesion {
     display: none;
 }
 
-#btn-logout{
+#btn-logout {
     font-size: 1.5rem;
     display: none;
 }
 
 
-#btn-profile.mostrar{
+#btn-profile.mostrar {
     display: block;
 }
 
-#btn-sesion.mostrar{
+#btn-sesion.mostrar {
     display: block;
 }
 
-#btn-logout.mostrar{
+#btn-logout.mostrar {
     display: block;
 }

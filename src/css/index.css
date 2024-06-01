@@ -24,24 +24,6 @@ header {
   height: 200px;
 }
 
-/* --------------------------------------------------- */
-/* .card {
-  width: 25rem;
-  margin: 2rem 0.5rem;
-  background-color: aliceblue;
-}
-.contenedor {
-  margin: 3rem 10% 5rem 10%;
-}
-.contenedor-anuncios {
-  row-gap: 2rem;
-}
-.card-body a {
-  background-color: #ffab3d;
-  padding: 0.5rem 2rem;
-  color: aliceblue;
-  border-radius: 0.3rem;
-}*/
 /* ------------------ Carta ----------------------- */
 .contenedor-anuncios {
   display: flex;
@@ -149,6 +131,7 @@ header {
   height: 1em;
   background: linear-gradient(to top, white, transparent);
 }
+
 .card__buttons {
   display: flex;
   gap: 0.5rem;
@@ -188,59 +171,6 @@ header {
 }
 
 /* --------------------------------------------------- */
-/* 
-.card {
-  text-align: center;
-  border: none;
-  padding: 0;
-  border: 1px solid rgba(114, 114, 114, 0.812);
-  border-radius: 1rem;
-}
-
-.headerCard {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.card-title {
-  font-size: x-large;
-  position: relative;
-  left: 25%;
-}
-
-.card-image {
-  max-width: 100%;
-}
-
-#imgCard {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.iconos-caracteristicas {
-  max-width: 50rem;
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.iconos-caracteristicas li {
-  display: flex;
-  align-items: center;
-}
-
-.iconos-caracteristicas li p {
-  margin: 0;
-  font-size: x-large;
-  font-style: bold;
-}
-
-.btnOpen {
-  width: 75%;
-} */
 
 .ver-anuncios {
   background-color: #74b12d;
@@ -257,6 +187,8 @@ header {
   background-position: center center;
   color: aliceblue;
 }
+
+/* --------------------------------------------------- */
 
 footer {
   height: 10rem;
