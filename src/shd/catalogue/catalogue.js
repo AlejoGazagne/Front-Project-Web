@@ -46,6 +46,8 @@ let pets = document.getElementById("petsCheck");
 
 let search = document.getElementById("btnSearch");
 
+let currentPage = 1;
+
 
 let wasChecked = {};
 
@@ -195,7 +197,7 @@ async function loadPosts(rsp) {
 window.addEventListener("load", async () => {
   await getFavorites();
 
-  fetch("http://localhost:3010/properties/", {
+  fetch(`http://localhost:3010/properties/${currentPage}`, {
     method: "GET",
   }).then(async (response) => {
 

@@ -4,6 +4,8 @@ const log_reg = document.getElementById("log-reg");
 const marcoFlotante = document.getElementById("marco-flotante");
 const atras = document.getElementById("atras");
 
+const verTodas = document.getElementById('ver-todas')
+
 async function getPostCardTemplate() {
   const response = await fetch(
     "../src/components/catalogPostCard/cpostCard.html"
@@ -152,3 +154,6 @@ atras.addEventListener("click", () => {
   marcoFlotante.classList.remove("mostrar");
 });
 
+verTodas.addEventListener("click", () => {
+  location.href = "../../src/shd/catalogue/catalogue.html";
+});

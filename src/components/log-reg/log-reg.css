@@ -1,6 +1,10 @@
 html {
   background-color: #ffffff;
   border-radius: 1rem;
+  /* overflow: auto; */
+}
+
+body {
   overflow: auto;
 }
 
@@ -13,16 +17,18 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* height: 700px; */
+  /* overflow: auto; */
 }
 
 .modal-contenido {
   background-color: #fefefe;
   width: 380px;
-  height: 490px;
+  /* height: 600px; */
   padding: 1rem;
   border-radius: 1rem;
   z-index: 2;
-  margin-top: 3rem;
+  margin: auto;
   /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -38,11 +44,22 @@ html {
 input,
 select {
   margin-bottom: 1rem;
-  background-color: #f0f0f0;
+  background-color: #f7f7f7;
   width: 100%;
-  padding: 0.5rem 0.4rem;
+  padding: .5rem 0.4rem;
   border-radius: 0.3rem;
   border: 1px solid #8f8f8f;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 input:user-invalid {
@@ -51,7 +68,7 @@ input:user-invalid {
   border: 1px solid red;
 }
 
-input:user-invalid ~ .error-message {
+input:user-invalid~.error-message {
   display: block;
   margin-top: 0.25rem;
   font-size: 0.8rem;
@@ -106,6 +123,19 @@ input:focus {
   display: none;
 }
 
+#pubImagen {
+  background-color: #fff;
+  border: none;
+
+}
+
+#pubDescripcion {
+  width: 380px;
+  resize: none;
+  overflow: hidden;
+  background-color: #f7f7f7;
+}
+
 /* ----------------------------------------------  */
 .seleccionCuenta {
   width: 100%;
@@ -147,4 +177,13 @@ input:focus {
 
 #registrar {
   margin-top: 1rem;
+}
+
+#volver-iniciar {
+  margin-top: 1.3rem;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  font-weight: bold;
+  color: #ffab3d;
 }
