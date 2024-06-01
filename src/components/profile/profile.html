@@ -17,7 +17,7 @@
   <body>
     <div class="profile">
       <header class="profile__header">
-        <div class="profile__avatar">
+        <div id="profile_avatar" class="profile__avatar">
           <img id="profile_img" src="" loading="lazy" alt="Mentor profile" />
         </div>
         <div class="profile__highlight__wrapper">
@@ -25,7 +25,7 @@
             <i class="fa-solid fa-house"></i>
             <span id="cant-posts"></span>
           </div>
-          publicaciones
+          <span id="detail"></span>
         </div>
         <div id="val-highlitght" class="profile__highlight__wrapper">
           <div class="profile__highlight">
@@ -37,6 +37,12 @@
       </header>
       <div class="profile__name">
         <h2 id="name">name</h2>
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="Como te llamas?"
+          class="ocultar"
+        />
       </div>
 
       <main>
@@ -52,11 +58,30 @@
           </ul>
         </div>
         <div id="tab1-content" class="tab-content tab-content--active">
-          <!--ARMAR LOS DIVS PARA EDITAR Y PARA VER LOS DATOS, NO HACERLO EN JS-->
+          <div id="data" class="mostrar">
+            <div id="emailDiv"></div>
+            <div id="phoneDiv"></div>
+            <div id="descriptionDiv"></div>
+          </div>
+          <div id="edit" class="ocultar">
+            <label for="emailInput">email:</label>
+            <input id="emailInput" type="mail" placeholder="tu email" />
+            <label for="phoneInput">numero de contacto:</label>
+            <input id="phoneInput" type="text" placeholder="tu telefono" />
+            <div id="descriptionZone">
+              <label for="descriptionInput">descripcion:</label>
+              <textarea
+                id="descriptionInput"
+                type="text"
+                placeholder="cuentanos sobre ti"
+              ></textarea>
+            </div>
+          </div>
         </div>
 
         <div id="tab2-content" class="tab-content"></div>
       </main>
+      <button id="save" class="btn btn--primary ocultar">Guardar</button>
       <button id="edit-profile" class="btn btn--primary">Editar Perfil</button>
     </div>
     <script src="https://kit.fontawesome.com/883028f340.js"></script>

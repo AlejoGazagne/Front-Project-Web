@@ -24,6 +24,8 @@ async function getProfileTemplate() {
   return doc;
 }
 
+let id;
+
 async function getData() {
 
   const profileTemplate = await getProfileTemplate();
@@ -43,29 +45,26 @@ async function getData() {
       const rsp = await response.json()
       console.log(rsp);
 
+      id = rsp.data.id;
+
       document.getElementById("profile_img").src = rsp.data.profileImage;
+
+      document.getElementById("detail").innerText = "publicaciones";
 
       document.getElementById("name").innerHTML = rsp.data.name;
 
-      let data = document.getElementById("tab1-content");
-
       // Insertar email
-      let emailDiv = document.createElement('div');
-      emailDiv.id = 'emailDiv';
+      let emailDiv = document.getElementById('emailDiv');
       emailDiv.textContent = `email: ${rsp.data.email}`;
-      data.appendChild(emailDiv);
 
       // Insertar phone
-      let phoneDiv = document.createElement('div');
-      phoneDiv.id = 'phoneDiv';
+      let phoneDiv = document.getElementById('phoneDiv');
       phoneDiv.textContent = `numero de contacto: ${rsp.data.phoneNumber}`;
-      data.appendChild(phoneDiv);
 
       // Insertar description
-      let descriptionDiv = document.createElement('div');
-      descriptionDiv.id = 'descriptionDiv';
+      let descriptionDiv = document.getElementById('descriptionDiv');
       descriptionDiv.textContent = rsp.data.description;
-      data.appendChild(descriptionDiv);
+
     }).catch((error) => {
       console.log(error);
     });
@@ -73,8 +72,9 @@ async function getData() {
   //ROL USER
   else if (sessionStorage.getItem("rol") === "user") {
 
+    document.getElementById("profile_avatar").classList.add("ocultar");
+    document.getElementById("descriptionDiv").classList.add("ocultar");
 
-    document.getElementById("phone").classList.add("ocultar");
     fetch("http://localhost:3010/user/me", {
       method: "GET",
       headers: {
@@ -86,70 +86,101 @@ async function getData() {
       const rsp = await response.json()
       console.log(rsp);
 
+      id = rsp.data.id;
+
       document.getElementById("name").innerHTML = rsp.data.name;
 
-      let data = document.getElementById("tab1-content");
+      document.getElementById("detail").innerText = "guardados";
 
       // Insertar email
-      let emailDiv = document.createElement('div');
-      emailDiv.id = 'emailDiv';
+      let emailDiv = document.getElementById('emailDiv');
       emailDiv.textContent = `email: ${rsp.data.email}`;
-      data.appendChild(emailDiv);
 
       // Insertar phone
-      let phoneDiv = document.createElement('div');
-      phoneDiv.id = 'phoneDiv';
+      let phoneDiv = document.getElementById('phoneDiv');
       phoneDiv.textContent = `numero de contacto: ${rsp.data.phoneNumber}`;
-      data.appendChild(phoneDiv);
+
+      // Insertar description
+      let descriptionDiv = document.getElementById('descriptionDiv');
+      descriptionDiv.display = "none";
     }).catch((error) => {
       console.log(error);
     });
   }
 
   btnEditProfile = document.getElementById("edit-profile");
+
   btnEditProfile.addEventListener("click", () => {
 
-    let emailDiv = document.getElementById('emailDiv');
-    let phoneDiv = document.getElementById('phoneDiv');
-    let descriptionDiv = document.getElementById('descriptionDiv');
+    let dataDiv = document.getElementById("data");
+    let editDiv = document.getElementById("edit");
+    let name = document.getElementById("name");
+    let nameInput = document.getElementById("nameInput");
+    let btnSave = document.getElementById("save");
 
+    dataDiv.classList.add("ocultar");
+    editDiv.classList.remove("ocultar");
 
-    let emailInput = document.createElement('input');
-    emailInput.id = 'emailInput';
-    let phoneInput = document.createElement('input');
-    phoneInput.id = 'phoneInput';
-    let descriptionInput = document.createElement('textarea');
-    descriptionInput.id = 'descriptionInput';
+    name.classList.add("ocultar");
+    nameInput.classList.remove("ocultar");
 
-    emailDiv.innerHTML = 'email: ';
-    emailDiv.appendChild(emailInput);
+    btnEditProfile.classList.add("ocultar");
+    btnSave.classList.remove("ocultar");
 
-    phoneDiv.innerHTML = 'numero de contacto: ';
-    phoneDiv.appendChild(phoneInput);
-
-    descriptionDiv.innerHTML = 'sobre ti: ';
-    descriptionDiv.appendChild(descriptionInput);
-
-    if (sessionStorage.getItem("rol") === "seller") {
-      fetch("http://localhost:3010/seller/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": sessionStorage.getItem("token")
-        },
-        body: JSON.stringify({
-          email: document.getElementById("emailInput").value,
-          phoneNumber: document.getElementById("phoneInput").value,
-          description: document.getElementById("descriptionInput").value
-        })
-      }).then(async (response) => {
-        if (response.status === 200) {
-          window.location.reload();
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
+    let descriptionInput = document.getElementById('descriptionInput');
+    if (sessionStorage.getItem("rol") === "user") {
+      document.getElementById("descriptionZone").classList.add("ocultar");
     }
+    else if (sessionStorage.getItem("rol") === "seller") {
+      descriptionInput.value = document.getElementById('descriptionDiv').textContent;
+    }
+
+    btnSave.addEventListener("click", () => {
+      if (sessionStorage.getItem("rol") === "seller") {
+        fetch("http://localhost:3010/seller/update", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": sessionStorage.getItem("token")
+          },
+          body: JSON.stringify({
+            name: document.getElementById("nameInput").value,
+            profileImage: document.getElementById("profile_img").src,
+            email: document.getElementById("emailInput").value,
+            phoneNumber: document.getElementById("phoneInput").value,
+            description: document.getElementById("descriptionInput").value,
+          })
+        }).then(async (response) => {
+          if (response.status === 200) {
+            window.location.reload();
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+      else if (sessionStorage.getItem("rol") === "user") {
+        fetch("http://localhost:3010/user/update", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": sessionStorage.getItem("token")
+          },
+          body: JSON.stringify({
+            name: document.getElementById("nameInput").value,
+            email: document.getElementById("emailInput").value,
+            phoneNumber: document.getElementById("phoneInput").value,
+          })
+        }).then(async (response) => {
+          if (response.status === 200) {
+            window.location.reload();
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    });
+
+
 
   });
 }
@@ -220,6 +251,9 @@ async function getPosts() {
     }).then((response) => response.json())
       .then((data) => {
         console.log(data);
+
+        document.getElementById("cant-posts").innerText = data.data.length
+
         data.data.forEach(async (post) => {
           const postCardTemplate = await getPostCardTemplate();
           let cardPost = postCardTemplate.replace('img-source', post.frontImage)
