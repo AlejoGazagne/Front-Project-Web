@@ -217,14 +217,14 @@ search.addEventListener("click", async () => {
 
   let filters = {
     type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
-    onSale: operation.value === "Operación" ? "" : operation.Value === "Venta" ? true : false,
-    priceMin: priceMin.value,
-    priceMax: priceMax.value,
+    onSale: operation.value === "Operación" ? "" : operation.value === "Venta" ? true : false,
+    priceMin: priceMin.value === "" ? "" : priceMin.value,
+    priceMax: priceMax.value === "" ? "" : priceMax.value,
     city: city.value === "" ? "" : city.value,
     neighborhood: neighborhood.value === "" ? "" : neighborhood.value,
-    roomCount: roomCount.value === "Habitaciones" ? "" : parseInt(roomCount.value),
-    bathroomCount: bathroomCount.value === "Baños" ? "" : parseInt(bathroomCount.value),
-    garageCount: garageCount.value === "Plazas de Garage" ? "" : parseInt(garageCount.value),
+    roomCount: roomCount.value === "Habitaciones" ? "" : roomCount.value,
+    bathroomCount: bathroomCount.value === "Baños" ? "" : bathroomCount.value,
+    garageCount: garageCount.value === "Plazas de Garage" ? "" : garageCount.value,
     pool: pool.checked,
     pets: pets.checked
   };
@@ -232,10 +232,8 @@ search.addEventListener("click", async () => {
   let urlParameters = [];
 
   for (let [key, value] of Object.entries(filters)) {
-    console.log(key, value)
-    if (value !== "") {
-      urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-    }
+    //console.log(key, value)  
+    urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
   }
 
   console.log(urlParameters)
@@ -244,7 +242,9 @@ search.addEventListener("click", async () => {
     method: "GET",
   }).then(async (response) => {
     const rsp = await response.json();
-    console.log(rsp.data)
+    if (rsp.data.length != 0) {
+      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
+    }
     loadPosts(rsp.data);
   }).catch((error) => {
     console.error("Error:", error);
