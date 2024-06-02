@@ -218,7 +218,17 @@ btnPost.addEventListener("click", async () => {
     .then((res) => res.json())
     .then((data) => {
       if (data.error) {
-        console.log(data.error);
+        let error = document.getElementById("error");
+
+        error.innerHTML = "";
+
+        for (let i = 0; i < data.error.length; i++) {
+          let p = document.createElement("p");
+          if (data.error[i].code === "custom") {
+            p.textContent = data.error[i].message;
+            error.appendChild(p);
+          }
+        }
       }
       else {
         console.log("Producto creado con éxito");
@@ -251,7 +261,17 @@ btnSave.addEventListener("click", async () => {
     .then((res) => res.json())
     .then((data) => {
       if (data.error) {
-        console.log(data.error);
+        let error = document.getElementById("error");
+
+        error.innerHTML = "";
+
+        for (let i = 0; i < data.error.length; i++) {
+          let p = document.createElement("p");
+          if (data.error[i].code === "custom") {
+            p.textContent = data.error[i].message;
+            error.appendChild(p);
+          }
+        }
       }
       else {
         console.log("Producto guardado con éxito");

@@ -194,9 +194,9 @@ async function loadPosts(rsp) {
 
 }
 
-window.addEventListener("load", async () => {
-  await getFavorites();
+// CARGA DE PUBLICACIONES
 
+async function getPosts() {
   fetch(`http://localhost:3010/properties/${currentPage}`, {
     method: "GET",
   }).then(async (response) => {
@@ -208,14 +208,36 @@ window.addEventListener("load", async () => {
   }).catch((error) => {
     console.error("Error:", error);
   });
+}
+
+window.addEventListener("load", async () => {
+  await getFavorites();
+  await getPosts();
 
 });
 
-
 // ---------BUSQUEDA POR FILTROS--------- //
+
+async function searchPosts(urlParameters) {
+  fetch(`http://localhost:3010/properties/search/${urlParameters}`, {
+    method: "GET",
+  }).then(async (response) => {
+    const rsp = await response.json();
+    if (rsp.data.length != 0) {
+      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
+    }
+    loadPosts(rsp.data);
+  }).catch((error) => {
+    console.error("Error:", error);
+  });
+}
+
+
 
 search.addEventListener("click", async () => {
   event.preventDefault();
+
+  currentPage = 1;
 
   let filters = {
     type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
@@ -228,7 +250,8 @@ search.addEventListener("click", async () => {
     bathroomCount: bathroomCount.value === "Baños" ? "" : bathroomCount.value,
     garageCount: garageCount.value === "Plazas de Garage" ? "" : garageCount.value,
     pool: pool.checked,
-    pets: pets.checked
+    pets: pets.checked,
+    page: currentPage
   };
 
   let urlParameters = [];
@@ -240,17 +263,7 @@ search.addEventListener("click", async () => {
 
   console.log(urlParameters)
 
-  fetch(`http://localhost:3010/properties/search?${urlParameters.join('&')}`, {
-    method: "GET",
-  }).then(async (response) => {
-    const rsp = await response.json();
-    if (rsp.data.length != 0) {
-      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
-    }
-    loadPosts(rsp.data);
-  }).catch((error) => {
-    console.error("Error:", error);
-  });
+  searchPosts(urlParameters.join('&'))
 });
 
 // ------------------------------------- //
