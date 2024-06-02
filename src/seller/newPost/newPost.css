@@ -45,3 +45,12 @@ input[type="number"] {
   width: 15rem;
   height: 11rem;
 }
+
+#error {
+  font-size: 1rem;
+  color: red;
+}
+
+#error p {
+  margin: 0 0 0 1rem;
+}
