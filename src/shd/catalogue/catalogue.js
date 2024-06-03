@@ -196,7 +196,7 @@ async function loadPosts(rsp) {
 // CARGA DE PUBLICACIONES
 
 async function getPosts() {
-  fetch(`http://localhost:3010/properties/${currentPage}`, {
+  fetch(`http://localhost:3010/properties?page=${currentPage}`, {
     method: "GET",
   }).then(async (response) => {
 
@@ -218,7 +218,7 @@ window.addEventListener("load", async () => {
 // ---------BUSQUEDA POR FILTROS--------- //
 
 async function searchPosts(urlParameters) {
-  fetch(`http://localhost:3010/properties/search/${urlParameters}`, {
+  fetch(`http://localhost:3010/properties/search?${urlParameters}`, {
     method: "GET",
   }).then(async (response) => {
     const rsp = await response.json();
@@ -260,10 +260,7 @@ search.addEventListener("click", async () => {
     urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
   }
 
-  console.log(urlParameters)
-  console.log(urlParameters.join('&'))
-
-  searchPosts(urlParameters)
+  searchPosts(urlParameters.join('&'))
 });
 
 // ------------------------------------- //
