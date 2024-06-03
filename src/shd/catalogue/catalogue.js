@@ -64,7 +64,7 @@ pets.addEventListener("click", function () {
   wasChecked[this.id] = this.checked;
 });
 
-/// CARGA INICIAL DE PUBLICACIONES ///
+/// FUNCIONES ///
 
 async function getPostCardTemplate() {
   const response = await fetch(
@@ -193,20 +193,50 @@ async function loadPosts(rsp) {
 
 }
 
+let pages;
+
+async function buildPages(size) {
+  pages = Math.ceil(size / 10);
+
+  let pagination = document.getElementById("pagination");
+
+  pagination.innerHTML = "";
+
+  let previous = "<li class=\"page-item\">  <a id=\"previousPage\" class=\"page-link\" href=\"#\" aria-label=\"Previous\"> <span aria-hidden=\"true\">&laquo;</span> </a></li >";
+  pagination.insertAdjacentHTML("beforeend", previous);
+
+  for (let i = 1; i <= pages; i++) {
+    let newPage = `<li class="page-item"><a class="page-link" href="#">${i}</a></li>`;
+    pagination.insertAdjacentHTML("beforeend", newPage);
+  }
+
+  let next = "<li class=\"page-item\"> <a id=\"nextPage\" class=\"page-link\" href=\"#\" aria-label=\"Next\"> <span aria-hidden=\"true\">&raquo;</span> </a> </li>";
+  pagination.insertAdjacentHTML("beforeend", next);
+
+  let paginationLinks = document.querySelectorAll('#pagination a');
+  paginationLinks.forEach(link => {
+    link.addEventListener('click', handlePaginationClick);
+  });
+}
+
 // CARGA DE PUBLICACIONES
 
 async function getPosts() {
+
   fetch(`http://localhost:3010/properties?page=${currentPage}`, {
     method: "GET",
   }).then(async (response) => {
 
     const rsp = await response.json();
+    console.log(rsp)
 
-    loadPosts(rsp.data);
+    await buildPages(rsp.data.size);
+    loadPosts(rsp.data.items);
 
   }).catch((error) => {
     console.error("Error:", error);
   });
+
 }
 
 window.addEventListener("load", async () => {
@@ -215,28 +245,10 @@ window.addEventListener("load", async () => {
 
 });
 
-// ---------BUSQUEDA POR FILTROS--------- //
+// ---------BUSQUEDA POR FILTROS--------- /
 
-async function searchPosts(urlParameters) {
-  fetch(`http://localhost:3010/properties/search?${urlParameters}`, {
-    method: "GET",
-  }).then(async (response) => {
-    const rsp = await response.json();
-    if (rsp.data.length != 0) {
-      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
-    }
-    loadPosts(rsp.data);
-  }).catch((error) => {
-    console.log("Error:", error);
-  });
-}
-
-
-
-search.addEventListener("click", async () => {
-  event.preventDefault();
-
-  currentPage = 1;
+async function searchPosts() {
+  console.log("pagina actual " + currentPage)
 
   let filters = {
     type: type.value === "Tipo de propiedad" || type.value === "Ambos" ? "" : type.value,
@@ -260,7 +272,62 @@ search.addEventListener("click", async () => {
     urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
   }
 
-  searchPosts(urlParameters.join('&'))
+
+  urlParameters = urlParameters.join("&");
+
+  fetch(`http://localhost:3010/properties/search?${urlParameters}`, {
+    method: "GET",
+  }).then(async (response) => {
+    const rsp = await response.json();
+    if (rsp.data.size == 0) {
+      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
+      return;
+    }
+
+    await buildPages(rsp.data.size);
+    loadPosts(rsp.data.items);
+
+  }).catch((error) => {
+    console.log("Error:", error);
+  });
+
+  console.log("pagina actual " + currentPage + "\n paginas: " + pages)
+}
+
+let searchActive = false;
+
+search.addEventListener("click", async () => {
+  event.preventDefault();
+
+  currentPage = 1;
+  searchActive = true;
+  await searchPosts();
 });
 
-// ------------------------------------- //
+// --------PAGINACION-------- //
+
+function handlePaginationClick(event) {
+  event.preventDefault();
+
+  let target = event.currentTarget;
+
+  // Si se hizo clic en "previous" y no estamos en la primera página
+  if (target.id === 'previousPage' && currentPage > 1) {
+    currentPage--;
+  }
+  // Si se hizo clic en "next" y no estamos en la última página
+  else if (target.id === 'nextPage' && currentPage < pages) {
+    currentPage++;
+  }
+  // Si se hizo clic en un número de página
+  else if (!isNaN(target.textContent)) {
+    currentPage = Number(target.textContent);
+  }
+
+  // Llama a la función correspondiente
+  if (searchActive) {
+    searchPosts();
+  } else {
+    getPosts();
+  }
+}

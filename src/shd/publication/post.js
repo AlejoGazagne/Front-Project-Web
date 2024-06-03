@@ -79,6 +79,7 @@ window.addEventListener("load", async () => {
   const id = urlParams.get("id");
   console.log(id)
 
+  console.log(id)
   fetch(`http://localhost:3010/properties/${id}`, {
     method: "GET",
     headers: {
@@ -92,6 +93,7 @@ window.addEventListener("load", async () => {
 
     // Inyeccion del carrusel
     document.getElementById("carrousel-img").innerHTML = carrousel;
+    console.log(publication.frontImage, publication.images)
     buildCarousel(publication.frontImage, publication.images)
 
     console.log(publication)
