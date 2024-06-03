@@ -223,8 +223,6 @@ async function buildPages(size) {
 
 async function getPosts() {
 
-  console.log("pagina actual " + currentPage)
-
   fetch(`http://localhost:3010/properties?page=${currentPage}`, {
     method: "GET",
   }).then(async (response) => {
@@ -247,10 +245,9 @@ window.addEventListener("load", async () => {
 
 });
 
-// ---------BUSQUEDA POR FILTROS--------- //
+// ---------BUSQUEDA POR FILTROS--------- /
 
 async function searchPosts() {
-
   console.log("pagina actual " + currentPage)
 
   let filters = {
@@ -274,6 +271,7 @@ async function searchPosts() {
     //console.log(key, value)  
     urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
   }
+
 
   urlParameters = urlParameters.join("&");
 
@@ -304,7 +302,6 @@ search.addEventListener("click", async () => {
   currentPage = 1;
   searchActive = true;
   await searchPosts();
-
 });
 
 // --------PAGINACION-------- //

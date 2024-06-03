@@ -77,6 +77,7 @@ window.addEventListener("load", async () => {
   const carrousel = await getCarrouselTemplate();
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
+  console.log(id)
 
   console.log(id)
   fetch(`http://localhost:3010/properties/${id}`, {
@@ -87,6 +88,8 @@ window.addEventListener("load", async () => {
   }).then(async (response) => {
     const rsp = await response.json()
     const publication = rsp.data;
+
+    console.log(publication)
 
     // Inyeccion del carrusel
     document.getElementById("carrousel-img").innerHTML = carrousel;
