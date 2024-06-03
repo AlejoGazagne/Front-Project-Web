@@ -48,7 +48,6 @@ let search = document.getElementById("btnSearch");
 
 let currentPage = 1;
 
-
 let wasChecked = {};
 
 pool.addEventListener("click", function () {
@@ -228,7 +227,7 @@ async function searchPosts(urlParameters) {
     }
     loadPosts(rsp.data);
   }).catch((error) => {
-    console.error("Error:", error);
+    console.log("Error:", error);
   });
 }
 
@@ -262,8 +261,9 @@ search.addEventListener("click", async () => {
   }
 
   console.log(urlParameters)
+  console.log(urlParameters.join('&'))
 
-  searchPosts(urlParameters.join('&'))
+  searchPosts(urlParameters)
 });
 
 // ------------------------------------- //
