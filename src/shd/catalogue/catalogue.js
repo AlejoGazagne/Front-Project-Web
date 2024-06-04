@@ -304,6 +304,30 @@ search.addEventListener("click", async () => {
   await searchPosts();
 });
 
+let btnReset = document.getElementById("btnReset");
+
+btnReset.addEventListener("click", async () => {
+  event.preventDefault();
+
+  window.scrollTo(0, 0);
+
+  currentPage = 1;
+  searchActive = false;
+  type.value = "Tipo de propiedad";
+  operation.value = "Operación";
+  priceMin.value = "";
+  priceMax.value = "";
+  city.value = "";
+  neighborhood.value = "";
+  roomCount.value = "Habitaciones";
+  bathroomCount.value = "Baños";
+  garageCount.value = "Plazas de Garage";
+  pool.checked = false;
+  pets.checked = false;
+
+  await getPosts();
+});
+
 // --------PAGINACION-------- //
 
 function handlePaginationClick(event) {
@@ -323,6 +347,8 @@ function handlePaginationClick(event) {
   else if (!isNaN(target.textContent)) {
     currentPage = Number(target.textContent);
   }
+
+  window.scrollTo(0, 0);
 
   // Llama a la función correspondiente
   if (searchActive) {

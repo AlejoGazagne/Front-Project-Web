@@ -38,47 +38,80 @@
     <div class="container">
       <div class="row">
         <div id="carrousel-img" class="col-5"></div>
-        <div class="col-7">
+        <div class="col-6">
           <h2 id="title"></h2>
-          <h3>Precio: $<span id="price"></span></h3>
+          <h4>$<span id="price"></span></h4>
+          <h6 id="type"></h6>
           <p id="description"></p>
-          <h4>Prestaciones</h4>
-          <div class="row">
-            <ul class="iconos-prestaciones">
-              <li>
-                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                <p id="area" class="ms-2">200 m<sup>2</sup></p>
-              </li>
-              <li>
-                <i class="fa-solid fa-bed"></i>
-                <p id="rooms" class="ms-2">3</p>
-              </li>
-              <li>
-                <i class="fa-solid fa-bath"></i>
-                <p id="wc" class="ms-2">3</p>
-              </li>
-              <li>
-                <i class="fa-solid fa-car"></i>
-                <p id="garage" class="ms-2">2</p>
-              </li>
-            </ul>
-          </div>
-          <div class="row">
-            <ul class="iconos-prestaciones-extras">
-              <li>
-                <i class="fa-solid fa-person-swimming"></i>
-                <p id="pool"></p>
-              </li>
-              <li>
-                <i class="fa-solid fa-dog"></i>
-                <p id="pets"></p>
-              </li>
-            </ul>
-          </div>
+
+          <div id="map" class="mb-3"></div>
+        </div>
+        <div class="col-1">
+          <ul class="iconos-prestaciones">
+            <li class="mb-2">
+              <p id="area">200 m<sup>2</sup></p>
+              <i
+                class="fa-solid fa-up-right-and-down-left-from-center mb-1"
+              ></i>
+            </li>
+            <li class="me-3 mb-2">
+              <p id="rooms">3</p>
+              <i class="fa-solid fa-bed mb-1"></i>
+            </li>
+            <li class="me-3 mb-2">
+              <p id="wc">3</p>
+              <i class="fa-solid fa-bath mb-1"></i>
+            </li>
+            <li class="me-3 mb-2">
+              <p id="garage">2</p>
+              <i class="fa-solid fa-car mb-1"></i>
+            </li>
+            <li class="me-3 mb-2">
+              <p id="pool"></p>
+              <i class="fa-solid fa-person-swimming mb-1"></i>
+            </li>
+            <li class="me-3 mb-2">
+              <p id="pets"></p>
+              <i class="fa-solid fa-dog mb-1"></i>
+            </li>
+          </ul>
         </div>
       </div>
+
       <div class="row mt-3">
         <div class="col-8">
+          <h3>Perfil del Propietario</h3>
+          <div class="profile d-flex">
+            <img id="imageProfile" src="../../img/images.svg" alt="" />
+            <div class="profile-info">
+              <h3 id="name">Sango Inmobiliaria</h3>
+              <p id="descriptionSeller">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Veritatis eveniet accusantium explicabo molestiae quae at enim
+                pariatur rerum architecto laudantium provident deleniti nulla
+                velit, error a nemo soluta sunt eos facere! Impedit eos ea
+                sapiente odio! Suscipit accusamus voluptas perferendis, odio
+                obcaecati ullam quasi nihil illo doloribus quaerat incidunt
+                nostrum at excepturi consequuntur, amet, consequatur facilis
+                dolorem quam quas numquam eos. Expedita fuga deserunt eum quidem
+                ab, laborum totam eaque dolorem. Saepe fugit numquam eaque earum
+                ad ratione possimus odit assumenda quibusdam unde? Fuga
+                quibusdam aspernatur aliquid. Aliquid asperiores quibusdam at
+                modi temporibus vitae quasi veritatis, esse explicabo
+                aspernatur, labore, reiciendis iusto atque ullam ipsam minima
+                corporis officiis consequuntur sapiente voluptatem!
+              </p>
+              <h5>Contacto</h5>
+              <div
+                class="contacto d-flex justify-content-around text-start mb-3"
+              >
+                <a id="phone">+54 9 351 2345678</a>
+                <a id="email">sangoinmuebles@example.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
           <form id="consulta" class="mt4 mb-3">
             <fieldset>
               <legend>Consulta con el propietario</legend>
@@ -128,40 +161,6 @@
               </button>
             </fieldset>
           </form>
-          <h3>Perfil del Propietario</h3>
-          <div class="profile d-flex">
-            <img src="../../img/images.svg" alt="" />
-            <div class="profile-info">
-              <h3 id="name">Sango Inmobiliaria</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Veritatis eveniet accusantium explicabo molestiae quae at enim
-                pariatur rerum architecto laudantium provident deleniti nulla
-                velit, error a nemo soluta sunt eos facere! Impedit eos ea
-                sapiente odio! Suscipit accusamus voluptas perferendis, odio
-                obcaecati ullam quasi nihil illo doloribus quaerat incidunt
-                nostrum at excepturi consequuntur, amet, consequatur facilis
-                dolorem quam quas numquam eos. Expedita fuga deserunt eum quidem
-                ab, laborum totam eaque dolorem. Saepe fugit numquam eaque earum
-                ad ratione possimus odit assumenda quibusdam unde? Fuga
-                quibusdam aspernatur aliquid. Aliquid asperiores quibusdam at
-                modi temporibus vitae quasi veritatis, esse explicabo
-                aspernatur, labore, reiciendis iusto atque ullam ipsam minima
-                corporis officiis consequuntur sapiente voluptatem!
-              </p>
-              <h5>Contacto</h5>
-              <div
-                class="contacto d-flex justify-content-around text-start mb-3"
-              >
-                <a id="phone">+54 9 351 2345678</a>
-                <a id="email">sangoinmuebles@example.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <h4>Ubicación</h4>
-          <div id="map" class="mb-3"></div>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ async function compressAndUploadImage(file) {
 
 // AGREGADO DE IMAGENES AL PREVIEW
 
-function addImageToDOOM(src) {
+function addImageToDOOM(src, data, i) {
     let img = document.createElement("img");
     img.src = src;
 
@@ -139,7 +139,7 @@ window.addEventListener("load", async () => {
 
         for (let i = 0; i < data.images.length; i++) {
             let link = data.images[i];
-            addImageToDOOM(link);
+            addImageToDOOM(link, data, i);
         }
 
         document.getElementById("title").value = data.title;

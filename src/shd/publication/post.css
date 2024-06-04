@@ -16,68 +16,41 @@ header {
   margin-top: 2rem;
 }
 
-.col-4 h2 {
-  font-size: 3.2rem;
-}
-
-.col-4 h3 {
-  font-size: 2.5rem;
+#carrousel-img img {
+  max-width: 100%;
+  max-height: 45rem;
 }
 
 .iconos-prestaciones {
   max-width: 100%;
   list-style: none;
+  margin: 3rem 0 0 1rem;
   padding: 0;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .iconos-prestaciones li {
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
 }
 
 .iconos-prestaciones li i {
-  font-size: 1.5rem;
-  margin-right: 0.3rem;
+  font-size: 1.3rem;
 }
 
 .iconos-prestaciones li p {
-  margin: 0;
-  font-size: 1.8rem;
-  font-style: bold;
-}
-
-.iconos-prestaciones-extras {
-  max-width: 100%;
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-evenly;
-  font-size: 2rem;
-}
-
-.iconos-prestaciones-extras li {
-  display: flex;
-  align-items: center;
-}
-
-.iconos-prestaciones-extras li i {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-}
-
-.iconos-prestaciones-extras li p {
-  margin: 0;
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-style: bold;
 }
 
 #map {
-  height: 25rem;
-  max-height: 25rem;
-  width: 100%;
-  z-index: -1;
+  height: 15rem;
+  width: 50%;
+  z-index: 0;
 }
 
 #consulta {

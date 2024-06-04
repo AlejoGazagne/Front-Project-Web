@@ -114,7 +114,8 @@ form div input {
   border-color: #727272cf;
 }
 
-#btnSearch {
+#btnSearch,
+#btnReset {
   width: 100%;
   height: 2rem;
   font-weight: bold;
