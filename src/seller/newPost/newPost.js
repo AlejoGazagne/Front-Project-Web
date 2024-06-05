@@ -111,10 +111,12 @@ images.addEventListener("change", async (e) => {
       // Comprime y sube la imagen, y guarda la URL en urlImages
       urlImages.push(await compressAndUploadImage(filesArray[i]));
 
+
       preview.appendChild(div);
     }
   }
 
+  console.log(urlImages);
 });
 
 // ARMADO DEL POST

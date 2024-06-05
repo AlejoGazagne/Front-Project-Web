@@ -7,6 +7,7 @@
   height: 110px;
   background-color: #000000ab;
 }
+
 header {
   margin-bottom: 2rem;
 }
@@ -62,4 +63,24 @@ header {
 
 i.fa-solid {
   font-size: 1.5rem;
+}
+
+/* ----------------------------- */
+
+footer {
+  margin-top: 2rem;
+  height: 10rem;
+  align-items: center;
+  background-color: #333333;
+  padding: 0 10%;
+  color: aliceblue;
+}
+
+.navegacion {
+  width: 18rem;
+}
+
+footer a {
+  color: aliceblue;
+  text-decoration: none;
 }
