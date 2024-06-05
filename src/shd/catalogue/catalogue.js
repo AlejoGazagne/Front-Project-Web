@@ -280,7 +280,7 @@ async function searchPosts() {
   }).then(async (response) => {
     const rsp = await response.json();
     if (rsp.data.size == 0) {
-      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
+      postSection.innerHTML = "<h2 style='width: max-content; margin: auto;'>Disculpe... No encontramos coincidencias</h2>"
       return;
     }
 

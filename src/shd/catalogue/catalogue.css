@@ -114,7 +114,18 @@ form div input {
   border-color: #727272cf;
 }
 
-#btnSearch,
+#btnSearch {
+  width: 100%;
+  height: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #333333;
+  padding: auto;
+  border-radius: 8px;
+  border: 3px solid #333333;
+  transition-duration: 0.3s;
+}
+
 #btnReset {
   width: 100%;
   height: 2rem;
@@ -128,6 +139,10 @@ form div input {
 }
 
 #btnSearch:hover {
+  border: 3px solid #ffab3d;
+}
+
+#btnReset:hover {
   border: 3px solid #ffab3d;
 }
 
@@ -295,6 +310,12 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #fda54c;
   border: none;
   color: ghostwhite;
+  box-shadow: 0 0 10px #8f8f8f;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.btn__vm:hover {
+  background-color: #ff9100;
 }
 
 /* --------------------------------------------------- */
@@ -303,6 +324,10 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.pagination .page-link {
+  color: #262626;
 }
 
 footer {
