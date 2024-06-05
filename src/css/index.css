@@ -168,6 +168,12 @@ header {
   background-color: #fda54c;
   border: none;
   color: ghostwhite;
+  box-shadow: 0 0 10px #8f8f8f;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.btn__vm:hover {
+  background-color: #ff9100;
 }
 
 /* --------------------------------------------------- */
@@ -175,8 +181,14 @@ header {
 .ver-anuncios {
   background-color: #74b12d;
   padding: 0.5rem 2rem;
-  color: aliceblue;
+  color: rgb(255, 255, 255);
   border-radius: 0.3rem;
+  box-shadow: 0 0 10px #8f8f8f;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.ver-anuncios:hover {
+  background-color: #5a8c1f;
 }
 
 .publi {

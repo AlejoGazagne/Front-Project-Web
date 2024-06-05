@@ -127,7 +127,7 @@ window.addEventListener("load", async () => {
     }).then((data) => {
         console.log(data.data);
 
-        data = data.data;
+        data = data.data.items;
 
         // guardamos fecha de creacion del post
         timestamp = data.datetime;

@@ -163,7 +163,7 @@
 }
 
 .btn {
-  background: var(--primary);
+  background: #74b12d;
   color: var(--white);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -177,11 +177,12 @@
 }
 
 .btn--primary {
-  background: var(--primary);
+  background: #74b12d;
 }
 
 .btn--primary:hover {
-  background: var(--primary-darker);
+  background: #588623;
+  color: white;
 }
 
 .profile main {
@@ -227,7 +228,7 @@
 }
 
 .tabs li a:hover {
-  color: var(--active);
+  color: black;
 }
 
 .tabs li a.active {
@@ -255,7 +256,6 @@
   margin-bottom: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  background: var(--primary);
   color: var(--white);
   font-weight: 600;
   cursor: pointer;
@@ -269,43 +269,47 @@
 .tab-content #emailDiv {
   width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
 }
 
 .tab-content #phoneDiv {
   width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
 }
 
 .tab-content #descriptionDiv {
   width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
 }
 
 .tab-content #emailInput {
-  width: 90%;
+  width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
-  border-top: none;
-  border-left: none;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
+  border-top: none;
+  border-left: none;
 }
 
 .tab-content #emailInput:focus {
@@ -313,15 +317,16 @@
 }
 
 .tab-content #phoneInput {
-  width: 90%;
+  width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
-  border-top: none;
-  border-left: none;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
+  border-top: none;
+  border-left: none;
 }
 
 .tab-content #phoneInput:focus {
@@ -329,15 +334,16 @@
 }
 
 .tab-content #descriptionInput {
-  width: 90%;
+  width: 100%;
   padding: 0.5rem;
+  margin-top: .5rem;
   margin-bottom: 0.5rem;
-  border-top: none;
-  border-left: none;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
-  border-bottom-right-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0.5rem;
+  box-shadow: #0000003f 0px 0px 10px;
+  border-top: none;
+  border-left: none;
 }
 
 .tab-content #descriptionInput:focus {
@@ -371,15 +377,15 @@
   border-radius: var(--tab-radius);
 }
 
-.tabs li:nth-child(1):has(.active) ~ #active-bg {
+.tabs li:nth-child(1):has(.active)~#active-bg {
   transform: translateX(calc(0));
 }
 
-.tabs li:nth-child(2):has(.active) ~ #active-bg {
+.tabs li:nth-child(2):has(.active)~#active-bg {
   transform: translateX(calc(var(--tab-width) + var(--tabs-gap)));
 }
 
-.tabs li:nth-child(3):has(.active) ~ #active-bg {
+.tabs li:nth-child(3):has(.active)~#active-bg {
   transform: translateX(calc(var(--tab-width) * 2 + var(--tabs-gap) * 2));
 }
 
@@ -602,3 +608,25 @@
 }
 
 /* --------------------------------------------------- */
+.active {
+  background-color: #88ff00b9;
+  border-radius: 5px;
+}
+
+/* --------------------------------------------------- */
+
+footer {
+  height: 10rem;
+  align-items: center;
+  background-color: #333333;
+  padding: 0 10%;
+  color: aliceblue;
+}
+
+.navegacion {
+  width: 18rem;
+}
+
+footer a {
+  color: aliceblue;
+}
