@@ -226,27 +226,9 @@ async function buildPages(size) {
 
 // CARGA DE PUBLICACIONES
 
-async function getPosts() {
-
-  fetch(`http://localhost:3010/properties?page=${currentPage}`, {
-    method: "GET",
-  }).then(async (response) => {
-
-    const rsp = await response.json();
-    console.log(rsp)
-
-    await buildPages(rsp.data.size);
-    loadPosts(rsp.data.items);
-
-  }).catch((error) => {
-    console.error("Error:", error);
-  });
-
-}
-
 window.addEventListener("load", async () => {
   await getFavorites();
-  await getPosts();
+  await searchPosts();
 
 });
 
@@ -265,8 +247,8 @@ async function searchPosts() {
     roomCount: roomCount.value === "Habitaciones" ? "" : roomCount.value,
     bathroomCount: bathroomCount.value === "Baños" ? "" : bathroomCount.value,
     garageCount: garageCount.value === "Plazas de Garage" ? "" : garageCount.value,
-    pool: pool.checked,
-    pets: pets.checked,
+    pool: pool.checked ? pool.checked : "",
+    pets: pets.checked ? pets.checked : "",
     page: currentPage
   };
 
@@ -285,7 +267,7 @@ async function searchPosts() {
   }).then(async (response) => {
     const rsp = await response.json();
     if (rsp.data.size == 0) {
-      postSection.innerHTML = "<h2 style='width: max-content; margin: auto;'>Disculpe... No encontramos coincidencias</h2>"
+      postSection.innerHTML = "<h2>Disculpe... No encontramos coincidencias</h2>"
       return;
     }
 
@@ -330,7 +312,7 @@ btnReset.addEventListener("click", async () => {
   pool.checked = false;
   pets.checked = false;
 
-  await getPosts();
+  await searchPosts();
 });
 
 // --------PAGINACION-------- //
@@ -356,9 +338,5 @@ function handlePaginationClick(event) {
   window.scrollTo(0, 0);
 
   // Llama a la función correspondiente
-  if (searchActive) {
-    searchPosts();
-  } else {
-    getPosts();
-  }
+  searchPosts();
 }

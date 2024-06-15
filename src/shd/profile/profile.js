@@ -153,6 +153,9 @@ async function getData() {
           })
         }).then(async (response) => {
           if (response.status === 200) {
+            let data = await response.json()
+            console.log(data.data.token)
+            sessionStorage.setItem("token", data.data.token)
             window.location.reload();
           }
         }).catch((error) => {
@@ -173,6 +176,9 @@ async function getData() {
           })
         }).then(async (response) => {
           if (response.status === 200) {
+            let data = await response.json()
+            console.log(data)
+            sessionStorage.setItem("token", data.data.token)
             window.location.reload();
           }
         }).catch((error) => {
@@ -325,6 +331,11 @@ async function getPosts() {
 
           let btnEdit = document.querySelector(`[on-post="${post.id}"]`)
           btnEdit.style.display = "none";
+
+          let btnStatus = document.querySelector(`[post = "${post.id}"]`);
+          btnStatus.style.display = "none";
+          let btnDelete = document.querySelector(`[post-delete="${post.id}"]`);
+          btnDelete.style.display = "none";
 
           let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
           btnFav.style.display = "inline";
