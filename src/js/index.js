@@ -40,11 +40,38 @@ async function getFavorites() {
 async function loadPosts() {
   let anunces = document.getElementById("anuncios-destacados");
 
-  fetch("http://localhost:3010/")
+  let filters = {
+    type: "",
+    onSale: "",
+    priceMin: "",
+    priceMax: "",
+    city: "",
+    neighborhood: "",
+    roomCount: "",
+    bathroomCount: "",
+    garageCount: "",
+    pool: "",
+    pets: "",
+    page: 1,
+    take: 3
+  };
+
+  let urlParameters = [];
+
+  for (let [key, value] of Object.entries(filters)) {
+    //console.log(key, value)  
+    urlParameters.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+  }
+
+
+  urlParameters = urlParameters.join("&");
+
+  fetch(`http://localhost:3010/properties/search?${urlParameters}`, {
+    method: "GET",
+  })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      data.forEach(async (post) => {
+      data.data.items.forEach(async (post) => {
         const postCardTemplate = await getPostCardTemplate();
         let cardPost = postCardTemplate.replace('img-source', post.frontImage)
           .replace(/idPost/gi, post.id)
