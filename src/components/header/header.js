@@ -23,6 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     btnProfile.classList.add("mostrar");
     btnLogout.classList.add("mostrar");
   }
+
+  if (sessionStorage.getItem("rol") === "seller") {
+    btnPost.classList.add("mostrar");
+  }
+  else {
+    btnPost.classList.remove("mostrar");
+  }
 });
 
 
@@ -47,12 +54,7 @@ btnPost.addEventListener("click", async () => {
   console.log(data.message);
   if (data.message === "seller") {
     ref.window.location.href = "../../../src/seller/newPost/newPost.html";
-  } else {
-    log_reg.classList.add("mostrar");
-    atras.classList.add("mostrar");
-    marcoFlotante.classList.add("mostrar");
   }
-
 });
 
 btnSesion.addEventListener("click", () => {

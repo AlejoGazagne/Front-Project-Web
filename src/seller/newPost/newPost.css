@@ -26,6 +26,7 @@ input[type="number"] {
   border-color: #007bff;
   color: white;
   padding: 0.5em 1em;
+  box-shadow: 0 0 10px #8f8f8f;
   width: 85%;
 }
 
