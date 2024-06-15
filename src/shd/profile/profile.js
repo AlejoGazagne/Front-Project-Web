@@ -232,6 +232,50 @@ async function getPosts() {
             window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
           });
 
+          // Boton Estado
+          let btnState = document.querySelector(`[post="${post.id}"]`)
+          btnState.classList.toggle("fa-solid");
+          if (post.published) {
+            btnState.classList.toggle("fa-globe");
+          }
+          else {
+            btnState.classList.toggle("fa-arrow-up-from-bracket");
+          }
+
+          btnState.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnState.getAttribute("post");
+
+            if (btnState.classList.contains("fa-globe")) {
+              window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
+            }
+            else if (btnState.classList.contains("fa-arrow-up-from-bracket")) {
+              window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
+            }
+          });
+
+          // Boton Borrar
+          let btnDelete = document.querySelector(`[post-delete="${post.id}"]`)
+          btnDelete.addEventListener("click", () => {
+            event.preventDefault();
+            let idPost = btnDelete.getAttribute("post-delete");
+
+            fetch("http://localhost:3010/seller/post/delete/" + idPost, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("token")
+              },
+            }).then((response) => {
+              if (response.status === 200) {
+                console.log("publicacion eliminada");
+                window.location.reload();
+              }
+            }).catch((error) => {
+              console.log(error);
+            });
+          });
+
           // Boton Ver Mas
           let btnVM = document.querySelector(`[data-id="${post.id}"]`)
           btnVM.addEventListener("click", () => {

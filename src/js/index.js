@@ -39,6 +39,7 @@ async function getFavorites() {
 
 async function loadPosts() {
   let anunces = document.getElementById("anuncios-destacados");
+
   fetch("http://localhost:3010/")
     .then((response) => response.json())
     .then((data) => {
@@ -56,6 +57,11 @@ async function loadPosts() {
           .replace("Garage", post.garage);
 
         anunces.insertAdjacentHTML("beforeend", cardPost);
+
+        let btnStatus = document.querySelector(`[post="${post.id}"]`);
+        btnStatus.style.display = "none";
+        let btnDelete = document.querySelector(`[post-delete="${post.id}"]`);
+        btnDelete.style.display = "none";
 
         // Boton Favorito
         let btnFav = document.querySelector(`[id-fav="${post.id}"]`)

@@ -496,6 +496,22 @@
   z-index: 1;
 }
 
+.card__preview #btn-state {
+  color: #fff;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.card__preview #btn-delete {
+  color: #ff0000;
+  position: absolute;
+  top: 4.5rem;
+  right: 1rem;
+  z-index: 1;
+}
+
 .card__preview img {
   width: 100%;
   object-fit: contain;

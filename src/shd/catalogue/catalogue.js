@@ -119,6 +119,11 @@ async function loadPosts(rsp) {
 
     postSection.insertAdjacentHTML("beforeend", newPost);
 
+    let btnStatus = document.querySelector(`[post="${post.id}"]`);
+    btnStatus.style.display = "none";
+    let btnDelete = document.querySelector(`[post-delete="${post.id}"]`);
+    btnDelete.style.display = "none";
+
     // Boton Favorito
     let btnFav = document.querySelector(`[id-fav="${post.id}"]`)
     if (sessionStorage.getItem("rol") === "seller") {

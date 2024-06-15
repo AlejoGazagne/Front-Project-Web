@@ -1,76 +1,83 @@
 html {
-    background-color: #ffffff00;
+  background-color: #ffffff00;
 }
 
 body {
-    background-color: #00000063;
+  background-color: #00000063;
 }
 
 .barra {
-    font-weight: bold;
-    padding: 0.4rem 10%;
-    background-color: #ffffff00;
+  font-weight: bold;
+  padding: 0.4rem 10%;
+  background-color: #ffffff00;
 }
 
 .navbar {
-    background-color: #ffffff00;
-    height: 110px;
+  background-color: #ffffff00;
+  height: 110px;
 }
 
 .navbar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nav-item a {
-    color: aliceblue;
+  color: aliceblue;
 }
 
 #img-logo {
-    width: 6rem;
+  width: 6rem;
 }
 
 .nav-item button {
-    width: max-content;
-    border: none;
-    background-color: #f0f8ff00;
-    font-weight: bold;
-    color: aliceblue;
-    transition-duration: 0.3s;
+  width: max-content;
+  border: none;
+  background-color: #f0f8ff00;
+  font-weight: bold;
+  color: aliceblue;
+  transition-duration: 0.3s;
 }
 
 .nav-item button:hover {
-    color: #fda54c;
+  color: #fda54c;
 }
 
 .nav-link:hover {
-    color: #a2a6aa;
+  color: #a2a6aa;
 }
 
 #btn-profile {
-    display: none;
+  display: none;
+}
+
+#btn-post {
+  display: none;
 }
 
 #btn-sesion {
-    display: none;
+  display: none;
 }
 
 #btn-logout {
-    font-size: 1rem;
-    display: none;
+  font-size: 1rem;
+  display: none;
 }
 
-
 #btn-profile.mostrar {
-    display: block;
+  display: block;
+}
+
+#btn-post.mostrar {
+  display: block;
 }
 
 #btn-sesion.mostrar {
-    display: block;
+  display: block;
 }
 
 #btn-logout.mostrar {
-    display: block;
+  display: block;
 }
