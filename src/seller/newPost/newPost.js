@@ -149,11 +149,6 @@ async function buildPost() {
   let city = document.getElementById("city").value;
   let neighborhood = document.getElementById("neighborhood").value;
 
-  if (images.length === 0) {
-    alert("Debe seleccionar al menos una imagen");
-    return;
-  }
-
   if (
     !title ||
     !description ||
@@ -204,7 +199,20 @@ btnPost.addEventListener("click", async () => {
   event.preventDefault();
 
   let post = await buildPost();
-  post.published = true;
+  if (post.images.length != 0 && post.frontImage != undefined) {
+    post.published = true;
+  }
+  else {
+    post.published = false;
+    let error = document.getElementById("error");
+
+    error.innerHTML = "";
+    let p = document.createElement("p");
+    p.textContent = "Lo sentimos, en este momento no pudimos procesar tus imagenes, la publicacion se guardara como borrador";
+    error.appendChild(p);
+    setInterval(() => { }, 5000);
+  }
+
 
   post = JSON.stringify(post);
 
@@ -234,6 +242,7 @@ btnPost.addEventListener("click", async () => {
       }
       else {
         console.log("Producto creado con éxito");
+        console.log(data);
         window.location.href = "../../shd/profile/profile.html";
       }
 

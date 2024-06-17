@@ -269,7 +269,7 @@
 .tab-content #emailDiv {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -280,7 +280,7 @@
 .tab-content #phoneDiv {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -291,7 +291,7 @@
 .tab-content #descriptionDiv {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -302,7 +302,7 @@
 .tab-content #emailInput {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -319,7 +319,7 @@
 .tab-content #phoneInput {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -336,7 +336,7 @@
 .tab-content #descriptionInput {
   width: 100%;
   padding: 0.5rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border-color);
   border-right: 1.5px solid var(--border-color);
@@ -377,15 +377,15 @@
   border-radius: var(--tab-radius);
 }
 
-.tabs li:nth-child(1):has(.active)~#active-bg {
+.tabs li:nth-child(1):has(.active) ~ #active-bg {
   transform: translateX(calc(0));
 }
 
-.tabs li:nth-child(2):has(.active)~#active-bg {
+.tabs li:nth-child(2):has(.active) ~ #active-bg {
   transform: translateX(calc(var(--tab-width) + var(--tabs-gap)));
 }
 
-.tabs li:nth-child(3):has(.active)~#active-bg {
+.tabs li:nth-child(3):has(.active) ~ #active-bg {
   transform: translateX(calc(var(--tab-width) * 2 + var(--tabs-gap) * 2));
 }
 
@@ -494,22 +494,31 @@
   top: 1rem;
   right: 1rem;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0.675);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
 }
 
 .card__preview #btn-state {
   color: #fff;
   position: absolute;
-  top: 3rem;
+  top: 3.3rem;
   right: 1rem;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0.675);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
 }
 
 .card__preview #btn-delete {
-  color: #ff0000;
+  color: #ff0d0d;
   position: absolute;
-  top: 4.5rem;
+  top: 5.1rem;
   right: 1rem;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0.675);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
 }
 
 .card__preview img {

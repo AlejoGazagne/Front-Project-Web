@@ -256,7 +256,24 @@ async function getPosts() {
               window.location.href = `../../../src/shd/publication/post.html?id=${idPost}`;
             }
             else if (btnState.classList.contains("fa-arrow-up-from-bracket")) {
-              window.location.href = `../../../src/seller/editPost/editPost.html?id=${idPost}`;
+              if (post.frontImage != "") {
+                fetch("http://localhost:3010/seller/post/update", {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": sessionStorage.getItem("token"),
+                  },
+                  body: JSON.stringify({
+                    id: post.id,
+                    published: true,
+                  }),
+                }).then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                    btnState.classList.toggle("fa-globe");
+                    btnState.classList.remove("fa-arrow-up-from-bracket");
+                  });
+              }
             }
           });
 

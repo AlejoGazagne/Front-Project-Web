@@ -145,7 +145,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8 mb-3">
+          <div class="col-md-4 mb-3">
             <label for="neighborhood" class="form-label">Barrio</label>
             <input
               type="text"
@@ -154,23 +154,18 @@
               required
             />
           </div>
-          <div class="col-md-4 mb-3">
-            <label for="postalCode" class="form-label">Código Postal</label>
-            <input type="text" class="form-control" id="postalCode" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-8 mb-3">
+          <div class="col-md-6 mb-3">
             <label for="street" class="form-label">Calle</label>
             <input type="text" class="form-control" id="street" required />
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-2 mb-3">
             <label for="number" class="form-label">Número</label>
             <input type="number" class="form-control" id="number" required />
           </div>
         </div>
 
         <div class="text-center">
+          <div id="error"></div>
           <button type="submit" id="btnSave" class="btn btn-primary mb-3">
             Guardar Borrador
           </button>
