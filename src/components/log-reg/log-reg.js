@@ -269,7 +269,6 @@ btnRegistrar.addEventListener("click", () => {
   else {
     error.textContent = "Por favor, rellena todos los campos"
     error.classList.add("mostrar");
-    console.log("error");
   }
 
 });
