@@ -152,12 +152,11 @@ window.addEventListener("load", async () => {
     document.getElementById("hasPool").checked = data.pool;
     document.getElementById("allowsPets").checked = data.pets;
     document.getElementById("price").value = data.price;
-    document.getElementById("operationType").value = data.operation;
+    document.getElementById("operationType").value = data.onSale ? "Venta" : "Alquiler";
     document.getElementById("number").value = number;
     document.getElementById("street").value = street;
     document.getElementById("neighborhood").value = data.neighborhood;
     document.getElementById("city").value = data.city;
-    document.getElementById("postalCode").value = "";
     document.getElementById("province").value = province;
 
   });
@@ -283,7 +282,17 @@ btnPost.addEventListener("click", async () => {
     }).then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log(data.error);
+          let error = document.getElementById("error");
+
+          error.innerHTML = "";
+
+          for (let i = 0; i < data.error.length; i++) {
+            let p = document.createElement("p");
+            if (data.error[i].code === "custom") {
+              p.textContent = data.error[i].message;
+              error.appendChild(p);
+            }
+          }
         }
         else {
           console.log("Producto actualizado con éxito");
