@@ -205,12 +205,6 @@ async function buildPost() {
   let finalURLImg = imagesArray.concat(urlImages);
   console.log(finalURLImg);
 
-
-  if (finalURLImg.length === 0) {
-    alert("Debe seleccionar al menos una imagen");
-    return;
-  }
-
   if (
     !title ||
     !description ||
@@ -264,6 +258,20 @@ btnPost.addEventListener("click", async () => {
   event.preventDefault();
 
   let post = await buildPost();
+
+  if (post.images.length != 0 && post.frontImage != undefined && post.frontImage != "") {
+    post.published = true;
+  }
+  else {
+    post.published = false;
+    let error = document.getElementById("error");
+
+    error.innerHTML = "";
+    let p = document.createElement("p");
+    p.textContent = "Lo sentimos, en este momento no pudimos procesar tus imagenes, la publicacion se guardara como borrador";
+    error.appendChild(p);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+  }
 
   if (ready) {
     post.published = true;

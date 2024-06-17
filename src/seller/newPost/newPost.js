@@ -199,7 +199,7 @@ btnPost.addEventListener("click", async () => {
   event.preventDefault();
 
   let post = await buildPost();
-  if (post.images.length != 0 && post.frontImage != undefined) {
+  if (post.images.length != 0 && post.frontImage != undefined && post.frontImage != "") {
     post.published = true;
   }
   else {
@@ -210,7 +210,7 @@ btnPost.addEventListener("click", async () => {
     let p = document.createElement("p");
     p.textContent = "Lo sentimos, en este momento no pudimos procesar tus imagenes, la publicacion se guardara como borrador";
     error.appendChild(p);
-    setInterval(() => { }, 5000);
+    await new Promise(resolve => setTimeout(resolve, 3000));
   }
 
 
