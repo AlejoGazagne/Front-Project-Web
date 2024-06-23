@@ -41,17 +41,6 @@ async function loadPosts() {
   let anunces = document.getElementById("anuncios-destacados");
 
   let filters = {
-    type: "",
-    onSale: "",
-    priceMin: "",
-    priceMax: "",
-    city: "",
-    neighborhood: "",
-    roomCount: "",
-    bathroomCount: "",
-    garageCount: "",
-    pool: "",
-    pets: "",
     page: 1,
     take: 3
   };
